@@ -1,4 +1,4 @@
-Google-Translate-Flashcards
+UCLA Translate Flashcards
 ===========================
 
  
