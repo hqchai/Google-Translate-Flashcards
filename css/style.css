@@ -1,0 +1,19 @@
+.first-row {
+  margin-top: 60px;
+  padding: 20px 0;
+}
+
+.deck {
+  background: transparent url(../images/deck.png) scroll 0 0 no-repeat;
+  color: #FF9900;
+  font-family: 'Hammersmith One', sans-serif;
+  font-size:2em;
+  height: 250px;
+  line-height: 225px;
+  margin: 30px;
+  text-align: center;
+  width: 200px;
+}
+.col-md-3 {
+  margin-top: 10px;
+}
