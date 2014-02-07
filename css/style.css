@@ -2,11 +2,6 @@ body {
   padding-top: 50px;
 }
 
-.first-row {
-  margin-top: 60px;
-  padding: 20px 0;
-}
-
 .deck {
   background: transparent url(../images/deck.png) scroll 0 0 no-repeat;
   color: #FF9900;
@@ -14,10 +9,21 @@ body {
   font-size:2em;
   height: 250px;
   line-height: 225px;
-  margin: 30px;
+  margin-top: 10px;
   text-align: center;
   width: 200px;
 }
+
+.deck-buttons {
+  margin-top: 10px;
+  text-align: center;
+  width: 200px;
+}
+
+.add-deck {
+  margin-top:10px;
+}
+
 .col-md-3 {
   margin-top: 10px;
 }
