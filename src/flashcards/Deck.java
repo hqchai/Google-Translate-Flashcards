@@ -21,9 +21,7 @@ public class Deck {
 	public boolean addCard() {
 		
 		// TODO
-		
-		Flashcard newCard = new Flashcard();
-		
+				
 		return false;
 	}
 	

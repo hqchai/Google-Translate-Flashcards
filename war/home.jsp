@@ -19,6 +19,7 @@
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <link href="css/cover.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Hammersmith+One' rel='stylesheet' type='text/css'>
     <link rel="icon" type="image/jpg" href="images/icon.jpg">
   </head>
@@ -38,7 +39,6 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
           </button>
           <div class="navbar-brand">UCLA Translate Flashcards</div>
         </div>
@@ -47,31 +47,49 @@
             <li class="active"><a href="home.jsp">Home</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="tutorial.html">Get Started</a></li>
-
-            <%
-              if (user == null) {
-            %>
-            
-                <li><a href="<%= userService.createLoginURL(request.getRequestURI()) %>">Sign In</a></li>
-
-            <%
-              } else {
-            %>
-
-                <li><a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">Sign Out</a></li>
-
-            <%
-              }
-            %>
-            
           </ul>
+
+          <% if (user != null) { %>
+
+            <ul class="nav navbar-nav navbar-right">
+          	  <li><a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">Sign Out</a></li>
+            </ul>
+
+          <% } %>
+
         </div><!--/.nav-collapse -->
       </div>
     </div>
 
-    <%
-      if (user != null) {
-    %>
+    <% if (user == null) { %>
+
+      <div class="site-wrapper">
+        <div class="site-wrapper-inner">
+          <div class="cover-container">
+            <div class="inner cover">
+              <h1 class="cover-heading">Introducing UCLA Translate Flashcards</h1>
+              <p class="lead">A fun way to learn new languages.</p>
+              <p class="lead">
+                <a href="<%= userService.createLoginURL(request.getRequestURI()) %>">
+                  <img src="images/sign_in_with_google.png">
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="container">
+        <div class="row">
+          <a href="<%= userService.createLoginURL(request.getRequestURI()) %>">
+            <div class="col-md-3">
+              <img src="images/sign_in_with_google.png">
+            </div>
+          </a>
+      	</div>
+      </div> -->
+
+    <% } else { %>
     
       <div class="container">
         <div class="row">
@@ -134,8 +152,6 @@
         <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
 
-    <%
-    }
-    %>
+    <% } %>
   </body>
 </html>
