@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.google.appengine.api.users.User" %>
+<%@ page import="com.google.appengine.api.users.UserService" %>
+<%@ page import="com.google.appengine.api.users.UserServiceFactory" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -16,6 +22,11 @@
     
     <link rel="icon" type="image/jpg" href="images/icon.jpg">
   </head>
+
+  <%
+    UserService userService = UserServiceFactory.getUserService();
+    User user = userService.getCurrentUser();
+  %>
   
   <body>
   
@@ -32,10 +43,18 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="home.html">Home</a></li>
-            <li class="active"><a href="#">About</a></li>
-            <li><a href="tutorial.html">Get Started</a></li>
+            <li><a href="home.jsp">Home</a></li>
+            <li class="active"><a href="about.jsp">About</a></li>
+            <li><a href="tutorial.jsp">Get Started</a></li>
           </ul>
+
+          <% if (user != null) { %>
+
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">Sign Out</a></li>
+            </ul>
+
+          <% } %>
         </div><!--/.nav-collapse -->
       </div>
     </div>
