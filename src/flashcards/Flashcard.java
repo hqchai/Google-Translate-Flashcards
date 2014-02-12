@@ -4,12 +4,12 @@ public class Flashcard {
 
 	public String phrase1;
 	public String phrase2;
-	public Language lang1;
-	public Language lang2;
+	public String lang1;
+	public String lang2;
 	private int score;
 	private int userRating;
 	
-	public Flashcard(String p1, String p2, Language l1, Language l2) {
+	public Flashcard(String p1, String p2, String l1, String l2) {
 		
 		// TODO: Phrase 2 is optional b/c use Google Translate?
 		// TODO: Is rating optional (default value) or required

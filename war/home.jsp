@@ -49,48 +49,15 @@
             <li><a href="tutorial.jsp">Get Started</a></li>
           </ul>
 
-          <% if (user != null) { %>
 
             <ul class="nav navbar-nav navbar-right">
           	  <li><a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">Sign Out</a></li>
             </ul>
 
-          <% } %>
 
         </div><!--/.nav-collapse -->
       </div>
     </div>
-
-    <% if (user == null) { %>
-
-      <div class="site-wrapper">
-        <div class="site-wrapper-inner">
-          <div class="cover-container">
-            <div class="inner cover">
-              <h1 class="cover-heading">Introducing UCLA Translate Flashcards</h1>
-              <p class="lead">A fun way to learn new languages.</p>
-              <p class="lead">
-                <a href="<%= userService.createLoginURL(request.getRequestURI()) %>">
-                  <img src="images/sign_in_with_google.png">
-                </a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- <div class="container">
-        <div class="row">
-          <a href="<%= userService.createLoginURL(request.getRequestURI()) %>">
-            <div class="col-md-3">
-              <img src="images/sign_in_with_google.png">
-            </div>
-          </a>
-      	</div>
-      </div> -->
-
-    <% } else { %>
-    
       <div class="container">
         <div class="row">
         
@@ -139,19 +106,19 @@
 					</div>
 					
 					<div class="modal-body">
-						<form action="uclatranslateflashcards.appspot.com/csv" Method="Post">
+						<form action="/csv" enctype="multipart/form-data" Method="Post">
 							  <p>New deck name: </p>
 							  <INPUT TYPE="text" NAME="deckname">
 							  <br>
 							  <br>
 								<p>Upload CSV </p>
-								<input type = "file" accept="text/csv">
+								<input type="file" name="deck" accept="text/csv">
 							<br>
 							  <button type="button" class="btn btn-primary">Fetch from Phrasebook</button>
 					</div>
 						<div class="modal-footer">
 						  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-						  <button type="button" class="btn btn-primary">Save Changes</button>
+						  <button type="submit" value="submit" class="btn btn-primary">Save Changes</button>
 						</div>
 					</form>
 				  </div>
@@ -180,7 +147,5 @@
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
-
-    <% } %>
   </body>
 </html>
