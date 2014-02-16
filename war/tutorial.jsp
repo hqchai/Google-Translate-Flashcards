@@ -70,10 +70,11 @@
             <li><a href="#signup">Sign Up</a></li>
             <li><a href="#login">Login</a></li>
             <li><a href="#create">Create a Deck</a></li>
-            <li><a href="#add">Add Cards to a Deck</a></li>
+            <!--<li><a href="#add">Add Cards to a Deck</a></li> -->
             <li><a href="#edit">Edit a Deck</a></li>
             <li><a href="#delete">Delete a Deck</a></li>
             <li><a href="#quiz">Quiz Yourself</a></li>
+			<li><a href="#signout">Sign Out</a></li>
           </ul>
         </div>
     
@@ -85,16 +86,18 @@
           <h2 id="login">Login</h2>
             <p>Follow <a href="home.jsp">this link</a> to enter your Google account information and to begin your UCLA Translate Flashcards experience. If you have already logged in with your Google account, this will automatically redirect you to your dashboard.</p>
           <h2 id="create">Create a Deck</h2>
-            <p>From <a href="home.jsp">your homepage</a>, click the "add a deck" icon in the lower-right corner of the screen. This will prompt you to fill out information (tell them what information it prompts them for once we actually write it...)</p>
-          <h2 id="add">Add Cards to a Deck</h2>
-            <p>See "Edit a Deck" </p>
+            <p>From <a href="home.jsp">your homepage</a>, click the "add a deck" icon in the lower-right corner of the screen. This will prompt you to fill out information regarding the deck you wish to create, including the deck name, language pair, and the source of the flashcard content.</p>
+          <!--<h2 id="add">Add Cards to a Deck</h2>
+            <p>See "Edit a Deck" </p>-->
           <h2 id="edit">Edit a Deck</h2>
-            <p>From <a href="home.jsp">your homepage</a>, click the <a href="edit.html">Edit</a> deck option. From there, you may: edit the contents of a flashcard, remove individual flashcards, rename your deck, quiz yourself (in case you didn't mean to click edit), or add cards</p>
+            <p>From <a href="home.jsp">your homepage</a>, click the <a href="deck.html?name=Food">Edit</a> deck option. From there, you may edit the contents of a flashcard, add/remove flashcards, rename your deck, or quiz yourself (in case you didn't mean to click edit).</p>
           <h2 id="delete">Delete a Deck</h2>
-            <p>From <a href="deck.html">your deck homepage</a>, click the <a href="delete.html">Delete</a> deck option. You will then be prompted to confirm that you want to delete this deck. You may select "Confirm" to delete the deck, or click off the page if you do not want to delete the deck.</p>
+            <p>From <a href="home.jsp">your homepage</a>, click on the "Delete" button below the deck you want to delete. You will then be prompted to confirm that you want to delete this deck. You may select "Confirm" to delete the deck, or click "Cancel" if you do not want to delete the deck.</p>
           <h2 id="quiz">Quiz Yourself</h2>
-            <p>The best part! From <a href="home.jsp">your homepage</a>, select a deck, and then click "Quiz me!" To flip a flashcard over to reveal the definition on the other side, simply click anywhere on the flashcard. To advance to the next card, hover your mouse over the right arrow. To go back a card, hover your mouse over the left arrow. </p>
-        </div>
+            <p>The best part! From <a href="home.jsp">your homepage</a>, click on the image of the deck you would like to be quizzed on. To flip a flashcard over, simply click anywhere on the flashcard. To advance to the next card, hover your mouse over the right arrow.</p>
+		 <h2 id="signout">Sign Out</h2>
+            <p>To sign out, simply click on the "Sign Out" button on the top-right corner of the screen. <br>Note: It will log you out of any associated Google accounts.</p>
+	   </div>
       </div>
     </div>
   </body>
