@@ -127,8 +127,37 @@
         <div>
           <div class="col-md-3"><div class="row deck">Weather</div><div class="row deck-buttons"><button type="button" class="btn btn-primary">Edit</button>&nbsp; &nbsp;<button type="button" class="btn btn-danger">Delete</button></div></div>
           <div class="col-md-3"><div class="row deck">Clothing</div><div class="row deck-buttons"><button type="button" class="btn btn-primary">Edit</button>&nbsp; &nbsp;<button type="button" class="btn btn-danger">Delete</button></div></div>
-          <a href="deck.html?add=1"><div class="col-md-3"><div class="row add-deck"><img src="images/add_deck.png" alt="add a deck"></div></div></a>
+		  <a href = "#add" data-toggle="modal"><div class="col-md-3"><div class="row add-deck"><img src="images/add_deck.png" alt="add a deck"></div></div></a>
       </div>
+	  
+	  			<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="delete-food-label" aria-hidden="true">
+				<div class="modal-dialog">
+				  <div class="modal-content">
+					<div class="modal-header">
+					  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					  <h4 class="modal-title" id="delete-food-label">Add deck</h4>
+					</div>
+					
+					<div class="modal-body">
+						<form action="uclatranslateflashcards.appspot.com/csv" Method="Post">
+							  <p>New deck name: </p>
+							  <INPUT TYPE="text" NAME="deckname">
+							  <br>
+							  <br>
+								<p>Upload CSV </p>
+								<input type = "file" accept="text/csv">
+							<br>
+							  <button type="button" class="btn btn-primary">Fetch from Phrasebook</button>
+					</div>
+						<div class="modal-footer">
+						  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+						  <button type="button" class="btn btn-primary">Save Changes</button>
+						</div>
+					</form>
+				  </div>
+				</div>
+			  </div>
+	  
 
         <!--
       <div class="container">
