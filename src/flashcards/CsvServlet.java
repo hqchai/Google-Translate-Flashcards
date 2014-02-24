@@ -30,6 +30,7 @@ public class CsvServlet extends HttpServlet {
 	 */
     private static final long serialVersionUID = 1L;
 
+    @SuppressWarnings("unchecked")
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         PrintWriter out = response.getWriter();
@@ -38,6 +39,9 @@ public class CsvServlet extends HttpServlet {
 
         // Check that we have a file upload request
         boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+        if (!isMultipart) {
+        	throw new ServletException("Request was not multipartContent");
+        }
 
         // Create a factory for disk-based file items
         DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -58,12 +62,16 @@ public class CsvServlet extends HttpServlet {
             if(deckList == null) {
                 deckList = new LinkedList<Deck>();
             }
+            deckList.add(deck);
+            session.setAttribute("deckList", deckList);
         } catch (FileUploadException e) {
             out.println("<HTML>");
             out.println("<p>FileUploadException</p>");
             out.println("<p>" + e.getMessage() + "</p>");
             out.println("</HTML>");
+            return;
         }
+        response.sendRedirect("home");
     }
 
     private String getDeckName(List<FileItem> items) throws IOException {

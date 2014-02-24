@@ -20,12 +20,11 @@ public class LoginServlet extends HttpServlet {
 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		response.getWriter().println("LoginServlet Accessed");
 		UserService userService = UserServiceFactory.getUserService();
         User user = userService.getCurrentUser();
         
         if (user != null) {
-        	response.sendRedirect("/home.jsp");
+        	response.sendRedirect("/home");
         } else {
         	request.setAttribute("loginURL", userService.createLoginURL(request.getRequestURI()));
         	request.getRequestDispatcher("/welcome.jsp").forward(request, response);
