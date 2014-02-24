@@ -57,7 +57,7 @@ public class CsvServlet extends HttpServlet {
             List<Deck> deckList = (List<Deck>) session.getAttribute("deckList");
             if(deckList == null) {
                 deckList = new LinkedList<Deck>();
-
+            }
         } catch (FileUploadException e) {
             out.println("<HTML>");
             out.println("<p>FileUploadException</p>");
