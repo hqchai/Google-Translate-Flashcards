@@ -8,24 +8,40 @@
         <servlet-class>flashcards.LoginServlet</servlet-class>
     </servlet>
     <servlet>
-	<servlet-name>Csv</servlet-name>
-	<servlet-class>flashcards.CsvServlet</servlet-class>
+	    <servlet-name>Csv</servlet-name>
+	    <servlet-class>flashcards.CsvServlet</servlet-class>
     </servlet>
     <servlet>
-	<servlet-name>Home</servlet-name>
-	<servlet-class>flashcards.HomePageServlet</servlet-class>
+	    <servlet-name>Home</servlet-name>
+	    <servlet-class>flashcards.HomePageServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddDeck</servlet-name>
+        <servlet-class>flashcards.AddDeckServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewDecks</servlet-name>
+        <servlet-class>flashcards.ViewDecksServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Csv</servlet-name>
-	<url-pattern>/csv</url-pattern>
+	    <url-pattern>/csv</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
-	<url-pattern>/login</url-pattern>
+	    <url-pattern>/login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
-	<url-pattern>/home</url-pattern>
+	    <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddDeck</servlet-name>
+        <url-pattern>/addDeck</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewDecks</servlet-name>
+        <url-pattern>/viewDecks</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>login</welcome-file>

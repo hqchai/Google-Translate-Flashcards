@@ -16,8 +16,8 @@ public class Deck implements Serializable {
 	public String language1;
 	public String language2;
 	
-	public Deck(String name) {
-		name = name;
+	public Deck(String n) {
+		name = n;
 		cards = new LinkedList<Flashcard>();
 	}
 	
@@ -31,6 +31,10 @@ public class Deck implements Serializable {
 	}
 
     public void setLanguage1(String language1) {
+        
+    }
+    
+    public void setLanguage2(String language1) {
         
     }
 

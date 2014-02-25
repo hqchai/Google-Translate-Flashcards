@@ -46,12 +46,14 @@ public class GoogleDatastoreFacade {
         Query.Filter filter = new Query.FilterPredicate("deckName", Query.FilterOperator.EQUAL, deckName);
         Query query = new Query("Deck", userKey).setFilter(filter);
         List<Entity> entityList = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(1));
+        // TODO: datastore entity property only supports strings
         return (Deck) entityList.get(0).getProperty("deck");
     }
     
     public void storeDeck(Deck deck) {
         Entity e = new Entity("Deck", userKey);
-        e.setProperty("deck", deck);
+        // TODO: datastore entity properties only support strings
+        //e.setProperty("deck", deck);
         e.setProperty("deckName", deck.name);
         datastore.put(e);
     }
