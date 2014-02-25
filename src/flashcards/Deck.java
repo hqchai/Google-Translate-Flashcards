@@ -1,20 +1,23 @@
 package flashcards;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Deck {
+public class Deck implements Serializable {
 	
-	public String name;
+	/**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+    
+    public String name;
 	public List<Flashcard> cards;
 	public String language1;
 	public String language2;
 	
-	public Deck(String n, String l1, String l2) {
-		name = n;
-		language1 = l1;
-		language2 = l2;
-		
+	public Deck(String name) {
+		name = name;
 		cards = new LinkedList<Flashcard>();
 	}
 	
@@ -26,5 +29,9 @@ public class Deck {
 		
 		// TODO: Insert card in deck according to score calculated from algorithm
 	}
+
+    public void setLanguage1(String language1) {
+        
+    }
 
 }

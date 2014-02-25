@@ -91,9 +91,11 @@ public class CsvServlet extends HttpServlet {
 		    nextLine = reader.readNext();
 		    String language1 = nextLine[0];
 		    String language2 = nextLine[1];
-		    Deck deck = new Deck(getDeckName(items), language1, language2);
+		    Deck deck = new Deck(getDeckName(items));
+		    deck.setLanguage1(language1);
+		    deck.setLanguage2(language2);
 		    while ((nextLine = reader.readNext()) != null) {
-				Flashcard flashcard = new Flashcard(nextLine[0], nextLine[1], language1, language1);
+				Flashcard flashcard = new Flashcard(nextLine[0], nextLine[1], language1, language2);
 				deck.addCard(flashcard);
 		    }
 		    return deck;

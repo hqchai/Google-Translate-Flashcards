@@ -1,8 +1,15 @@
 package flashcards;
 
-public class Flashcard {
+import java.io.Serializable;
 
-	public String phrase1;
+public class Flashcard implements Serializable {
+
+	/**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+    
+    public String phrase1;
 	public String phrase2;
 	public String lang1;
 	public String lang2;

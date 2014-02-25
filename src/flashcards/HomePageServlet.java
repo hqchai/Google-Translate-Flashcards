@@ -11,38 +11,23 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class HomePageServlet extends HttpServlet {
-	/**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@SuppressWarnings("unchecked")
-	@Override
-	/**
-	 * Returns the deck name list to the home.jsp
-	 */
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		HttpSession session = request.getSession(false);
-		List<Deck> deckList = null;
-		if (session == null) {
-			try {
-				GoogleDatastoreFacade datastore = new GoogleDatastoreFacade();
-				deckList = datastore.getDecks();
-				//Makes a new session
-				session = request.getSession();
-				session.setAttribute("deckList", datastore.getDecks());
-			} catch (AuthorizationException e) {
-				// TODO redirect to the login page
-				e.printStackTrace();
-			}
-		} else {
-			deckList = (List<Deck>) session.getAttribute("deckList");
-		}
-		List<String> deckNameList = new LinkedList<String>();
-		for(Deck deck : deckList) {
-			deckNameList.add(deck.name);
-		}
-        request.setAttribute("deckNameList", deckNameList);
-        request.getRequestDispatcher("/home.jsp").forward(request, response);
-	}
+    @Override
+    /**
+     * Returns the deck name list to the home.jsp
+     */
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        try {
+            GoogleDatastoreFacade datastore = new GoogleDatastoreFacade();
+            request.setAttribute("deckNameList", datastore.getDeckNameList());
+            request.getRequestDispatcher("/home.jsp").forward(request, response);
+        } catch (AuthorizationException e) {
+            // TODO Redirect to Login page
+            e.printStackTrace();
+        }
+    }
 }
