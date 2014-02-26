@@ -49,12 +49,36 @@
           <ul class="nav nav-sidebar">
 			<li><a href="#rename" data-toggle="modal">Rename</a></li>			
 			
-            <li><a href="#delete">Delete</a></li>		
+            <li><a href="#delete" data-toggle="modal">Delete Deck</a></li>		
             <li><a href="./quiz.html">Quiz</a></li>
-			<li><a href="#add">Add Card</a></li>
+			<li><a href="#add" data-toggle="modal">Add Card</a></li>
 					
           </ul>
         </div>	
+		
+		
+		 <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="delete-label" aria-hidden="true">
+				<div class="modal-dialog">
+				  <div class="modal-content">
+					
+					<div class="modal-header">
+					  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					  <h4 class="modal-title" id="delete-label">Are you sure you want to delete the deck &quot;Deck&quot;?</h4>
+					</div>
+					
+					<div class="modal-body">
+					  <p>Once you delete this deck, it may be impossible to retrieve this information again.</p>
+					</div>
+					
+					<form action="" Method="Post">
+						<div class="modal-footer">
+						  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+						  <button type="button" class="btn btn-danger">Delete</button>
+						</div>
+					</form>	
+              </div>
+            </div>
+          </div>
 		
 			<div class="modal fade" id="rename" tabindex="-1" role="dialog" aria-labelledby="delete-food-label" aria-hidden="true">
 				<div class="modal-dialog">
@@ -63,18 +87,51 @@
 					  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					  <h4 class="modal-title" id="delete-food-label">Rename Deck &quot;Food&quot;?</h4>
 					</div>
-					<div class="modal-body">
-					  <p>New deck name: </p>
-					  <INPUT TYPE="text" NAME="deckname">
-					</div>
-					<div class="modal-footer">
-					  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-					  <button type="button" class="btn btn-primary">Save Changes</button>
-					</div>
+					
+					<form action="" Method="Post">
+						<div class="modal-body">
+								<p>New deck name: </p>
+								<INPUT TYPE="text" NAME="deckname">
+						</div>
+						<div class="modal-footer">
+						  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+						  <button type="button" class="btn btn-primary">Save Changes</button>
+						</div>
+					</form>
 				  </div>
 				</div>
 			  </div>
 			
+			
+			
+			<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="add-label" aria-hidden="true">
+				<div class="modal-dialog">
+				  <div class="modal-content">
+					<div class="modal-header">
+					  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					  <h4 class="modal-title" id="add-label">Add Card</h4>
+					</div>
+					
+					
+					<form action="/csv" enctype="multipart/form-data" Method="Post">
+						<div class="modal-body">
+								  <p>Phrase 1: </p>
+								  <INPUT TYPE="text" NAME="phrase1">
+								  <br>
+								  <p>Phrase 2: </p>
+								  <INPUT TYPE="text" NAME="phrase1">
+								  <p>Or translate with Google Translate</p>
+								  <br>
+
+						</div>
+						<div class="modal-footer">
+						  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+						  <button type="submit" value="submit" class="btn btn-primary">Save Changes</button>
+						</div>
+					</form>
+				  </div>
+				</div>
+			  </div>
 	
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 		<table class="table table-striped">  
@@ -86,6 +143,8 @@
           </tr>  
         </thead>  
         <tbody>  
+		
+		<!-- just have to make this dynamically generated -->
           <tr>  
             <td>Bok choy</td>  
             <td>白菜</td>  
@@ -102,6 +161,8 @@
             <td>Difficult</td>  
           </tr>  
         </tbody>  
+		
+		
       </table>  
 	
 	   </div>
