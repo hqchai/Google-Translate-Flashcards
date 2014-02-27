@@ -60,7 +60,6 @@
     </div>
 	
 	
-	
       <div class="container">
 	   <% List<String> deckNameList = (List<String>) request.getAttribute("deckNameList");
 		 int deckSize = deckNameList.size();
@@ -82,18 +81,24 @@
 					</div>
 					
 					<div class="modal-body">
-                                        <form action="/csv" method="post" enctype="multipart/form-data">
+					
+							<form name="Add Deck Test Form" action="addDeck" method="post">
+							New Deck Name: <input type="text" name="deckName">
+							<input type="submit" value="Add Deck Name">
+							</form>
+					
+                                      <!--  <form action="/csv" method="post" enctype="multipart/form-data">
 							  <p>New deck name: </p>
 							  <input type="text" name="deckname"/>
 						          <p>Upload CSV </p>
 							  <input type="file" name="deck"/> 
 							  <br>
-							  <button type="button" class="btn btn-primary">Fetch from Phrasebook</button>
+							  <button type="button" class="btn btn-primary">Fetch from Phrasebook</button> -->
 					</div>
-						<div class="modal-footer">
+						<!--<div class="modal-footer">
 						  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 						  <button type="submit" value="submit" class="btn btn-primary">Save Changes</button>
-						</div>
+						</div> -->
 					</form>
 				  </div>
 				</div>
@@ -103,7 +108,7 @@
 			else {
 			
 			String deckName = deckNameList.get(i); %>
-			 <div class="col-md-3"><a href="quiz.html?name=<%=deckName%>"><div class="row deck"><%= deckName %></div></a><div class="row deck-buttons"><button type="button" class="btn btn-primary" onclick="window.location.href='editDeck.jsp?name=<%=deckName%>'">Edit</button>&nbsp; &nbsp;<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-<%=deckName%>">Delete</button></div></div>
+			 <div class="col-md-3"><a href="quiz.html?name=<%=deckName%>"><div class="row deck"><%= deckName %></div></a><div class="row deck-buttons"><button type="button" class="btn btn-primary" onclick="window.location.href='deck.html?name=<%=deckName%>'">Edit</button>&nbsp; &nbsp;<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-<%=deckName%>">Delete</button></div></div>
 			
 			 <div class="modal fade" id="delete-<%=deckName%>" tabindex="-1" role="dialog" aria-labelledby="delete-<%=deckName%>-label" aria-hidden="true">
 				<div class="modal-dialog">
