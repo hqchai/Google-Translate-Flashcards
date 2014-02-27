@@ -58,20 +58,86 @@
         </div><!--/.nav-collapse -->
       </div>
     </div>
+	
+	
+	
       <div class="container">
-        <div class="row">
-        
-          <!-- Begin one deck -->
+	   <% List<String> deckNameList = (List<String>) request.getAttribute("deckNameList");
+		 int deckSize = deckNameList.size();
+		 for (int i =0; i <= deckSize; i++) {
+			if (i % 4 == 0) { %>
+				<div class="row-fluid">
+			<% }
+			
+			if (i == deckSize)
+			{ %>
+			 	<div class="col-md-3"><a href = "#add" data-toggle="modal"><div class="row add-deck"><img src="images/add_deck.png" alt="add a deck"></div></a></div>
+	  
+	  			<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="add-deck-label" aria-hidden="true">
+				<div class="modal-dialog">
+				  <div class="modal-content">
+					<div class="modal-header">
+					  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					  <h4 class="modal-title" id="add-deck-label">Add deck</h4>
+					</div>
+					
+					<div class="modal-body">
+					<form action="/csv" enctype="multipart/form-data" Method="Post">
+							  <p>New deck name: </p>
+							  <INPUT TYPE="text" NAME="deckname">
+							  <br>
+							  <br>
+								<p>Upload CSV </p>
+								<input type="file" name="deck" accept="text/csv">
+							<br>
+							  <button type="button" class="btn btn-primary">Fetch from Phrasebook</button>
+					</div>
+						<div class="modal-footer">
+						  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+						  <button type="submit" value="submit" class="btn btn-primary">Save Changes</button>
+						</div>
+					</form>
+				  </div>
+				</div>
+			  </div>
+			 		 
+			<% }
+			else {
+			
+			String deckName = deckNameList.get(i); %>
+			 <div class="col-md-3"><a href="quiz.html?name=<%=deckName%>"><div class="row deck"><%= deckName %></div></a><div class="row deck-buttons"><button type="button" class="btn btn-primary" onclick="window.location.href='deck.html?name=<%=deckName%>'">Edit</button>&nbsp; &nbsp;<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-<%=deckName%>">Delete</button></div></div>
+			
+			 <div class="modal fade" id="delete-<%=deckName%>" tabindex="-1" role="dialog" aria-labelledby="delete-<%=deckName%>-label" aria-hidden="true">
+				<div class="modal-dialog">
+				  <div class="modal-content">
+					
+					<div class="modal-header">
+					  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					  <h4 class="modal-title" id="delete-<%=deckName%>-label">Are you sure you want to delete the deck &quot;<%=deckName%>&quot;?</h4>
+					</div>
+					
+					<div class="modal-body">
+					  <p>Once you delete this deck, it may be impossible to retrieve this information again.</p>
+					</div>
+					
+					<div class="modal-footer">
+					  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					  <button type="button" class="btn btn-danger">Delete</button>
+					</div>
+					
+              </div>
+            </div>
+          </div>
+		  <% } %> <!-- closes the else -->
+		<% if (i % 4 == 3) { %>
+			</div> <!-- closes row div if 4th element -->
+		<% } %>
+	  <% }%>
 		  
-		 <% List<String> deckNameList = (List<String>) request.getAttribute("deckNameList");
-	   for(String deckName : deckNameList) { %>
-		<p><%= deckName %></p>
-	   <% } %>
-		  
-          <div class="col-md-3">
+         <!-- <div class="col-md-3">
             <a href="quiz.html?name=Food"><div class="row deck">Food</div></a>
             <div class="row deck-buttons"><button type="button" class="btn btn-primary" onclick="window.location.href='deck.html?name=Food'">Edit</button>&nbsp; &nbsp;<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-food">Delete</button></div>
-          </div>
+          </div> 
           
           <div class="modal fade" id="delete-food" tabindex="-1" role="dialog" aria-labelledby="delete-food-label" aria-hidden="true">
             <div class="modal-dialog">
@@ -93,9 +159,11 @@
           <!-- End one deck -->
           
           <!-- All other decks will have similar structure, but must be dynamically generated -->
-          <div class="col-md-3"><div class="row deck">Animals</div><div class="row deck-buttons"><button type="button" class="btn btn-primary">Edit</button>&nbsp; &nbsp;<button type="button" class="btn btn-danger">Delete</button></div></div>
+  <!--        <div class="col-md-3"><div class="row deck">Animals</div><div class="row deck-buttons"><button type="button" class="btn btn-primary">Edit</button>&nbsp; &nbsp;<button type="button" class="btn btn-danger">Delete</button></div></div>
           <div class="col-md-3"><div class="row deck">Greetings</div><div class="row deck-buttons"><button type="button" class="btn btn-primary">Edit</button>&nbsp; &nbsp;<button type="button" class="btn btn-danger">Delete</button></div></div>
-		  <a href = "#add" data-toggle="modal"><div class="col-md-3"><div class="row add-deck"><img src="images/add_deck.png" alt="add a deck"></div></div></a>
+	
+
+		<a href = "#add" data-toggle="modal"><div class="col-md-3"><div class="row add-deck"><img src="images/add_deck.png" alt="add a deck"></div></div></a>
       </div>
 	  
 	  			<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="delete-food-label" aria-hidden="true">
@@ -125,7 +193,7 @@
 				  </div>
 				</div>
 			  </div>
-
+-->
 
         <!-- Bootstrap core JavaScript
         ================================================== -->
