@@ -82,14 +82,12 @@
 					</div>
 					
 					<div class="modal-body">
-					<form action="/csv" enctype="multipart/form-data" Method="Post">
+                                        <form action="/csv" method="post" enctype="multipart/form-data">
 							  <p>New deck name: </p>
-							  <INPUT TYPE="text" NAME="deckname">
+							  <input type="text" name="deckname"/>
+						          <p>Upload CSV </p>
+							  <input type="file" name="deck"/> 
 							  <br>
-							  <br>
-								<p>Upload CSV </p>
-								<input type="file" name="deck" accept="text/csv">
-							<br>
 							  <button type="button" class="btn btn-primary">Fetch from Phrasebook</button>
 					</div>
 						<div class="modal-footer">
@@ -175,13 +173,13 @@
 					</div>
 					
 					<div class="modal-body">
-					<form action="/csv" enctype="multipart/form-data" Method="Post">
+					<form action="/csv" enctype="multipart/form-data" Method="post">
 							  <p>New deck name: </p>
-							  <INPUT TYPE="text" NAME="deckname">
+							  <input type="text" name="deckname"/>
 							  <br>
 							  <br>
 								<p>Upload CSV </p>
-								<input type="file" name="deck" accept="text/csv">
+								<input type="file" name="deck"/>
 							<br>
 							  <button type="button" class="btn btn-primary">Fetch from Phrasebook</button>
 					</div>
