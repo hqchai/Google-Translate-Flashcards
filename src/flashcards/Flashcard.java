@@ -2,6 +2,12 @@ package flashcards;
 
 import java.io.Serializable;
 
+import javax.jdo.annotations.EmbeddedOnly;
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
+
+@PersistenceCapable
+@EmbeddedOnly
 public class Flashcard implements Serializable {
 
 	/**
@@ -9,11 +15,22 @@ public class Flashcard implements Serializable {
      */
     private static final long serialVersionUID = 1L;
     
+    @Persistent
     public String phrase1;
+    
+    @Persistent
 	public String phrase2;
+    
+    @Persistent
 	public String lang1;
+    
+    @Persistent
 	public String lang2;
+    
+    @Persistent
 	private int score;
+    
+    @Persistent
 	private int userRating;
 	
 	public Flashcard(String p1, String p2, String l1, String l2) {

@@ -1,22 +1,17 @@
 package flashcards;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
-import com.google.appengine.api.datastore.DatastoreService;
-import com.google.appengine.api.datastore.DatastoreServiceFactory;
-import com.google.appengine.api.datastore.Entity;
-import com.google.appengine.api.datastore.FetchOptions;
-import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.datastore.KeyFactory;
-import com.google.appengine.api.datastore.Query;
+import javax.jdo.PersistenceManager;
+import javax.jdo.Query;
+
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
 public class GoogleDatastoreFacade {
-    private Key userKey;
-    private DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    private String userId; 
 
     public GoogleDatastoreFacade() throws AuthorizationException {
         UserService userService = UserServiceFactory.getUserService();
@@ -24,43 +19,91 @@ public class GoogleDatastoreFacade {
         if (user == null) {
             throw new AuthorizationException("User not logged in");
         }
-        userKey = KeyFactory.createKey("User", user.getUserId());
+        userId = user.getUserId();
     }
     
     public List<String> getDeckNameList() throws AuthorizationException {
-        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-
-        Query query = new Query("Deck", userKey);
-        List<Entity> entityList = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(1000));
-        List<String> deckNameList = new LinkedList<String>();
-
-        for (Entity entity : entityList) {
-            String deckName = (String) entity.getProperty("deckName");
-            deckNameList.add(deckName);
+        
+        PersistenceManager pm = PMF.get().getPersistenceManager();
+        Query q = pm.newQuery(Deck.class);
+        q.setFilter("userId == p_userId");
+        q.declareParameters("String p_userId");
+        
+        List<String> deckNameList = new ArrayList<String>();
+        try {
+            List<Deck> results = (List<Deck>) q.execute(userId);
+            if (!results.isEmpty()) {
+                for (Deck d : results) {
+                    deckNameList.add(d.name);
+                }
+            }
+        } finally {
+            q.closeAll();
+            pm.close();
         }
+        
         return deckNameList;
     }
 
+    // TODO: any method calling getDeck() should check if the result is null
     public Deck getDeck(String deckName) {
-        // Cards are not cached in server, must get from google datastore
-        Query.Filter filter = new Query.FilterPredicate("deckName", Query.FilterOperator.EQUAL, deckName);
-        Query query = new Query("Deck", userKey).setFilter(filter);
-        List<Entity> entityList = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(1));
-        // TODO: datastore entity property only supports strings
-        return (Deck) entityList.get(0).getProperty("deck");
+        
+        PersistenceManager pm = PMF.get().getPersistenceManager();
+        Query q = pm.newQuery(Deck.class);
+        q.setFilter("name == deckName");
+        q.declareParameters("String deckName");
+        
+        try {
+            List<Deck> results = (List<Deck>) q.execute(deckName);
+            if (!results.isEmpty()) {
+                for (Deck d : results) {
+                    if (d.userId.equals(userId)) {
+                        return d;
+                    }
+                }
+            }
+        } finally {
+            q.closeAll();
+            pm.close();
+        }
+        
+        return null;
     }
     
     public void storeDeck(Deck deck) {
-        Entity e = new Entity("Deck", userKey);
-        // TODO: datastore entity properties only support strings
-        //e.setProperty("deck", deck);
-        e.setProperty("deckName", deck.name);
-        datastore.put(e);
+
+        deck.setUserId(userId);
+        PersistenceManager pm = PMF.get().getPersistenceManager();
+
+        try {
+            pm.makePersistent(deck);
+        } finally {
+            pm.close();
+        }
     }
     
     public void storeDecks(List<Deck> deckList) throws AuthorizationException {
+        
         for (Deck deck : deckList) {
             storeDeck(deck);
+        }
+    }
+   
+    public void updateDeck(Deck newDeck) {
+                
+        Deck oldDeck = getDeck(newDeck.name);
+        removeDeck(oldDeck);
+        storeDeck(newDeck);
+        return;    
+    }
+    
+    public void removeDeck(Deck deck) {
+        
+        PersistenceManager pm = PMF.get().getPersistenceManager();
+        try {
+            pm.deletePersistent(deck);
+        } finally {
+            pm.close();
         }
     }
 }
