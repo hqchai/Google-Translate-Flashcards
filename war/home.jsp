@@ -60,7 +60,6 @@
     </div>
 	
 	
-	
       <div class="container">
 	   <% List<String> deckNameList = (List<String>) request.getAttribute("deckNameList");
 		 int deckSize = deckNameList.size();
@@ -82,18 +81,24 @@
 					</div>
 					
 					<div class="modal-body">
-                                        <form action="/csv" method="post" enctype="multipart/form-data">
+					
+							<form name="Add Deck Test Form" action="addDeck" method="post">
+							New Deck Name: <input type="text" name="deckName">
+							<input type="submit" value="Add Deck Name">
+							</form>
+					
+                                      <!--  <form action="/csv" method="post" enctype="multipart/form-data">
 							  <p>New deck name: </p>
 							  <input type="text" name="deckname"/>
 						          <p>Upload CSV </p>
 							  <input type="file" name="deck"/> 
 							  <br>
-							  <button type="button" class="btn btn-primary">Fetch from Phrasebook</button>
+							  <button type="button" class="btn btn-primary">Fetch from Phrasebook</button> -->
 					</div>
-						<div class="modal-footer">
+						<!--<div class="modal-footer">
 						  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 						  <button type="submit" value="submit" class="btn btn-primary">Save Changes</button>
-						</div>
+						</div> -->
 					</form>
 				  </div>
 				</div>
@@ -119,8 +124,11 @@
 					</div>
 					
 					<div class="modal-footer">
-					  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-					  <button type="button" class="btn btn-danger">Delete</button>
+						
+						<form name="User Feedback" action="ProcessCardServlet" method="post">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+							<input class="btn btn-danger" type="submit" name="deleteCard" value="Delete">
+						</form>
 					</div>
 					
               </div>
