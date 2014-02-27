@@ -124,8 +124,11 @@
 					</div>
 					
 					<div class="modal-footer">
-					  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-					  <button type="button" class="btn btn-danger">Delete</button>
+						
+						<form name="User Feedback" action="ProcessCardServlet" method="post">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+							<input class="btn btn-danger" type="submit" name="deleteCard" value="Delete">
+						</form>
 					</div>
 					
               </div>
