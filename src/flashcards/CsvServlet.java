@@ -50,17 +50,15 @@ public class CsvServlet extends HttpServlet {
         FileItemStream item = iterator.next();
         assert item.isFormField();
         Deck deck = new Deck(getDeckName(item));
-
         CSVReader reader = new CSVReader(new InputStreamReader(iterator.next().openStream()));
         String[] nextLine;
         try {
             nextLine = reader.readNext();
             String language1 = nextLine[0];
             String language2 = nextLine[1];
-            deck.setLanguage1(language1);
-            deck.setLanguage2(language2);
+            deck.setLanguages(language1, language2);
             while ((nextLine = reader.readNext()) != null) {
-                Flashcard flashcard = new Flashcard(nextLine[0], nextLine[1], language1, language2);
+                Flashcard flashcard = new Flashcard(nextLine[0], nextLine[1]);
                 deck.addCard(flashcard);
             }
             return deck;
