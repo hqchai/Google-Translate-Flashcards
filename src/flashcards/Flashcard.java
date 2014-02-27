@@ -2,6 +2,16 @@ package flashcards;
 
 import java.io.Serializable;
 
+import javax.jdo.annotations.EmbeddedOnly;
+import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
+
+import com.google.appengine.api.datastore.Key;
+
+@PersistenceCapable
+@EmbeddedOnly
 public class Flashcard implements Serializable {
 
 	/**
@@ -9,11 +19,26 @@ public class Flashcard implements Serializable {
      */
     private static final long serialVersionUID = 1L;
     
+    @PrimaryKey
+    @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+    private Key key;
+    
+    @Persistent
     public String phrase1;
+    
+    @Persistent
 	public String phrase2;
-	private int totalScore;       
+
+	@Persistent
+    private int totalScore;       
+    
+    @Persistent
     private int correctnessRating;  // Higher score means more times correct
-	private int userRating;  // 1 = easy 3 = hard
+	
+    @Persistent
+    private int userRating;  // 1 = easy 3 = hard
+    
+    @Persistent
     private int timeRating;  // A high time rating means you haven't seen it in a while
 	
 	public Flashcard(String p1, String p2) {
@@ -30,7 +55,7 @@ public class Flashcard implements Serializable {
         //Calculate the total score
         updateTotalScore();
 	}
-	
+		
 	public String toString() {
         return Integer.toString(totalScore);
 	}

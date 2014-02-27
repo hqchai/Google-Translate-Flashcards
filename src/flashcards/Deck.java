@@ -4,19 +4,41 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
+
+import com.google.appengine.api.datastore.Key;
+
+@PersistenceCapable
 public class Deck implements Serializable {
 	
 	/**
      * 
      */
     private static final long serialVersionUID = 1L;
-                      
-    String name;                //languages can not be changed once initialized
-	List<Flashcard> cards = new LinkedList<Flashcard>();
-	String language1;
-	String language2;
-
-    //Constructors	
+    
+    @PrimaryKey
+    @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+    public Key key;
+    
+    @Persistent
+    public String userId;
+    
+    @Persistent
+    public String name;
+    
+    @Persistent
+	public List<Flashcard> cards = new LinkedList<Flashcard>();
+    
+    @Persistent
+	public String language1;
+    
+    @Persistent
+	public String language2;
+	
+    // Constructors
 	public Deck(String n) {
 		name = n;
 	}
@@ -52,7 +74,11 @@ public class Deck implements Serializable {
     public void changeDeckName(String newName) {
         name = newName;
     }
-
+	
+	public void setUserId(String u) {
+        userId = u;
+    }
+	
 	public void addCard(Flashcard flashcard) {
 	    cards.add(flashcard);
 	}
@@ -70,8 +96,4 @@ public class Deck implements Serializable {
         }
         return highestRatedCard;
     }
-
-
-
-
 }
