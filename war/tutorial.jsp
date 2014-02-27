@@ -44,7 +44,7 @@
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
           <% if (user != null) { %>
-            <li><a href="home.jsp">Home</a></li>
+            <li><a href="/home">Home</a></li>
           <% } else { %>
             <li><a href="welcome.jsp">Home</a></li>
           <% } %>
