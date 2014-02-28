@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
+
 public class HomePageServlet extends HttpServlet {
     /**
 	 * 
@@ -26,8 +29,13 @@ public class HomePageServlet extends HttpServlet {
             request.setAttribute("deckNameList", datastore.getDeckNameList());
             request.getRequestDispatcher("/home.jsp").forward(request, response);
         } catch (AuthorizationException e) {
-            // TODO Redirect to Login page
-            e.printStackTrace();
+            redirectToLogin(response);
         }
+    }
+
+    public static void redirectToLogin(HttpServletResponse response) throws IOException {
+        //Send user to Google login page before returning to home
+        UserService userService = UserServiceFactory.getUserService();
+        response.sendRedirect(userService.createLoginURL("/home"));
     }
 }

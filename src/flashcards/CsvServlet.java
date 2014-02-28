@@ -33,7 +33,7 @@ public class CsvServlet extends HttpServlet {
         } catch (FileUploadException e) {
             throw new ServletException(e);
         } catch (AuthorizationException e) {
-            throw new ServletException(e);
+            HomePageServlet.redirectToLogin(response);
         }
         response.sendRedirect("/home");
     }
