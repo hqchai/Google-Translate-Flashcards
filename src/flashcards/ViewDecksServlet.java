@@ -12,7 +12,7 @@ public class ViewDecksServlet extends HttpServlet {
         try {
             GoogleDatastoreFacade datastore = new GoogleDatastoreFacade();
             request.setAttribute("deckNameList", datastore.getDeckNameList());
-            request.getRequestDispatcher("/home.jsp").forward(request, response);
+            request.getRequestDispatcher("/home").forward(request, response);
         } catch (AuthorizationException | ServletException | IOException e) {
             //TODO: Redirect to login
         }

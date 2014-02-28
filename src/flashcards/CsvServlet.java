@@ -35,7 +35,7 @@ public class CsvServlet extends HttpServlet {
         } catch (AuthorizationException e) {
             throw new ServletException(e);
         }
-        response.sendRedirect("home");
+        response.sendRedirect("/home");
     }
 
     private String getDeckName(FileItemStream item) throws IOException {
