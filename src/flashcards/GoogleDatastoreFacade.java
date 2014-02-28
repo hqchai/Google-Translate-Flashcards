@@ -91,18 +91,29 @@ public class GoogleDatastoreFacade {
    
     public void updateDeck(Deck newDeck) {
                 
-        Deck oldDeck = getDeck(newDeck.name);
-        removeDeck(oldDeck);
+        deleteDeck(newDeck.name);
         storeDeck(newDeck);
         return;    
     }
     
-    public void removeDeck(Deck deck) {
+    public void deleteDeck(String deckName) {
         
         PersistenceManager pm = PMF.get().getPersistenceManager();
+        Query q = pm.newQuery(Deck.class);
+        q.setFilter("name == deckName");
+        q.declareParameters("String deckName");
+        
         try {
-            pm.deletePersistent(deck);
+            List<Deck> results = (List<Deck>) q.execute(deckName);
+            if (!results.isEmpty()) {
+                for (Deck d : results) {
+                    if (d.userId.equals(userId)) {
+                        pm.deletePersistent(d);
+                    }
+                }
+            }
         } finally {
+            q.closeAll();
             pm.close();
         }
     }

@@ -27,6 +27,10 @@
         <servlet-name>EditDeck</servlet-name>
         <servlet-class>flashcards.EditDeckServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteDeck</servlet-name>
+        <servlet-class>flashcards.DeleteDeckServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Csv</servlet-name>
 	    <url-pattern>/csv</url-pattern>
@@ -50,6 +54,10 @@
     <servlet-mapping>
         <servlet-name>EditDeck</servlet-name>
         <url-pattern>/editDeck</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteDeck</servlet-name>
+        <url-pattern>/deleteDeck</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>login</welcome-file>
