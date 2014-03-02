@@ -1,7 +1,6 @@
 package flashcards;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,8 +18,7 @@ public class AddDeckServlet extends HttpServlet {
             GoogleDatastoreFacade datastore = new GoogleDatastoreFacade();
             Deck newDeck = new Deck(deckName);
             datastore.storeDeck(newDeck);
-            PrintWriter out = response.getWriter();
-            out.println("Successfully added deck <em>" + deckName + "</em>. Go to <em>/viewDecks</em> to view your decks.");
+            response.sendRedirect("/home");
         } catch (AuthorizationException e) {
             HomePageServlet.redirectToLogin(response);
         }
