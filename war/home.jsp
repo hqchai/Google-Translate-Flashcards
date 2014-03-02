@@ -51,7 +51,7 @@
 
 
             <ul class="nav navbar-nav navbar-right">
-          	  <li><a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">Sign Out</a></li>
+          	  <li><a href="<%= userService.createLogoutURL("/login") %>">Sign Out</a></li>
             </ul>
 
 
