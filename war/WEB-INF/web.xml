@@ -20,10 +20,6 @@
         <servlet-class>flashcards.AddDeckServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ViewDecks</servlet-name>
-        <servlet-class>flashcards.ViewDecksServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>EditDeck</servlet-name>
         <servlet-class>flashcards.EditDeckServlet</servlet-class>
     </servlet>
@@ -46,10 +42,6 @@
     <servlet-mapping>
         <servlet-name>AddDeck</servlet-name>
         <url-pattern>/addDeck</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ViewDecks</servlet-name>
-        <url-pattern>/viewDecks</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>EditDeck</servlet-name>

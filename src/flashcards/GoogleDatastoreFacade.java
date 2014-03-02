@@ -3,7 +3,9 @@ package flashcards;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
+import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
 
 import com.google.appengine.api.users.User;
@@ -12,7 +14,9 @@ import com.google.appengine.api.users.UserServiceFactory;
 
 public class GoogleDatastoreFacade {
     private String userId; 
-
+    private static final PersistenceManagerFactory persistenceManagerFactory =
+            JDOHelper.getPersistenceManagerFactory("transactions-optional");
+    
     public GoogleDatastoreFacade() throws AuthorizationException {
         UserService userService = UserServiceFactory.getUserService();
         User user = userService.getCurrentUser();
@@ -22,9 +26,10 @@ public class GoogleDatastoreFacade {
         userId = user.getUserId();
     }
     
+    @SuppressWarnings("unchecked")
     public List<String> getDeckNameList() throws AuthorizationException {
         
-        PersistenceManager pm = PMF.get().getPersistenceManager();
+        PersistenceManager pm = persistenceManagerFactory.getPersistenceManager();
         Query q = pm.newQuery(Deck.class);
         q.setFilter("userId == p_userId");
         q.declareParameters("String p_userId");
@@ -46,9 +51,10 @@ public class GoogleDatastoreFacade {
     }
 
     // TODO: any method calling getDeck() should check if the result is null
+    @SuppressWarnings("unchecked")
     public Deck getDeck(String deckName) {
         
-        PersistenceManager pm = PMF.get().getPersistenceManager();
+        PersistenceManager pm = persistenceManagerFactory.getPersistenceManager();
         Query q = pm.newQuery(Deck.class);
         q.setFilter("name == deckName");
         q.declareParameters("String deckName");
@@ -73,7 +79,7 @@ public class GoogleDatastoreFacade {
     public void storeDeck(Deck deck) {
 
         deck.setUserId(userId);
-        PersistenceManager pm = PMF.get().getPersistenceManager();
+        PersistenceManager pm = persistenceManagerFactory.getPersistenceManager();
 
         try {
             pm.makePersistent(deck);
@@ -96,9 +102,10 @@ public class GoogleDatastoreFacade {
         return;    
     }
     
+    @SuppressWarnings("unchecked")
     public void deleteDeck(String deckName) {
         
-        PersistenceManager pm = PMF.get().getPersistenceManager();
+        PersistenceManager pm = persistenceManagerFactory.getPersistenceManager();
         Query q = pm.newQuery(Deck.class);
         q.setFilter("name == deckName");
         q.declareParameters("String deckName");
