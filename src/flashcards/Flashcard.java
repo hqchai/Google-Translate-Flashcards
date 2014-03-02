@@ -19,6 +19,7 @@ public class Flashcard implements Serializable {
      */
     private static final long serialVersionUID = 1L;
     
+    @SuppressWarnings("unused")
     @PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
     private Key key;
@@ -35,10 +36,12 @@ public class Flashcard implements Serializable {
     @Persistent
     private int correctnessRating;  // Higher score means more times correct
 	
+    @SuppressWarnings("unused")
     @Persistent
     private int userRating;  // 1 = easy 3 = hard
     
     @Persistent
+    @SuppressWarnings("unused")
     private int timeRating;  // A high time rating means you haven't seen it in a while
 	
 	public Flashcard(String p1, String p2) {
