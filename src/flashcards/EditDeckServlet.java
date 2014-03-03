@@ -19,6 +19,7 @@ public class EditDeckServlet extends HttpServlet {
             String deckName = request.getParameter("deckName");
             Deck deck = facade.getDeck(deckName);
             request.setAttribute("flashcardList", deck.cards);
+            request.setAttribute("deckName", deckName);
             request.getRequestDispatcher("/deck.jsp").forward(request, response);
         } catch (AuthorizationException e) {
             HomePageServlet.redirectToLogin(response);

@@ -131,7 +131,7 @@
 					</div>
 					
 					
-					<form action="/csv" enctype="multipart/form-data" Method="Post">
+					<form action="/addCard" method="Post">
 						<div class="modal-body">
 								  <p>Phrase 1: </p>
 								  <INPUT TYPE="text" NAME="phrase1">
@@ -140,7 +140,7 @@
 								  <INPUT TYPE="text" NAME="phrase2">
 								  <p>Or translate with Google Translate</p>
 								  <br>
-
+								  <input type="hidden" name="deckName" value="<c:out value="${deckName}"/>">
 						</div>
 						<div class="modal-footer">
 						  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
