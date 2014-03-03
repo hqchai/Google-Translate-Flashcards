@@ -124,10 +124,9 @@
 					</div>
 					
 					<div class="modal-footer">
-						
-						<form name="User Feedback" action="ProcessCardServlet" method="post">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-							<input class="btn btn-danger" type="submit" name="deleteCard" value="Delete">
+						<form name="Delete Deck Test Form" action="deleteDeck" method="post">
+							Deck Name To Remove: <input type="text" name="deckName">
+							<input type="submit" value="Delete Deck Name">
 						</form>
 					</div>
 					
