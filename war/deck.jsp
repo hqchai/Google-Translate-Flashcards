@@ -5,7 +5,7 @@
 <%@ page import="com.google.appengine.api.users.UserService" %>
 <%@ page import="com.google.appengine.api.users.UserServiceFactory" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html lang="en">
   <head>
@@ -163,15 +163,12 @@
 		
 		<!-- just have to make this dynamically generated -->
 		
-				
-	   <% List<Flashcard> flashcardList = (List<Flashcard>) request.getAttribute("flashcardList");
-		 int numCards = flashcardList.size();
-		 for (int i =0; i < numCards; i++) { %>
+	<c:forEach var="flashcard" items="${flashcardList}">
           <tr>  
-            <td><%= flashcardList.get(i).phrase1 %></td>  
-            <td><%= flashcardList.get(i).phrase2 %></td>  
+            <td>${flashcard.phrase1}</td>  
+            <td>${flashcard.phrase2}</td>  
           </tr>  
-		  <% } %>
+	</c:forEach>
         </tbody>  
 		
 		
