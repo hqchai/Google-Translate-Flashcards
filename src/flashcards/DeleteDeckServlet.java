@@ -18,8 +18,7 @@ public class DeleteDeckServlet extends HttpServlet {
             String deckName = (String) request.getParameter("deckName");
             GoogleDatastoreFacade datastore = new GoogleDatastoreFacade();
             datastore.deleteDeck(deckName);
-            PrintWriter out = response.getWriter();
-            out.println("Successfully removed deck <em>" + deckName + "</em>. Go to <em>/viewDecks</em> to view your decks.");
+            response.sendRedirect("/home");
         } catch (AuthorizationException e) {
             HomePageServlet.redirectToLogin(response);
         }
