@@ -38,6 +38,7 @@ public class Deck implements Serializable {
     @Persistent
 	public String language2;
 
+    @Persistent
     public Flashcard currentCard;
 
     // Constructors
@@ -49,6 +50,20 @@ public class Deck implements Serializable {
         name = n;
         language1 = lang1;
         language2 = lang2;
+    }
+    
+    public String toString() {
+        
+        String cardsStr = "";
+        if (cards != null) {
+            
+            for (Flashcard f :  cards) {
+                
+                cardsStr += f.toString();
+            }
+        }
+        
+        return "Deck Name: " + name + "\n" + cardsStr;
     }
 
     //Accessors

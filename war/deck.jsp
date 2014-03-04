@@ -29,6 +29,7 @@
     <%
     UserService userService = UserServiceFactory.getUserService();
     User user = userService.getCurrentUser();
+    String deckName = (String) request.getParameter("name");
   %>
   
   <body>  
@@ -140,7 +141,7 @@
 								  <INPUT TYPE="text" NAME="phrase2">
 								  <p>Or translate with Google Translate</p>
 								  <br>
-								  <input type="hidden" name="deckName" value="<c:out value="${deckName}"/>">
+								  <input type="hidden" name="deckName" value="<%= deckName %>">
 						</div>
 						<div class="modal-footer">
 						  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>

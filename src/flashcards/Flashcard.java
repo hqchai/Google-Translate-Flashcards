@@ -58,9 +58,10 @@ public class Flashcard implements Serializable {
         //Calculate the total score
         updateTotalScore();
 	}
-		
+	
 	public String toString() {
-        return Integer.toString(totalScore);
+	    
+	    return "phrase 1: " + phrase1 + ", phase 2: " + phrase2;
 	}
 
     public int getTotalScore() {
