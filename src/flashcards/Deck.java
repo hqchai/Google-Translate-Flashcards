@@ -37,7 +37,9 @@ public class Deck implements Serializable {
     
     @Persistent
 	public String language2;
-	
+
+    public Flashcard currentCard;
+
     // Constructors
 	public Deck(String n) {
 		name = n;
@@ -95,5 +97,19 @@ public class Deck implements Serializable {
                 highestRatedCard = card;
         }
         return highestRatedCard;
+    }
+    public void updateCurrentCard(int score, Boolean correctness) {     //Call this function after you use the card
+       // Update the time rating.  If the rating is 0, bump all other cards ratings by 100 
+       currentCard.updateTimeRating();
+       if (currentCard.timeRatingIs0()) {
+           for (Flashcard card : cards) {
+               card.add100ToTimeRating();
+           }
+       }
+
+       //Update correctness rating and user rating
+       currentCard.updateUserRating(score);
+       currentCard.updateCorrectnessRating(correctness);
+
     }
 }

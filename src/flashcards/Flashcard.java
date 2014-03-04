@@ -67,13 +67,42 @@ public class Flashcard implements Serializable {
         return totalScore;
     }
 
+    public boolean timeRatingIs0() {
+        if (timeRating == 0)
+            return true;
+        else
+            return false;
+    }
+
     //////////////////////////////////////
     // Functions that update the scores //
     //////////////////////////////////////
 
 	public void updateTotalScore() {
-        //score based on a function that considers the 3 ratings
-        // TODO Make the function
+        // Take the time rating and add multipliers based on correctness and user rating
+        int base = timeRating;
+        switch (userRating) {
+            case 1: break;
+            case 2: base *= 1.2;
+                    break;
+            case 3: base *= 1.4;
+                    break;
+            default: break;
+        }
+        switch (correctnessRating) {
+            case 1: base *= 1.1;
+                    break;
+            case 2: base *= 1.2;
+                    break;
+            case 3: base *= 1.3;
+                    break;
+            case 4: base *= 1.4;
+                    break;
+            case 5: base *= 1.5;
+                    break;
+            default: break;
+        }
+        totalScore = base;
     }
     
     public void updateCorrectnessRating(Boolean correct) {
@@ -100,6 +129,10 @@ public class Flashcard implements Serializable {
         // Should be called whenever a card is accessed
         // Accessing a card will decrement the time rating, so a higher rating means the card hasn't been accessed in a while
         // When a card hits a rating of 0, all of the cards ratings will be bumped up by 100
-        // TODO Implement.  How will a card know which deck it belongs to?
+        timeRating--;
+    }
+
+    public void add100ToTimeRating() {
+        timeRating += 100; 
     }
 }
