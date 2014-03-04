@@ -30,7 +30,7 @@ public class Deck implements Serializable {
     public String name;
     
     @Persistent
-	public List<Flashcard> cards = new LinkedList<Flashcard>();
+	public List<Flashcard> cards;
     
     @Persistent
 	public String language1;
@@ -50,6 +50,7 @@ public class Deck implements Serializable {
         name = n;
         language1 = lang1;
         language2 = lang2;
+        cards = new LinkedList<Flashcard>();
     }
     
     public String toString() {
