@@ -104,17 +104,18 @@
 				  <div class="modal-content">
 					<div class="modal-header">
 					  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					  <h4 class="modal-title" id="delete-food-label">Rename Deck &quot;Food&quot;?</h4>
+					  <h4 class="modal-title" id="delete-food-label">Rename Deck &quot;<%= deckName %>&quot;?</h4>
 					</div>
 					
-					<form action="" Method="Post">
+					<form action="/renameDeck" Method="Post">
 						<div class="modal-body">
 								<p>New deck name: </p>
-								<INPUT TYPE="text" NAME="deckname">
+								<input type="text" name="newDeckName">
+								<input type="hidden" name="oldDeckName" value=<%= deckName %>>
 						</div>
 						<div class="modal-footer">
 						  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-						  <button type="button" class="btn btn-primary">Save Changes</button>
+						  <button type="submit" value="submit" class="btn btn-primary">Save Changes</button>
 						</div>
 					</form>
 				  </div>
