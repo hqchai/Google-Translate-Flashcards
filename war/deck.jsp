@@ -29,7 +29,7 @@
     <%
     UserService userService = UserServiceFactory.getUserService();
     User user = userService.getCurrentUser();
-    String deckName = (String) request.getParameter("name");
+    String deckName = (String) request.getAttribute("deckName");
   %>
   
   <body>  

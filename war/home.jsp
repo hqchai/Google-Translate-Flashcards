@@ -108,7 +108,7 @@
 			else {
 			
 			String deckName = deckNameList.get(i); %>
-			 <div class="col-md-3"><a href="quiz.jsp?name=<%=deckName%>"><div class="row deck"><div style="word-wrap: break-word"><%= deckName %></div></div></a><div class="row deck-buttons"><button type="button" class="btn btn-primary" onclick="window.location.href='deck.jsp?name=<%=deckName%>'">Edit</button>&nbsp; &nbsp;<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-<%=deckName%>">Delete</button></div></div>
+			 <div class="col-md-3"><a href="quiz.jsp?name=<%=deckName%>"><div class="row deck"><div style="word-wrap: break-word"><%= deckName %></div></div></a><div class="row deck-buttons"><button type="button" class="btn btn-primary" onclick="window.location.href='/editDeck?deckName=<%=deckName%>'">Edit</button>&nbsp; &nbsp;<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-<%=deckName%>">Delete</button></div></div>
 			
 			 <div class="modal fade" id="delete-<%=deckName%>" tabindex="-1" role="dialog" aria-labelledby="delete-<%=deckName%>-label" aria-hidden="true">
 				<div class="modal-dialog">
