@@ -52,6 +52,8 @@ public class GoogleDatastoreFacade {
 
         deck.setUserId(userId);
         ofy().save().entity(deck).now();
+        
+        return;
     }
     
     public void storeDecks(List<Deck> deckList) {
@@ -62,6 +64,8 @@ public class GoogleDatastoreFacade {
         }
         
         ofy().save().entities(deckList).now();
+        
+        return;
     }
    
     // TODO: better way of updating w/o deleting and re-storing?
@@ -75,6 +79,12 @@ public class GoogleDatastoreFacade {
     public void deleteDeck(String deckName) {
         
         Deck deck = getDeck(deckName);
-        ofy().delete().entity(deck).now();
+        if (deck != null) {
+            
+            ofy().delete().entity(deck).now();
+
+        }
+        
+        return;
     }
 }
