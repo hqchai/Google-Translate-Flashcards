@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -50,6 +51,7 @@ public class CsvServlet extends HttpServlet {
         FileItemStream item = iterator.next();
         assert item.isFormField();
         Deck deck = new Deck(getDeckName(item));
+        @SuppressWarnings("resource")
         CSVReader reader = new CSVReader(new InputStreamReader(iterator.next().openStream()));
         String[] nextLine;
         try {

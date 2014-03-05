@@ -3,10 +3,7 @@ package flashcards;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.jdo.JDOHelper;
-import javax.jdo.PersistenceManager;
-import javax.jdo.PersistenceManagerFactory;
-import javax.jdo.Query;
+import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
@@ -14,8 +11,6 @@ import com.google.appengine.api.users.UserServiceFactory;
 
 public class GoogleDatastoreFacade {
     private String userId; 
-    private static final PersistenceManagerFactory persistenceManagerFactory =
-            JDOHelper.getPersistenceManagerFactory("transactions-optional");
     
     public GoogleDatastoreFacade() throws AuthorizationException {
         UserService userService = UserServiceFactory.getUserService();
@@ -26,51 +21,28 @@ public class GoogleDatastoreFacade {
         userId = user.getUserId();
     }
     
-    @SuppressWarnings("unchecked")
     public List<String> getDeckNameList() throws AuthorizationException {
         
-        PersistenceManager pm = persistenceManagerFactory.getPersistenceManager();
-        Query q = pm.newQuery(Deck.class);
-        q.setFilter("userId == p_userId");
-        q.declareParameters("String p_userId");
-        
+        List<Deck> decks = ofy().load().type(Deck.class).filter("userId", userId).list();
         List<String> deckNameList = new ArrayList<String>();
-        try {
-            List<Deck> results = (List<Deck>) q.execute(userId);
-            if (!results.isEmpty()) {
-                for (Deck d : results) {
-                    deckNameList.add(d.name);
-                }
-            }
-        } finally {
-            q.closeAll();
-            pm.close();
+        for (Deck d : decks) {
+            
+            deckNameList.add(d.name);
         }
         
         return deckNameList;
     }
 
     // TODO: any method calling getDeck() should check if the result is null
-    @SuppressWarnings("unchecked")
     public Deck getDeck(String deckName) {
         
-        PersistenceManager pm = persistenceManagerFactory.getPersistenceManager();
-        Query q = pm.newQuery(Deck.class);
-        q.setFilter("name == deckName");
-        q.declareParameters("String deckName");
-        
-        try {
-            List<Deck> results = (List<Deck>) q.execute(deckName);
-            if (!results.isEmpty()) {
-                for (Deck d : results) {
-                    if (d.userId.equals(userId)) {
-                        return d;
-                    }
-                }
+        List<Deck> decks = ofy().load().type(Deck.class).filter("userId", userId).list();
+        for (Deck d : decks) {
+            
+            if (d.name.equals(deckName)) {
+                
+                return d;
             }
-        } finally {
-            q.closeAll();
-            pm.close();
         }
         
         return null;
@@ -79,22 +51,20 @@ public class GoogleDatastoreFacade {
     public void storeDeck(Deck deck) {
 
         deck.setUserId(userId);
-        PersistenceManager pm = persistenceManagerFactory.getPersistenceManager();
-
-        try {
-            pm.makePersistent(deck);
-        } finally {
-            pm.close();
-        }
+        ofy().save().entity(deck).now();
     }
     
-    public void storeDecks(List<Deck> deckList) throws AuthorizationException {
+    public void storeDecks(List<Deck> deckList) {
         
         for (Deck deck : deckList) {
-            storeDeck(deck);
+            
+            deck.setUserId(userId);
         }
+        
+        ofy().save().entities(deckList).now();
     }
    
+    // TODO: better way of updating w/o deleting and re-storing?
     public void updateDeck(Deck newDeck) {
                 
         deleteDeck(newDeck.name);
@@ -102,26 +72,9 @@ public class GoogleDatastoreFacade {
         return;    
     }
     
-    @SuppressWarnings("unchecked")
     public void deleteDeck(String deckName) {
         
-        PersistenceManager pm = persistenceManagerFactory.getPersistenceManager();
-        Query q = pm.newQuery(Deck.class);
-        q.setFilter("name == deckName");
-        q.declareParameters("String deckName");
-        
-        try {
-            List<Deck> results = (List<Deck>) q.execute(deckName);
-            if (!results.isEmpty()) {
-                for (Deck d : results) {
-                    if (d.userId.equals(userId)) {
-                        pm.deletePersistent(d);
-                    }
-                }
-            }
-        } finally {
-            q.closeAll();
-            pm.close();
-        }
+        Deck deck = getDeck(deckName);
+        ofy().delete().entity(deck).now();
     }
 }

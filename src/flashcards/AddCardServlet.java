@@ -44,6 +44,7 @@ public class AddCardServlet extends HttpServlet {
 
     }
     
+        @SuppressWarnings("unused")
         private String translate() {
             CloseableHttpClient client = HttpClients.createDefault();
             return null;

@@ -1,53 +1,31 @@
 package flashcards;
 
-import java.io.Serializable;
+import com.googlecode.objectify.annotation.Embed;
 
-import javax.jdo.annotations.EmbeddedOnly;
-import javax.jdo.annotations.IdGeneratorStrategy;
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.Persistent;
-import javax.jdo.annotations.PrimaryKey;
-
-import com.google.appengine.api.datastore.Key;
-
-@PersistenceCapable
-@EmbeddedOnly
-public class Flashcard implements Serializable {
+@Embed
+public class Flashcard {
 
 	/**
      * 
      */
+    @SuppressWarnings("unused")
     private static final long serialVersionUID = 1L;
     
-    @SuppressWarnings("unused")
-    @PrimaryKey
-    @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-    private Key key;
-    
-    @Persistent
-    public String phrase1;
-    
-    @Persistent
-	public String phrase2;
-
-	@Persistent
+    private String phrase1;
+	private String phrase2;
     private int totalScore;       
-    
-    @Persistent
     private int correctnessRating;  // Higher score means more times correct
-	
-    @SuppressWarnings("unused")
-    @Persistent
     private int userRating;  // 1 = easy 3 = hard
-    
-    @Persistent
-    @SuppressWarnings("unused")
     private int timeRating;  // A high time rating means you haven't seen it in a while
 	
+    // no-arg constructor required for objectify
+    @SuppressWarnings("unused")
+    private Flashcard() {}
+    
 	public Flashcard(String p1, String p2) {
 		
 		// TODO: Phrase 2 is optional b/c use Google Translate?
-		
+	    
 		phrase1 = p1;
 		phrase2 = p2;
 		
@@ -66,6 +44,26 @@ public class Flashcard implements Serializable {
 
     public int getTotalScore() {
         return totalScore;
+    }
+    
+    public String getPhrase1() {
+        
+        return phrase1;
+    }
+    
+    public void setPhrase1(String s) {
+        
+        phrase1 = s;
+    }
+    
+    public String getPhrase2() {
+        
+        return phrase2;
+    }
+    
+    public void setPhrase2(String s) {
+        
+        phrase2 = s;
     }
 
     public boolean timeRatingIs0() {

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
+import com.googlecode.objectify.ObjectifyService;
 
 public class LoginServlet extends HttpServlet {
 	
@@ -17,10 +18,15 @@ public class LoginServlet extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+    static {
+        ObjectifyService.register(Deck.class);
+    }
 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		UserService userService = UserServiceFactory.getUserService();
+	    
+	    UserService userService = UserServiceFactory.getUserService();
         User user = userService.getCurrentUser();
         
         if (user != null) {

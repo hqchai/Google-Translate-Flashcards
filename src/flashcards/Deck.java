@@ -1,56 +1,49 @@
 package flashcards;
 
-import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.jdo.annotations.IdGeneratorStrategy;
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.Persistent;
-import javax.jdo.annotations.PrimaryKey;
+import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Index;
 
-import com.google.appengine.api.datastore.Key;
-
-@PersistenceCapable
-public class Deck implements Serializable {
+@Entity
+public class Deck {
 	
 	/**
      * 
      */
+    @SuppressWarnings("unused")
     private static final long serialVersionUID = 1L;
     
-    @PrimaryKey
-    @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-    public Key key;
-    
-    @Persistent
-    public String userId;
-    
-    @Persistent
-    public String name;
-    
-    @Persistent
-	public List<Flashcard> cards;
-    
-    @Persistent
+    @Id Long id;
+    @Index public String userId;
+    @Index public String name;
+	public List<Flashcard> cards = new LinkedList<Flashcard>();
 	public String language1;
-    
-    @Persistent
 	public String language2;
-
-    @Persistent
     public Flashcard currentCard;
 
     // Constructors
+    
+    // no-arg constructor required for objectify
+    @SuppressWarnings("unused")
+    private Deck() { id = null; }
+    
 	public Deck(String n) {
-		name = n;
+		
+        id = null; // see objectify documentation for reasoning
+
+        name = n;
 	}
 
     public Deck(String n, String lang1, String lang2) {
+        
+        id = null; // see objectify documentation for reasoning
+
         name = n;
         language1 = lang1;
         language2 = lang2;
-        cards = new LinkedList<Flashcard>();
     }
     
     public String toString() {
