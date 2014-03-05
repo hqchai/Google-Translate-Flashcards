@@ -12,7 +12,7 @@ public class DeleteDeckServlet extends HttpServlet {
      */
     private static final long serialVersionUID = 1L;
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             String deckName = (String) request.getParameter("deckName");
             GoogleDatastoreFacade datastore = new GoogleDatastoreFacade();
