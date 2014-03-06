@@ -89,7 +89,7 @@
 					
 					<div class="modal-footer">
 						<form name="Delete Deck Test Form" action="deleteDeck" method="post">
-							<input type="hidden" name="deckName" value=<%= deckName %>>
+							<input type="hidden" name="deckName" value="<%= deckName %>">
 							<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 							<button type="submit" value="submit" class="btn btn-danger">Delete Deck</button>
 							<!--<input type="submit" value="Delete Deck">-->
@@ -112,7 +112,7 @@
 						<div class="modal-body">
 								<p>New deck name: </p>
 								<input type="text" name="newDeckName">
-								<input type="hidden" name="oldDeckName" value=<%= deckName %>>
+								<input type="hidden" name="oldDeckName" value="<%= deckName %>">
 						</div>
 						<div class="modal-footer">
 						  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
