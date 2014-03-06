@@ -84,7 +84,13 @@
 					
 							<form name="Add Deck Test Form" action="addDeck" method="post">
 							New Deck Name: <input type="text" name="deckName">
-							<input type="submit" value="Add Deck Name">
+							<button type="submit" value="submit" class="btn btn-primary">Add Deck</button>
+							
+							<!--<input type="submit" value="Add Deck">-->
+							
+							<!--<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+						  <button type="submit" value="submit" class="btn btn-primary">Save Changes</button>-->
+						  
 							</form>
 					
                                       <!--  <form action="/csv" method="post" enctype="multipart/form-data">
@@ -126,7 +132,9 @@
 					<div class="modal-footer">
 						<form name="Delete Deck Test Form" action="deleteDeck" method="post">
 							<input type="hidden" name="deckName" value=<%= deckName %>>
-							<input type="submit" value="Delete Deck Name">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+							<button type="submit" value="submit" class="btn btn-danger">Delete Deck</button>
+							<!--<input type="submit" value="Delete Deck">-->
 						</form>
 					</div>
 					
