@@ -168,7 +168,13 @@
 	<c:forEach var="flashcard" items="${flashcardList}">
           <tr>  
             <td>${flashcard.phrase1}</td>  
-            <td>${flashcard.phrase2}</td>  
+            <td>${flashcard.phrase2}</td>
+            <td>
+            	<form action="/deleteCard" method="Post">
+            		<input type="hidden" name="deckName" value=<%= deckName %>>
+            		<input type="hidden" name="phrase1" value=${flashcard.phrase1}>
+            		<input type="submit" name="submit" value="Delete">
+            </td>  
           </tr>  
 	</c:forEach>
         </tbody>  
