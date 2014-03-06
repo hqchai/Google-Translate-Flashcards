@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class RenameDeckServlet extends HttpServlet {
+public class DeleteCardServlet extends HttpServlet {
     /**
      * 
      */
@@ -14,18 +14,16 @@ public class RenameDeckServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-            String oldDeckName = (String) request.getParameter("oldDeckName");
-            String newDeckName = (String) request.getParameter("newDeckName");
-
+            String deckName = (String) request.getParameter("deckName");
+            String phrase1 = (String) request.getParameter("phrase1");
             GoogleDatastoreFacade datastore = new GoogleDatastoreFacade();
-            Deck deck = datastore.getDeck(oldDeckName);
+            Deck deck = datastore.getDeck(deckName);
             if (deck != null) {
                 
-                deck.name = newDeckName;
-                datastore.deleteDeck(oldDeckName);
-                datastore.storeDeck(deck);
+                deck.deleteCard(phrase1);
             }
-            response.sendRedirect("/editDeck?deckName=" + newDeckName);
+            datastore.updateDeck(deck);
+            response.sendRedirect("/editDeck?deckName=" + deckName);
         } catch (AuthorizationException e) {
             HomePageServlet.redirectToLogin(response);
         }
