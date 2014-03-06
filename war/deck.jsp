@@ -66,23 +66,21 @@
       <div class="row-fluid">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-			<li><a href="#rename" data-toggle="modal">Rename</a></li>			
-			
-            <li><a href="#delete-<%=deckName%>" data-toggle="modal">Delete Deck</a></li>		
-            <li><a href="./quiz.html">Quiz</a></li>
 			<li><a href="#add" data-toggle="modal">Add Card</a></li>
-					
+            <li><a href="#delete" data-toggle="modal">Delete Deck</a></li>		
+            <li><a href="./quiz.html">Quiz</a></li>
+			<li><a href="#rename" data-toggle="modal">Rename</a></li>							
           </ul>
         </div>	
 		
 		
-			<div class="modal fade" id="delete-<%=deckName%>" tabindex="-1" role="dialog" aria-labelledby="delete-<%=deckName%>-label" aria-hidden="true">
+			<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="delete-label" aria-hidden="true">
 				<div class="modal-dialog">
 				  <div class="modal-content">
 					
 					<div class="modal-header">
 					  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					  <h4 class="modal-title" id="delete-<%=deckName%>-label">Are you sure you want to delete the deck &quot;<%=deckName%>&quot;?</h4>
+					  <h4 class="modal-title" id="delete-label">Are you sure you want to delete the deck &quot;<%=deckName%>&quot;?</h4>
 					</div>
 					
 					<div class="modal-body">
@@ -91,7 +89,7 @@
 					
 					<div class="modal-footer">
 						<form name="Delete Deck Test Form" action="deleteDeck" method="post">
-							<input type="hidden" name="deckName" value=<%= deckName %>>
+							<input type="hidden" name="deckName" value="<%= deckName %>">
 							<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 							<button type="submit" value="submit" class="btn btn-danger">Delete Deck</button>
 							<!--<input type="submit" value="Delete Deck">-->
@@ -114,7 +112,7 @@
 						<div class="modal-body">
 								<p>New deck name: </p>
 								<input type="text" name="newDeckName">
-								<input type="hidden" name="oldDeckName" value=<%= deckName %>>
+								<input type="hidden" name="oldDeckName" value="<%= deckName %>">
 						</div>
 						<div class="modal-footer">
 						  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>

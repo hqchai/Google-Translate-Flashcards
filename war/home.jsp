@@ -113,16 +113,17 @@
 			<% }
 			else {
 			
-			String deckName = deckNameList.get(i); %>
-			 <div class="col-md-3"><a href="quiz.jsp?name=<%=deckName%>"><div class="row deck"><div style="word-wrap: break-word"><%= deckName %></div></div></a><div class="row deck-buttons"><button type="button" class="btn btn-primary" onclick="window.location.href='/editDeck?deckName=<%=deckName%>'">Edit</button>&nbsp; &nbsp;<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-<%=deckName%>">Delete</button></div></div>
+			String deckName = deckNameList.get(i); 
+			String specialDeckName = deckName.replaceAll(" ", "-"); %>
+			 <div class="col-md-3"><a href="quiz.jsp?name=<%=deckName%>"><div class="row deck"><div style="word-wrap: break-word"><%= deckName %></div></div></a><div class="row deck-buttons"><button type="button" class="btn btn-primary" onclick="window.location.href='/editDeck?deckName=<%=deckName%>'">Edit</button>&nbsp; &nbsp;<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-<%=specialDeckName%>">Delete</button></div></div>
 			
-			 <div class="modal fade" id="delete-<%=deckName%>" tabindex="-1" role="dialog" aria-labelledby="delete-<%=deckName%>-label" aria-hidden="true">
+			 <div class="modal fade" id="delete-<%=specialDeckName%>" tabindex="-1" role="dialog" aria-labelledby="delete-<%=specialDeckName%>-label" aria-hidden="true">
 				<div class="modal-dialog">
 				  <div class="modal-content">
 					
 					<div class="modal-header">
 					  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					  <h4 class="modal-title" id="delete-<%=deckName%>-label">Are you sure you want to delete the deck &quot;<%=deckName%>&quot;?</h4>
+					  <h4 class="modal-title" id="delete-<%=specialDeckName%>-label">Are you sure you want to delete the deck &quot;<%=deckName%>&quot;?</h4>
 					</div>
 					
 					<div class="modal-body">
@@ -131,7 +132,7 @@
 					
 					<div class="modal-footer">
 						<form name="Delete Deck Test Form" action="deleteDeck" method="post">
-							<input type="hidden" name="deckName" value=<%= deckName %>>
+							<input type="hidden" name="deckName" value="<%= deckName %>">
 							<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 							<button type="submit" value="submit" class="btn btn-danger">Delete Deck</button>
 							<!--<input type="submit" value="Delete Deck">-->
