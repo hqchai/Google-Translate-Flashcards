@@ -94,8 +94,18 @@ public class Deck {
 	    cards.add(flashcard);
 	}
 
-    public void deleteCard(Flashcard flashcard) {
-        cards.remove(flashcard);
+    public void deleteCard(String p1) {
+        
+        for (Flashcard f : cards) {
+            
+            if (f.getPhrase1().equals(p1)) {
+                
+                cards.remove(f);
+                return;
+            }
+        }
+        
+        return;
     }
 
     //Useful functions
