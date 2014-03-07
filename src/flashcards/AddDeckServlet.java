@@ -20,7 +20,7 @@ public class AddDeckServlet extends HttpServlet {
                 
                 // deck with this name already exists for this user
                 
-                response.getWriter().print("You already have a deck named " + deckName + " ! Press the back button in your browser and try a new name.");
+                response.getWriter().print("You already have a deck named " + deckName + "! Press the back button in your browser and try a new name.");
                 return;
             }
             Deck newDeck = new Deck(deckName);
