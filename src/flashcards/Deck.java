@@ -131,4 +131,17 @@ public class Deck {
        currentCard.updateCorrectnessRating(correctness);
 
     }
+
+    public boolean isDuplicateDeckName() {
+
+        try {
+            GoogleDatastoreFacade datastore;
+            datastore = new GoogleDatastoreFacade();
+            return (datastore.getDeck(name) != null);
+        } catch (AuthorizationException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

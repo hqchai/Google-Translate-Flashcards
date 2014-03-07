@@ -18,6 +18,13 @@ public class RenameDeckServlet extends HttpServlet {
             String newDeckName = (String) request.getParameter("newDeckName");
 
             GoogleDatastoreFacade datastore = new GoogleDatastoreFacade();
+            if (datastore.getDeck(newDeckName) != null) {
+                
+                // deck with this name already exists for this user
+                
+                response.getWriter().print("You already have a deck named " + newDeckName + "! Press the back button in your browser and try a new name.");
+                return;
+            }
             Deck deck = datastore.getDeck(oldDeckName);
             if (deck != null) {
                 
