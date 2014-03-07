@@ -144,6 +144,9 @@
 								  <p>Or translate with Google Translate</p>
 								  <br>
 								  <input type="hidden" name="deckName" value="<%= deckName %>">
+								  <input type="hidden" name="language1" value="<c:out value="${language1}"/>">
+								  <input type="hidden" name="language2" value="<c:out value="${language2}"/>">
+
 						</div>
 						<div class="modal-footer">
 						  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -158,8 +161,8 @@
 		<table class="table table-striped">  
         <thead>  
           <tr>  
-            <th>Language 1</th>  
-            <th>Language 2</th>  
+            <th><c:out value="${language1}"/></th>  
+            <th><c:out value="${language2}"/></th>  
           </tr>  
         </thead>  
         <tbody>  

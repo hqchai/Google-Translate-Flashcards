@@ -20,6 +20,8 @@ public class EditDeckServlet extends HttpServlet {
             Deck deck = facade.getDeck(deckName);
             request.setAttribute("flashcardList", deck.cards);
             request.setAttribute("deckName", deckName);
+            request.setAttribute("language1", deck.language1);
+            request.setAttribute("language2", deck.language2);
             request.getRequestDispatcher("/deck.jsp").forward(request, response);
         } catch (AuthorizationException e) {
             HomePageServlet.redirectToLogin(response);

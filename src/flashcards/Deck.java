@@ -29,13 +29,6 @@ public class Deck {
     // no-arg constructor required for objectify
     @SuppressWarnings("unused")
     private Deck() { id = null; }
-    
-	public Deck(String n) {
-		
-        id = null; // see objectify documentation for reasoning
-
-        name = n;
-	}
 
     public Deck(String n, String lang1, String lang2) {
         
