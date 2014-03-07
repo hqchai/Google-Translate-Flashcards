@@ -83,24 +83,26 @@
 					<div class="modal-body">
 					
 							<form name="Add Deck Test Form" action="addDeck" method="post">
-							New Deck Name: <input type="text" name="deckName">
+							New Deck Name: <input type="text" name="deckName"><br><br>
+							Language1: <input type="text" name="language1"><br><br>
+							Language1: <input type="text" name="language2">
+					</div>
+
+					<div class="modal-footer">
 							<button type="submit" value="submit" class="btn btn-primary">Add Deck</button>
-							
-							<!--<input type="submit" value="Add Deck">-->
-							
-							<!--<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-						  <button type="submit" value="submit" class="btn btn-primary">Save Changes</button>-->
-						  
 							</form>
+					</div>
+						  
+							
 					
-                                      <!--  <form action="/csv" method="post" enctype="multipart/form-data">
+                              <!--  <form action="/csv" method="post" enctype="multipart/form-data">
 							  <p>New deck name: </p>
 							  <input type="text" name="deckname"/>
 						          <p>Upload CSV </p>
 							  <input type="file" name="deck"/> 
 							  <br>
 							  <button type="button" class="btn btn-primary">Fetch from Phrasebook</button> -->
-					</div>
+					<!--</div>-->
 						<!--<div class="modal-footer">
 						  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 						  <button type="submit" value="submit" class="btn btn-primary">Save Changes</button>
