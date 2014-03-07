@@ -3,6 +3,7 @@ package flashcards;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URLEncoder;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class AddCardServlet extends HttpServlet {
             String phrase2 = request.getParameter("phrase2");
             String sourceLanguage = request.getParameter("sourceLanguage");
             String targetLanguage = request.getParameter("targetLanguage");
-            if(phrase2 == null) {
+            if(phrase2 == null || phrase2 == "") {
                 phrase2 = translate(phrase1, sourceLanguage, targetLanguage);
             }
             //response.getOutputStream().print("Phrase1: " + phrase1 + " Phrase2: " + phrase2 + " Deck Name: " + deckName);
@@ -58,7 +59,7 @@ public class AddCardServlet extends HttpServlet {
             flashcardList.add(flashcard);
             //response.getOutputStream().print(deck.toString());
             googleDatastoreFacade.updateDeck(deck);
-            response.sendRedirect("/editDeck?deckName=" + deckName);
+            response.sendRedirect("/editDeck?deckName=" + URLEncoder.encode(deckName, "UTF-8"));
         } catch (AuthorizationException e) {
             HomePageServlet.redirectToLogin(response);
         }

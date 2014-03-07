@@ -1,6 +1,7 @@
 package flashcards;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +24,7 @@ public class DeleteCardServlet extends HttpServlet {
                 deck.deleteCard(phrase1);
             }
             datastore.updateDeck(deck);
-            response.sendRedirect("/editDeck?deckName=" + deckName);
+            response.sendRedirect("/editDeck?deckName=" + URLEncoder.encode(deckName, "UTF-8"));
         } catch (AuthorizationException e) {
             HomePageServlet.redirectToLogin(response);
         }
