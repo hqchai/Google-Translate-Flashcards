@@ -51,7 +51,10 @@ public class GoogleDatastoreFacade {
     public void storeDeck(Deck deck) {
 
         deck.setUserId(userId);
-        ofy().save().entity(deck).now();
+        if (!deck.duplicateDeck()) {
+           
+            ofy().save().entity(deck).now();
+        }
         
         return;
     }
@@ -61,6 +64,10 @@ public class GoogleDatastoreFacade {
         for (Deck deck : deckList) {
             
             deck.setUserId(userId);
+            if (deck.duplicateDeck()) {
+                
+                deckList.remove(deck);
+            }
         }
         
         ofy().save().entities(deckList).now();

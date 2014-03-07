@@ -131,4 +131,10 @@ public class Deck {
        currentCard.updateCorrectnessRating(correctness);
 
     }
+
+    public boolean duplicateDeck() {
+        
+        GoogleDatastoreFacade datastore = new GoogleDatastoreFacade();
+        return (datastore.getDeck(name) != null);
+    }
 }
