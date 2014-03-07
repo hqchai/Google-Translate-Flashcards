@@ -34,6 +34,11 @@ public class AddCardServlet extends HttpServlet {
                 deck.cards = new LinkedList<Flashcard>();
                 flashcardList = deck.cards;
             }
+            if (isDuplicateCard(flashcardList, flashcard)) {
+
+                response.getWriter().print("You already have a flashcard with these two phrases for this language pair! Press the back button in your browser and try again.");
+                return;
+            }
             flashcardList.add(flashcard);
             //response.getOutputStream().print(deck.toString());
             googleDatastoreFacade.updateDeck(deck);
@@ -43,11 +48,28 @@ public class AddCardServlet extends HttpServlet {
         }
 
     }
-    
-        @SuppressWarnings("unused")
-        private String translate() {
-            CloseableHttpClient client = HttpClients.createDefault();
-            return null;
-   
+
+    private boolean isDuplicateCard(List<Flashcard> flashcardList, Flashcard flashcard) {
+
+        // TODO: check for same language pair as deck (should be done for all cards added)
+        if (flashcardList != null) {
+            
+            for (Flashcard f : flashcardList) {
+                
+                if (f.getPhrase1().equals(flashcard.getPhrase1()) && f.getPhrase2().equals(flashcard.getPhrase2())) {
+                    
+                    return true;
+                }
+            }
         }
+        
+        return false;
+    }
+
+    @SuppressWarnings("unused")
+    private String translate() {
+        CloseableHttpClient client = HttpClients.createDefault();
+        return null;
+
+    }
 }
