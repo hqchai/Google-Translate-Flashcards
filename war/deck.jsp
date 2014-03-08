@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.net.URLEncoder" %>
 <%@ page import="org.apache.commons.lang3.StringEscapeUtils" %>
 <%@ page import="flashcards.Flashcard" %>
 <%@ page import="com.google.appengine.api.users.User" %>
@@ -31,7 +32,10 @@
     UserService userService = UserServiceFactory.getUserService();
     User user = userService.getCurrentUser();
     String deckName = (String) request.getAttribute("deckName");
+
+    // safeDeckName is for modal names, encodedDeckName is for HTTP GET parameter passing via URL
 	String safeDeckName = StringEscapeUtils.escapeHtml4((deckName.replaceAll(" ", "-")).replaceAll("'", "-"));
+	String encodedDeckName = URLEncoder.encode(deckName, "UTF-8");
   %>
   
   <body>  

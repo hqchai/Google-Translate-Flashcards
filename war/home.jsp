@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.net.URLEncoder" %>
 <%@ page import="org.apache.commons.lang3.StringEscapeUtils" %>
 <%@ page import="com.google.appengine.api.users.User" %>
 <%@ page import="com.google.appengine.api.users.UserService" %>
@@ -117,8 +118,11 @@
 			else {
 			
 			String deckName = deckNameList.get(i); 
-			String safeDeckName = StringEscapeUtils.escapeHtml4((deckName.replaceAll(" ", "-")).replaceAll("'", "-")); %>
-			 <div class="col-md-3"><a href="quiz.jsp?name=<%=deckName%>"><div class="row deck"><div style="word-wrap: break-word"><%= deckName %></div></div></a><div class="row deck-buttons"><button type="button" class="btn btn-primary" onclick="window.location.href='/editDeck?deckName=<%=deckName%>'">Edit</button>&nbsp; &nbsp;<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-<%=safeDeckName%>">Delete</button></div></div>
+
+			// safeDeckName is for modal names, encodedDeckName is for HTTP GET parameter passing via URL
+			String safeDeckName = StringEscapeUtils.escapeHtml4((deckName.replaceAll(" ", "-")).replaceAll("'", "-")); 
+			String encodedDeckName = URLEncoder.encode(deckName, "UTF-8"); %>
+			 <div class="col-md-3"><a href="quiz.jsp?name=<%=encodedDeckName%>"><div class="row deck"><div style="word-wrap: break-word"><%= deckName %></div></div></a><div class="row deck-buttons"><button type="button" class="btn btn-primary" onclick="window.location.href='/editDeck?deckName=<%=encodedDeckName%>'">Edit</button>&nbsp; &nbsp;<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-<%=safeDeckName%>">Delete</button></div></div>
 			
 			 <div class="modal fade" id="delete-<%=safeDeckName%>" tabindex="-1" role="dialog" aria-labelledby="delete-<%=safeDeckName%>-label" aria-hidden="true">
 				<div class="modal-dialog">

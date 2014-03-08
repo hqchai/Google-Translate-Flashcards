@@ -1,6 +1,7 @@
 package flashcards;
 
 import java.io.IOException;
+import java.net.URLDecoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +17,7 @@ public class EditDeckServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             GoogleDatastoreFacade facade = new GoogleDatastoreFacade();
-            String deckName = request.getParameter("deckName");
+            String deckName = URLDecoder.decode( (String) request.getParameter("deckName"), "UTF-8");
             Deck deck = facade.getDeck(deckName);
             request.setAttribute("flashcardList", deck.cards);
             request.setAttribute("deckName", deckName);

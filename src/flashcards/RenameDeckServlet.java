@@ -1,6 +1,7 @@
 package flashcards;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +33,7 @@ public class RenameDeckServlet extends HttpServlet {
                 datastore.deleteDeck(oldDeckName);
                 datastore.storeDeck(deck);
             }
-            response.sendRedirect("/editDeck?deckName=" + newDeckName);
+            response.sendRedirect("/editDeck?deckName=" + URLEncoder.encode(newDeckName, "UTF-8"));
         } catch (AuthorizationException e) {
             HomePageServlet.redirectToLogin(response);
         }
