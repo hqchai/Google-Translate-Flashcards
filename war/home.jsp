@@ -224,9 +224,11 @@
 
 							</select>
 
+							<br><br>
 
-							<!--Language1: <input type="text" name="language1"><br><br>
-							Language1: <input type="text" name="language2">-->
+							<p>Optional: Upload CSV</p>
+							<p align="center"><input type="file" accept=".csv" name="deckCSV"/></p>
+							
 					</div>
 
 					<div class="modal-footer">
