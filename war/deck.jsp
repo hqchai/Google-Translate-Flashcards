@@ -68,7 +68,7 @@
           <ul class="nav nav-sidebar">
 			<li><a href="#add" data-toggle="modal">Add Card</a></li>
             <li><a href="#delete" data-toggle="modal">Delete Deck</a></li>		
-            <li><a href="./quiz.html">Quiz</a></li>
+            <li><a href="quiz.jsp?name=<%= deckName %>">Quiz</a></li>
 			<li><a href="#rename" data-toggle="modal">Rename</a></li>							
           </ul>
         </div>	
