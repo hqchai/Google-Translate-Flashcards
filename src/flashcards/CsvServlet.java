@@ -50,7 +50,8 @@ public class CsvServlet extends HttpServlet {
         FileItemIterator iterator = upload.getItemIterator(request);
         FileItemStream item = iterator.next();
         assert item.isFormField();
-        Deck deck = new Deck(getDeckName(item));
+        //TODO: Fix this
+        Deck deck = new Deck(getDeckName(item), null, null);
         CSVReader reader = new CSVReader(new InputStreamReader(iterator.next().openStream()));
         String[] nextLine;
         try {
