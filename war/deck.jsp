@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
+<%@ page import="org.apache.commons.lang3.StringEscapeUtils" %>
 <%@ page import="flashcards.Flashcard" %>
 <%@ page import="com.google.appengine.api.users.User" %>
 <%@ page import="com.google.appengine.api.users.UserService" %>
@@ -30,6 +31,7 @@
     UserService userService = UserServiceFactory.getUserService();
     User user = userService.getCurrentUser();
     String deckName = (String) request.getAttribute("deckName");
+	String safeDeckName = StringEscapeUtils.escapeHtml4((deckName.replaceAll(" ", "-")).replaceAll("'", "-"));
   %>
   
   <body>  
@@ -176,7 +178,7 @@
             <td>
              	<form action="/deleteCard" method="Post">
              		<input type="hidden" name="deckName" value="<%= deckName %>">
-             		<input type="hidden" name="phrase1" value=${flashcard.phrase1}>
+             		<input type="hidden" name="phrase1" value="${flashcard.phrase1}">
              		<input type="submit" name="submit" value="Delete">
              	</form>
            </td>  
