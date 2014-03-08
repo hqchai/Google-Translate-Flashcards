@@ -84,8 +84,149 @@
 					
 							<form name="Add Deck Test Form" action="addDeck" method="post">
 							New Deck Name: <input type="text" name="deckName"><br><br>
-							Language1: <input type="text" name="language1"><br><br>
-							Language1: <input type="text" name="language2">
+
+							Language1:
+							<select name="language1" size="4">
+								<option value="English">English</option>
+								<option value="Afrikaans">Afrikaans</option>
+								<option value="Albanian">Albanian</option>
+								<option value="Arabic">Arabic</option>
+								<option value="Azerbaijani">Azerbaijani</option>
+								<option value="Basque">Basque</option>
+								<option value="Bengali">Bengali</option>
+								<option value="Belarusian">Belarusian</option>
+								<option value="Bulgarian">Bulgarian</option>
+								<option value="Catalan">Catalan</option>
+								<option value="Chinese Simplified">Chinese Simplified</option>
+								<option value="Chinese Traditional">Chinese Traditional</option>
+								<option value="Croatian">Croatian</option>
+								<option value="Czech">Czech</option>
+								<option value="Danish">Danish</option>
+								<option value="Dutch">Dutch</option>
+								<option value="Esperanto">Esperanto</option>
+								<option value="Estonian">Estonian</option>
+								<option value="Filipino">Filipino</option>
+								<option value="Finnish">Finnish</option>
+								<option value="French">French</option>
+								<option value="Galician">Galician</option>
+								<option value="Georgian">Georgian</option>
+								<option value="German">German</option>
+								<option value="Greek">Greek</option>
+								<option value="Gujarati">Gujarati</option>
+								<option value="Haitian Creole">Haitian Creole</option>
+								<option value="Hebrew">Hebrew</option>
+								<option value="Hindi">Hindi</option>
+								<option value="Hungarian">Hungarian</option>
+								<option value="Icelandic">Icelandic</option>
+								<option value="Indonesian">Indonesian</option>
+								<option value="Irish">Irish</option>
+								<option value="Italian">Italian</option>
+								<option value="Japanese">Japanese</option>
+								<option value="Kannada">Kannada</option>
+								<option value="Korean">Korean</option>
+								<option value="Latin">Latin</option>
+								<option value="Latvian">Latvian</option>
+								<option value="Lithuanian">Lithuanian</option>
+								<option value="Macedonian">Macedonian</option>
+								<option value="Malay">Malay</option>
+								<option value="Maltese">Maltese</option>
+								<option value="Norwegian">Norwegian</option>
+								<option value="Persian">Persian</option>
+								<option value="Polish">Polish</option>
+								<option value="Portuguese">Portuguese</option>
+								<option value="Romanian">Romanian</option>
+								<option value="Russian">Russian</option>
+								<option value="Serbian">Serbian</option>
+								<option value="Slovak">Slovak</option>
+								<option value="Slovenian">Slovenian</option>
+								<option value="Spanish">Spanish</option>
+								<option value="Swahili">Swahili</option>
+								<option value="Swedish">Swedish</option>
+								<option value="Tamil">Tamil</option>
+								<option value="Telugu">Telugu</option>
+								<option value="Thai">Thai</option>
+								<option value="Turkish">Turkish</option>
+								<option value="Ukrainian">Ukrainian</option>
+								<option value="Urdu">Urdu</option>
+								<option value="Vietnamese">Vietnamese</option>
+								<option value="Welsh">Welsh</option>
+								<option value="Yiddish">Yiddish</option>
+
+							</select>
+
+							
+							<br><br>Language2: 
+							<select name="language2" size="4">
+								<option value="English">English</option>
+								<option value="Afrikaans">Afrikaans</option>
+								<option value="Albanian">Albanian</option>
+								<option value="Arabic">Arabic</option>
+								<option value="Azerbaijani">Azerbaijani</option>
+								<option value="Basque">Basque</option>
+								<option value="Bengali">Bengali</option>
+								<option value="Belarusian">Belarusian</option>
+								<option value="Bulgarian">Bulgarian</option>
+								<option value="Catalan">Catalan</option>
+								<option value="Chinese Simplified">Chinese Simplified</option>
+								<option value="Chinese Traditional">Chinese Traditional</option>
+								<option value="Croatian">Croatian</option>
+								<option value="Czech">Czech</option>
+								<option value="Danish">Danish</option>
+								<option value="Dutch">Dutch</option>
+								<option value="Esperanto">Esperanto</option>
+								<option value="Estonian">Estonian</option>
+								<option value="Filipino">Filipino</option>
+								<option value="Finnish">Finnish</option>
+								<option value="French">French</option>
+								<option value="Galician">Galician</option>
+								<option value="Georgian">Georgian</option>
+								<option value="German">German</option>
+								<option value="Greek">Greek</option>
+								<option value="Gujarati">Gujarati</option>
+								<option value="Haitian Creole">Haitian Creole</option>
+								<option value="Hebrew">Hebrew</option>
+								<option value="Hindi">Hindi</option>
+								<option value="Hungarian">Hungarian</option>
+								<option value="Icelandic">Icelandic</option>
+								<option value="Indonesian">Indonesian</option>
+								<option value="Irish">Irish</option>
+								<option value="Italian">Italian</option>
+								<option value="Japanese">Japanese</option>
+								<option value="Kannada">Kannada</option>
+								<option value="Korean">Korean</option>
+								<option value="Latin">Latin</option>
+								<option value="Latvian">Latvian</option>
+								<option value="Lithuanian">Lithuanian</option>
+								<option value="Macedonian">Macedonian</option>
+								<option value="Malay">Malay</option>
+								<option value="Maltese">Maltese</option>
+								<option value="Norwegian">Norwegian</option>
+								<option value="Persian">Persian</option>
+								<option value="Polish">Polish</option>
+								<option value="Portuguese">Portuguese</option>
+								<option value="Romanian">Romanian</option>
+								<option value="Russian">Russian</option>
+								<option value="Serbian">Serbian</option>
+								<option value="Slovak">Slovak</option>
+								<option value="Slovenian">Slovenian</option>
+								<option value="Spanish">Spanish</option>
+								<option value="Swahili">Swahili</option>
+								<option value="Swedish">Swedish</option>
+								<option value="Tamil">Tamil</option>
+								<option value="Telugu">Telugu</option>
+								<option value="Thai">Thai</option>
+								<option value="Turkish">Turkish</option>
+								<option value="Ukrainian">Ukrainian</option>
+								<option value="Urdu">Urdu</option>
+								<option value="Vietnamese">Vietnamese</option>
+								<option value="Welsh">Welsh</option>
+								<option value="Yiddish">Yiddish</option>
+
+							</select>
+
+
+							<!--Language1: <input type="text" name="language1"><br><br>
+							Language1: <input type="text" name="language2">-->
 					</div>
 
 					<div class="modal-footer">
