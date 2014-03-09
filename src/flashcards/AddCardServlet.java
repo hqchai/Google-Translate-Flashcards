@@ -150,7 +150,7 @@ public class AddCardServlet extends HttpServlet {
             try {
                 HttpEntity entity = response.getEntity();
                 String googlejsonResponse = EntityUtils.toString(entity);
-                String detectedLanguageCode = jsonToTranslatedWord(googlejsonResponse);
+                String detectedLanguageCode = jsonToDetectedLanguage(googlejsonResponse);
                 
                 LanguageCoder languageCoder = LanguageCoder.getInstance();
                 return languageCoder.getLanguage(detectedLanguageCode);

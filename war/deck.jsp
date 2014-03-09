@@ -28,7 +28,7 @@
     <link rel="icon" type="image/jpg" href="images/icon.jpg">
   </head>
 
-    <%
+  <%
     UserService userService = UserServiceFactory.getUserService();
     User user = userService.getCurrentUser();
     String deckName = (String) request.getAttribute("deckName");
@@ -74,7 +74,7 @@
           <ul class="nav nav-sidebar">
 			<li><a href="#add" data-toggle="modal">Add Card</a></li>
             <li><a href="#delete" data-toggle="modal">Delete Deck</a></li>		
-            <li><a href="./quiz.html">Quiz</a></li>
+            <li><a href="quiz.jsp?deckName=<%= encodedDeckName %>">Quiz</a></li>
 			<li><a href="#rename" data-toggle="modal">Rename</a></li>							
           </ul>
         </div>	
@@ -178,20 +178,62 @@
 			<!-- just have to make this dynamically generated -->
 			
 		<c:forEach var="flashcard" items="${flashcardList}">
+			<c:set var="p1" value="${flashcard.phrase1}" />
+
+			  <%
+			  	String phrase1 = (String) pageContext.getAttribute("p1");
+			  	String safePhrase1 = StringEscapeUtils.escapeHtml4((phrase1.replaceAll(" ", "-")).replaceAll("'", "-")); 
+			  %>
+	          
 	          <tr>  
 	            <td>${flashcard.phrase1}</td>  
 	            <td>${flashcard.phrase2}</td>
 	            <td>
-	           		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit-<%=safeDeckName%>">Edit</button>
+	           		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit-<%=safePhrase1%>">Edit</button>
 	            </td> 
 	            <td>
 	             	<form action="/deleteCard" method="Post">
 	             		<input type="hidden" name="deckName" value="<%= deckName %>">
-	             		<input type="hidden" name="phrase1" value="${flashcard.phrase1}">
+	             		<input type="hidden" name="phrase1" value="<c:out value="${flashcard.phrase1}"/>">
 	             		<button type="submit" value="submit" class="btn btn-danger">Delete</button>
 	             	</form>
 	            </td> 
-	          </tr>  
+	          </tr>
+
+	          <div class="modal fade" id="edit-<%=safePhrase1%>" tabindex="-1" role="dialog" aria-labelledby="edit--<%=safePhrase1%>-label" aria-hidden="true">
+				<div class="modal-dialog">
+				  <div class="modal-content">
+					<div class="modal-header">
+					  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					  <h4 class="modal-title" id="add-label">Edit Card</h4>
+					</div>
+					
+					
+					<form action="/editCard" method="Post">
+						<div class="modal-body">
+								  <p>Phrase 1: </p>
+								  <input type="text" name="phrase1" value="${flashcard.phrase1}">
+								  <br><br>
+								  <p>Phrase 2: </p>
+								  <input type="text" type="phrase2" value="${flashcard.phrase2}">
+								  <br><br>
+								  <input type="radio" name="userRating" value="1">Easy<br>
+								  <input type="radio" name="userRating" value="2" checked="checked">Medium<br>
+								  <input type="radio" name="userRating" value="3">Difficult<br>
+								  <br><br>
+								  <input type="hidden" name="deckName" value="<%= deckName %>">
+								  <input type="hidden" name="oldPhrase1" value="<c:out value="${flashcard.phrase1}"/>">
+
+						</div>
+						<div class="modal-footer">
+						  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+						  <button type="submit" value="submit" class="btn btn-primary">Save Changes</button>
+						</div>
+					</form>
+				  </div>
+				</div>
+			  </div>
+
 		</c:forEach>
 	        </tbody>  
 			

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.net.URLDecoder" %>
 <%@ page import="flashcards.Flashcard" %>
 <%@ page import="com.google.appengine.api.users.User" %>
 <%@ page import="com.google.appengine.api.users.UserService" %>
@@ -25,9 +26,10 @@
     <link rel="icon" type="image/jpg" href="images/icon.jpg">
   </head>
 
-      <%
+  <%
     UserService userService = UserServiceFactory.getUserService();
     User user = userService.getCurrentUser();
+    String deckName = URLDecoder.decode( (String) request.getParameter("deckName"), "UTF-8");
   %>
   
   <body>
