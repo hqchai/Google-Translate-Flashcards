@@ -40,6 +40,10 @@
         <servlet-class>flashcards.AddCardServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>EditCard</servlet-name>
+        <servlet-class>flashcards.EditCardServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>DeleteCard</servlet-name>
         <servlet-class>flashcards.DeleteCardServlet</servlet-class>
     </servlet>
@@ -74,6 +78,10 @@
     <servlet-mapping>
         <servlet-name>AddCard</servlet-name>
         <url-pattern>/addCard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditCard</servlet-name>
+        <url-pattern>/editCard</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DeleteCard</servlet-name>

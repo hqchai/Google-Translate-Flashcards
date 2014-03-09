@@ -141,6 +141,11 @@ public class Flashcard implements Comparable<Flashcard> {
     public void updateUserRating(int newRating) {
         userRating = newRating;
     }
+    
+    public String getUserRating() {
+        
+        return String.valueOf(userRating);
+    }
 
     public void updateTimeRating() {
         // Rating is used to know how long it has been since a card has been accessed
