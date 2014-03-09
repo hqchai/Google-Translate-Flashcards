@@ -53,7 +53,6 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li align="center"><strong>Deck: </strong><%= deckName %></li>
             <li><a href="/home">Home</a></li>
             <li><a href="about.jsp">About</a></li>
             <li><a href="tutorial.jsp">Get Started</a></li>
@@ -73,7 +72,8 @@
       <div class="row-fluid">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-			<li><a href="#add" data-toggle="modal">Add Card</a></li>
+            <li align="center"><strong>Deck: </strong><%= deckName %></li>
+	    <li><a href="#add" data-toggle="modal">Add Card</a></li>
             <li><a href="#delete" data-toggle="modal">Delete Deck</a></li>		
             <li><a href="./quiz.html">Quiz</a></li>
 			<li><a href="#rename" data-toggle="modal">Rename</a></li>							
