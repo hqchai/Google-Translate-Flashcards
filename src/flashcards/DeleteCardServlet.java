@@ -21,8 +21,8 @@ public class DeleteCardServlet extends HttpServlet {
             Deck deck = datastore.getDeck(deckName);
             if (deck != null) {
                 deck.deleteCard(phrase1);
+                datastore.updateDeck(deck);
             }
-            datastore.updateDeck(deck);
             response.sendRedirect("/editDeck?deckName=" + URLEncoder.encode(deckName, "UTF-8"));
         } catch (AuthorizationException e) {
             HomePageServlet.redirectToLogin(response);

@@ -19,12 +19,31 @@ public class EditCardServlet extends HttpServlet {
             String oldPhrase1 = (String) request.getParameter("oldPhrase1");
             GoogleDatastoreFacade datastore = new GoogleDatastoreFacade();
             Deck deck = datastore.getDeck(deckName);
+            
             if (deck == null) {
                 
                 response.getWriter().print("Error getting the deck named <em>" + deckName + "</em>. Press the back button in your browser and try a new name.");
                 return;
             }
-            // TODO: update flashcard contents
+
+            Flashcard flashcard = null;
+            for (Flashcard f: deck.cards) {
+                
+                if (f.getPhrase1().equals(oldPhrase1)) {
+                    
+                    flashcard = f;
+                }
+            }
+            
+            if (flashcard == null) {
+                
+                response.getWriter().print("Error getting the flashcard with phrase 1  <em>" + oldPhrase1 + "</em>. Press the back button in your browser and try again.");
+                return;
+            }
+            
+            flashcard.setPhrase1((String) request.getParameter("phrase1"));
+            flashcard.setPhrase2((String) request.getParameter("phrase2"));
+            flashcard.updateUserRating(Integer.parseInt((String) request.getParameter("userRating"))); 
             datastore.updateDeck(deck);
             response.sendRedirect("/editDeck?deckName=" + URLEncoder.encode(deckName, "UTF-8"));
         } catch (AuthorizationException e) {

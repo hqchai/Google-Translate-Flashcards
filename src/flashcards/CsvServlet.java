@@ -59,7 +59,7 @@ public class CsvServlet extends HttpServlet {
             Deck deck = new Deck(getDeckName(Titleitem), language1, language2);
             while ((nextLine = reader.readNext()) != null) {
                 Flashcard flashcard = new Flashcard(nextLine[0], nextLine[1]);
-                deck.addCard(flashcard);
+                deck.cards.add(flashcard);
             }
             return deck;
         } catch (NullPointerException e) {

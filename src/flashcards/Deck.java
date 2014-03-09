@@ -42,7 +42,6 @@ public class Deck {
         for (Flashcard f : cards) {
             if (f.getPhrase1().equals(p1)) {
                 cards.remove(f);
-                return;
             }
         }
     }

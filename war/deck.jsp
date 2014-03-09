@@ -72,7 +72,7 @@
       <div class="row-fluid">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li align="center"><strong>Deck: </strong><%= deckName %></li>
+            <li align="center"><h4><strong>Deck: </strong><em><%= deckName %></em></h4></li>
 	    <li><a href="#add" data-toggle="modal">Add Card</a></li>
             <li><a href="#delete" data-toggle="modal">Delete Deck</a></li>		
             <li><a href="/quiz?deckName=<%= encodedDeckName %>">Quiz</a></li>

@@ -1,7 +1,5 @@
 package flashcards;
 
-import java.util.List;
-
 import com.googlecode.objectify.annotation.Embed;
 
 /**
@@ -161,9 +159,9 @@ public class Flashcard implements Comparable<Flashcard> {
 
     @Override
     public int compareTo(Flashcard other) {
-        if (this.totalScore == other.totalScore) {
+        /*if (this.totalScore == other.totalScore) {
             return 0;
-        }
+        }*/
         if (this.totalScore > other.totalScore) {
             return 1;
         }

@@ -37,7 +37,6 @@ public class AddCardServlet extends HttpServlet {
             if(phrase2 == null || phrase2 == "") {
                 phrase2 = translate(phrase1, sourceLanguage, targetLanguage);
             }
-            //response.getOutputStream().print("Phrase1: " + phrase1 + " Phrase2: " + phrase2 + " Deck Name: " + deckName);
             Flashcard flashcard = new Flashcard(phrase1, phrase2);
             GoogleDatastoreFacade googleDatastoreFacade = new GoogleDatastoreFacade();
             Deck deck = googleDatastoreFacade.getDeck(deckName);
@@ -53,7 +52,6 @@ public class AddCardServlet extends HttpServlet {
                 return;
             }*/
             flashcardList.add(flashcard);
-            //response.getOutputStream().print(deck.toString());
             googleDatastoreFacade.updateDeck(deck);
             response.sendRedirect("/editDeck?deckName=" + URLEncoder.encode(deckName, "UTF-8"));
         } catch (AuthorizationException e) {
@@ -67,7 +65,7 @@ public class AddCardServlet extends HttpServlet {
         
         String cardLanguage1 = detectLanguage(flashcard.getPhrase1());        
         String cardLanguage2 = detectLanguage(flashcard.getPhrase2());
-        return ((!cardLanguage1.equalsIgnoreCase(deck.getLanguage1())) || (!cardLanguage2.equalsIgnoreCase(deck.getLanguage2())));
+        return ((!cardLanguage1.equalsIgnoreCase(deck.language1)) || (!cardLanguage2.equalsIgnoreCase(deck.language2)));
     }
 
     public String translate(String sourceText, String sourceLanguage, String targetLanguage) {
