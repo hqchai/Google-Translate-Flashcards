@@ -23,6 +23,55 @@
 	  <link href="css/carousel.css" rel="stylesheet">
   
     <link rel="icon" type="image/jpg" href="images/icon.jpg">
+
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+<style id="jsbin-css">
+body {
+    background: #ccc;
+}
+.flip {
+    -webkit-perspective: 800;
+    width: 400px;
+    height: 200px;
+    position: relative;
+    margin: 50px auto;
+}
+.flip .card.flipped {
+    -webkit-transform: rotatex(-180deg);
+}
+.flip .card {
+    width: 100%;
+    height: 100%;
+    -webkit-transform-style: preserve-3d;
+    -webkit-transition: 0.5s;
+}
+.flip .card .face {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    -webkit-backface-visibility: hidden;
+    z-index: 2;
+    font-family: Georgia;
+    font-size: 3em;
+    text-align: center;
+    line-height: 200px;
+}
+.flip .card .front {
+    position: absolute;
+    z-index: 1;
+    background: black;
+    color: white;
+    cursor: pointer;
+}
+.flip .card .back {
+    -webkit-transform: rotatex(-180deg);
+    background: blue;
+    background: white;
+    color: black;
+    cursor: pointer;
+}
+</style>
   </head>
 
       <%
@@ -62,37 +111,32 @@
 	<div id="myCarousel" class="carousel slide">
       <div class="carousel-inner">
         <div class="item active">
-          <img src="./images/ucla_logo.gif" alt="">
+          <!--<img src="./images/ucla_logo.gif/1200x480" alt="">-->
           <div class="container">
-            <div class="carousel-caption">
+           <!-- <div class="carousel-caption">-->
 			
 			
-			
-              <h1>Flashcard 1</h1>
-              <p class="lead">Content 1</p>
-              <a class="btn btn-large btn-primary" button onclick="myFunction()">Flip over!</a>
-			  
-			    
-			  
-			  
+			          <div class="flip">
+                    <div class="card">
+                        <div class="face front">Front</div>
+                        <div class="face back">Back</div>
+                    </div>
+                </div>
+                  
+                <script>
+                $('.flip').click(function () {
+                        $(this).find('.card').addClass('flipped').mouseleave(function () {
+                            $(this).removeClass('flipped');
+                        });
+                        return false;
+                    });
+                </script>
 			  
 			  
             </div>
           </div>
         </div>
-        <div class="item">
-          <img src="./images/ucla_logo2.gif" alt="">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>Flashcard 2</h1>
-              <p class="lead">Content 2</p>
-              <a class="btn btn-large btn-primary" href="#">Flip over!</a>
-            </div>
-          </div>
-        </div>
-
-
-      </div>
+  </div>
 
 	  <h2 style="text-align:right; padding-right: 130px">Rate card difficulty </h2>
 
