@@ -1,16 +1,15 @@
 package flashcards;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
+import com.google.common.collect.ImmutableBiMap;
 
 public final class LanguageCoder {
-    private Map<String, String> languageToCode;
+    private BiMap<String, String> languageToCode;
     private static LanguageCoder instance = null;
 
     private LanguageCoder() {
-        Map<String, String> map = new HashMap<String, String>();
+        BiMap<String, String> map = HashBiMap.create(64);
         map.put("Afrikaans", "af");
         map.put("Albanian", "sq");
         map.put("Arabic", "ar");
@@ -75,7 +74,7 @@ public final class LanguageCoder {
         map.put("Vietnamese", "vi");
         map.put("Welsh", "cy");
         map.put("Yiddish", "yi");
-        languageToCode = ImmutableMap.copyOf(map);
+        languageToCode = ImmutableBiMap.copyOf(map);
     }
 
     public static LanguageCoder getInstance() {
@@ -87,5 +86,9 @@ public final class LanguageCoder {
     
     public String getCode(String Language) {
         return languageToCode.get(Language);
+    }
+    
+    public String getLanguage(String Code) {
+        return languageToCode.inverse().get(Code);
     }
 }
