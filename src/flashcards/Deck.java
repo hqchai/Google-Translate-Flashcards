@@ -42,7 +42,8 @@ public class Deck {
         for (Flashcard f : cards) {
             if (f.getPhrase1().equals(p1)) {
                 cards.remove(f);
-            }
+            	return;
+	    }
         }
     }
 
@@ -68,7 +69,6 @@ public class Deck {
             datastore = new GoogleDatastoreFacade();
             return (datastore.getDeck(name) != null);
         } catch (AuthorizationException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             return false;
         }

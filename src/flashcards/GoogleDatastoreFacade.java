@@ -33,7 +33,6 @@ public class GoogleDatastoreFacade {
         return deckNameList;
     }
 
-    // TODO: any method calling getDeck() should check if the result is null
     public Deck getDeck(String deckName) {
         
         List<Deck> decks = ofy().load().type(Deck.class).filter("userId", userId).list();
@@ -75,7 +74,7 @@ public class GoogleDatastoreFacade {
         return;
     }
    
-    // TODO: better way of updating w/o deleting and re-storing?
+    // Hack: For now, update a deck by deleting it and re-storing it
     public void updateDeck(Deck newDeck) {
                 
         deleteDeck(newDeck.name);

@@ -31,8 +31,6 @@ public class Flashcard implements Comparable<Flashcard> {
 
     public Flashcard(String p1, String p2) {
 
-        // TODO: Phrase 2 is optional b/c use Google Translate?
-
         phrase1 = p1;
         phrase2 = p2;
 
