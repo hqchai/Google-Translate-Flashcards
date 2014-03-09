@@ -29,8 +29,8 @@ public class RenameDeckServlet extends HttpServlet {
             Deck deck = datastore.getDeck(oldDeckName);
             if (deck != null) {
                 
-                deck.name = newDeckName;
                 datastore.deleteDeck(oldDeckName);
+                deck.name = newDeckName;
                 datastore.storeDeck(deck);
             }
             response.sendRedirect("/editDeck?deckName=" + URLEncoder.encode(newDeckName, "UTF-8"));

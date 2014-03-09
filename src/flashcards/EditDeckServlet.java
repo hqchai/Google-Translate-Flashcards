@@ -19,6 +19,10 @@ public class EditDeckServlet extends HttpServlet {
             GoogleDatastoreFacade facade = new GoogleDatastoreFacade();
             String deckName = URLDecoder.decode( (String) request.getParameter("deckName"), "UTF-8");
             Deck deck = facade.getDeck(deckName);
+            if (deck == null) {
+                
+                response.getWriter().print("Error getting the deck named <em>" + deckName + "</em>. Press the back button in your browser and try a new name.");
+            }
             request.setAttribute("flashcardList", deck.cards);
             request.setAttribute("deckName", deckName);
             request.setAttribute("language1", deck.language1);

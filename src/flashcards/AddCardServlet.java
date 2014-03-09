@@ -60,11 +60,12 @@ public class AddCardServlet extends HttpServlet {
                 response.getWriter().print("You already have a flashcard with these two phrases for this language pair! Press the back button in your browser and try again.");
                 return;
             }
-            if (isWrongLanguagePair(flashcard, deck)) {
+            // TODO: Uncomment this once billing is set up for app
+            /*if (isWrongLanguagePair(flashcard, deck)) {
                 
                 response.getWriter().print("The detected languages for phrase 1 and phrase 2 don't match the language pair for this deck! Press the back button in your broswer and try again.");
                 return;
-            }
+            }*/
             flashcardList.add(flashcard);
             //response.getOutputStream().print(deck.toString());
             googleDatastoreFacade.updateDeck(deck);
