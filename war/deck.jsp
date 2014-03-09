@@ -72,10 +72,10 @@
       <div class="row-fluid">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li align="center"><strong>Deck: </strong><%= deckName %></li>
-	    <li><a href="#add" data-toggle="modal">Add Card</a></li>
-            <li><a href="#delete" data-toggle="modal">Delete Deck</a></li>		
-            <li><a href="/quiz?deckName=<c:out value="${deckName}"/>">Quiz</a></li>
+          	<li align="center"><strong>Deck: </strong><%= deckName %></li>
+			<li><a href="#add" data-toggle="modal">Add Card</a></li>
+            <li><a href="#delete" data-toggle="modal">Delete Deck</a></li>	
+            <li><a href="/quiz.jsp?deckName=<c:out value="${deckName}"/>">Quiz</a></li>
 			<li><a href="#rename" data-toggle="modal">Rename</a></li>							
           </ul>
         </div>	
@@ -164,6 +164,14 @@
 				</div>
 			  </div>
 	
+		<% List<String> flashcardList = (List<String>) request.getAttribute("flashcardList");
+		 int numCards = flashcardList.size();
+		 if (numCards ==0)
+		 	{ %>
+		 		<!-- if no cards in deck, then prompt user with form -->
+		 		
+		 	<% } %>
+
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 		<table class="table table-striped">  
         <thead>  
@@ -184,6 +192,7 @@
              	<form action="/deleteCard" method="Post">
              		<input type="hidden" name="deckName" value="<%= deckName %>">
              		<input type="hidden" name="phrase1" value="${flashcard.phrase1}">
+             		<input type="submit" name="editSubmit" value="Edit">
              		<input type="submit" name="submit" value="Delete">
              	</form>
            </td>  
