@@ -215,7 +215,7 @@
 								  <input type="text" name="phrase1" value="${flashcard.phrase1}">
 								  <br><br>
 								  <p>Phrase 2: </p>
-								  <input type="text" type="phrase2" value="${flashcard.phrase2}">
+								  <input type="text" name="phrase2" value="${flashcard.phrase2}">
 								  <br><br>
 								  <input type="radio" name="userRating" value="1">Easy<br>
 								  <input type="radio" name="userRating" value="2" checked="checked">Medium<br>
