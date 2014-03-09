@@ -164,33 +164,38 @@
 			  </div>
 	
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-		<table class="table table-striped">  
-        <thead>  
-          <tr>  
-            <th><c:out value="${language1}"/></th>  
-            <th><c:out value="${language2}"/></th>  
-          </tr>  
-        </thead>  
-        <tbody>  
-		
-		<!-- just have to make this dynamically generated -->
-		
-	<c:forEach var="flashcard" items="${flashcardList}">
-          <tr>  
-            <td>${flashcard.phrase1}</td>  
-            <td>${flashcard.phrase2}</td>
-            <td>
-             	<form action="/deleteCard" method="Post">
-             		<input type="hidden" name="deckName" value="<%= deckName %>">
-             		<input type="hidden" name="phrase1" value="${flashcard.phrase1}">
-             		<input type="submit" name="submit" value="Delete">
-             	</form>
-           </td>  
-          </tr>  
-	</c:forEach>
-        </tbody>  
-		
-		
+		<table class="table table-striped table-hover table-condensed">
+	        <thead>  
+	          <tr>  
+	            <th><c:out value="${language1}"/></th>  
+	            <th><c:out value="${language2}"/></th>
+	            <th></th>
+	            <th></th>  
+	          </tr>  
+	        </thead>  
+	        <tbody>  
+			
+			<!-- just have to make this dynamically generated -->
+			
+		<c:forEach var="flashcard" items="${flashcardList}">
+	          <tr>  
+	            <td>${flashcard.phrase1}</td>  
+	            <td>${flashcard.phrase2}</td>
+	            <td>
+	           		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit-<%=safeDeckName%>">Edit</button>
+	            </td> 
+	            <td>
+	             	<form action="/deleteCard" method="Post">
+	             		<input type="hidden" name="deckName" value="<%= deckName %>">
+	             		<input type="hidden" name="phrase1" value="${flashcard.phrase1}">
+	             		<button type="submit" value="submit" class="btn btn-danger">Delete</button>
+	             	</form>
+	            </td> 
+	          </tr>  
+		</c:forEach>
+	        </tbody>  
+			
+			
       </table>  
 	
 	   </div>
