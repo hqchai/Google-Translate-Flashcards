@@ -3,7 +3,7 @@ package flashcards;
 import com.googlecode.objectify.annotation.Embed;
 
 @Embed
-public class Flashcard {
+public class Flashcard implements Comparable<Flashcard>{
 
 	/**
      * 
@@ -133,5 +133,16 @@ public class Flashcard {
 
     public void add100ToTimeRating() {
         timeRating += 100; 
+    }
+
+    @Override
+    public int compareTo(Flashcard other) {
+        if(this.totalScore == other.totalScore) {
+            return 0;
+        }
+        if(this.totalScore > other.totalScore) {
+            return 1;
+        }
+        return -1;   
     }
 }
