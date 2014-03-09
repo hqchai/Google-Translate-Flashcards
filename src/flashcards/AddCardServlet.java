@@ -4,8 +4,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.SortedSet;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -40,26 +39,13 @@ public class AddCardServlet extends HttpServlet {
             }
             //response.getOutputStream().print("Phrase1: " + phrase1 + " Phrase2: " + phrase2 + " Deck Name: " + deckName);
             Flashcard flashcard = new Flashcard(phrase1, phrase2);
-            if (flashcard == null) {
-                
-                return;
-            }
             GoogleDatastoreFacade googleDatastoreFacade = new GoogleDatastoreFacade();
             Deck deck = googleDatastoreFacade.getDeck(deckName);
             if (deck == null) {
                 response.sendError(500);
                 return;
             }
-            List<Flashcard> flashcardList = deck.cards;
-            if (flashcardList == null) {
-                deck.cards = new LinkedList<Flashcard>();
-                flashcardList = deck.cards;
-            }
-            if (isDuplicateCard(flashcardList, flashcard)) {
-
-                response.getWriter().print("You already have a flashcard with these two phrases for this language pair! Press the back button in your browser and try again.");
-                return;
-            }
+            SortedSet<Flashcard> flashcardList = deck.cards;
             // TODO: Uncomment this once billing is set up for app
             /*if (isWrongLanguagePair(flashcard, deck)) {
                 
@@ -75,21 +61,7 @@ public class AddCardServlet extends HttpServlet {
         }
     }
     
-    private boolean isDuplicateCard(List<Flashcard> flashcardList, Flashcard flashcard) {
-
-        if (flashcardList != null) {
-            
-            for (Flashcard f : flashcardList) {
-                
-                if (f.getPhrase1().equals(flashcard.getPhrase1()) && f.getPhrase2().equals(flashcard.getPhrase2())) {
-                    
-                    return true;
-                }
-            }
-        }
-        
-        return false;
-    }
+    
     
     private boolean isWrongLanguagePair(Flashcard flashcard, Deck deck) {
         

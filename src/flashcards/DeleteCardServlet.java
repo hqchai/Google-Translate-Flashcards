@@ -20,7 +20,6 @@ public class DeleteCardServlet extends HttpServlet {
             GoogleDatastoreFacade datastore = new GoogleDatastoreFacade();
             Deck deck = datastore.getDeck(deckName);
             if (deck != null) {
-                
                 deck.deleteCard(phrase1);
             }
             datastore.updateDeck(deck);
