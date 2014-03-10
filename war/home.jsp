@@ -89,7 +89,7 @@
 
 							Language1:
 							<select name="language1" size="4">
-								<option value="English">English</option>
+								<option value="English" selected>English</option>
 								<option value="Afrikaans">Afrikaans</option>
 								<option value="Albanian">Albanian</option>
 								<option value="Arabic">Arabic</option>
@@ -159,7 +159,7 @@
 							
 							<br><br>Language2: 
 							<select name="language2" size="4">
-								<option value="English">English</option>
+								<option value="English" selected>English</option>
 								<option value="Afrikaans">Afrikaans</option>
 								<option value="Albanian">Albanian</option>
 								<option value="Arabic">Arabic</option>
