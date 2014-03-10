@@ -189,7 +189,7 @@
 			  </div>
 	
 		<div class="page-header">
-  			<h1><%= deckName %></h1>
+  			<h1 style="color:black"><%= deckName %></h1>
 		</div>
 
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
