@@ -31,6 +31,7 @@
     UserService userService = UserServiceFactory.getUserService();
     User user = userService.getCurrentUser();
     String deckName = (String) request.getAttribute("deckName");
+    String progressAmount = (String) request.getAttribute("progressAmount");
 
     // safeDeckName is for modal names, encodedDeckName is for HTTP GET parameter passing via URL
 	String safeDeckName = deckName.replaceAll("[^a-zA-Z0-9]","-");
@@ -75,7 +76,14 @@
             <li><a href="#delete" data-toggle="modal">Delete Deck</a></li>		
             <li><a href="/quiz?deckName=<%= encodedDeckName %>">Quiz</a></li>
 			<li><a href="#rename" data-toggle="modal">Rename</a></li>
-			<li><a href="#upload-csv" data-toggle="modal">Upload CSV</a></li>							
+			<li><a href="#upload-csv" data-toggle="modal">Upload CSV</a></li>
+			<li>
+				<div class="progress progress-striped active">
+  					<div class="progress-bar" role="progressbar" aria-valuenow="<%= progressAmount %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= progressAmount %>%">
+    					<span class="sr-only"><%= progressAmount %>% Complete</span>
+  					</div>
+				</div>
+			</li>						
           </ul>
         </div>	
 		

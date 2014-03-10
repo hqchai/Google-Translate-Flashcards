@@ -28,6 +28,7 @@ public class EditDeckServlet extends HttpServlet {
             request.setAttribute("deckName", deckName);
             request.setAttribute("language1", deck.language1);
             request.setAttribute("language2", deck.language2);
+            request.setAttribute("progressAmount", Integer.toString(deck.getProgressAmount()));
             request.getRequestDispatcher("/deck.jsp").forward(request, response);
         } catch (AuthorizationException e) {
             HomePageServlet.redirectToLogin(response);
