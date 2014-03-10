@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URLEncoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -25,45 +26,37 @@ public class CsvServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html");
-        // Parse the request
         try {
-            Deck deck = getDeck(request);
-            GoogleDatastoreFacade datastore = new GoogleDatastoreFacade();
-            datastore.storeDeck(deck);
+            response.setContentType("text/html");
+            ServletFileUpload upload = new ServletFileUpload();
+            FileItemIterator iterator = upload.getItemIterator(request);
+            FileItemStream titleitem = iterator.next();
+            String deckName = getDeckName(titleitem);
+            addToDeck(deckName, iterator.next());
+            response.sendRedirect("/editDeck?deckName=" + URLEncoder.encode(deckName, "UTF-8"));
         } catch (FileUploadException e) {
             throw new ServletException(e);
         } catch (AuthorizationException e) {
             HomePageServlet.redirectToLogin(response);
         }
-        response.sendRedirect("/home");
     }
 
-    private String getDeckName(FileItemStream item) throws IOException {
-        InputStream inputStream = item.openStream();
+    private void addToDeck(String deckName, FileItemStream cardStream) throws IOException, FileUploadException,
+            AuthorizationException {
+        GoogleDatastoreFacade facade = new GoogleDatastoreFacade();
+        Deck deck = facade.getDeck(deckName);
+        CSVReader reader = new CSVReader(new InputStreamReader(cardStream.openStream()));
+        String[] nextLine;
+        while ((nextLine = reader.readNext()) != null) {
+            Flashcard flashcard = new Flashcard(nextLine[0], nextLine[1]);
+            deck.cards.add(flashcard);
+        }
+        facade.updateDeck(deck);
+    }
+
+    private String getDeckName(FileItemStream titleItem) throws IOException {
+        InputStream inputStream = titleItem.openStream();
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         return reader.readLine();
-    }
-
-    private Deck getDeck(HttpServletRequest request) throws IOException, FileUploadException {
-        ServletFileUpload upload = new ServletFileUpload();
-        FileItemIterator iterator = upload.getItemIterator(request);
-        FileItemStream Titleitem = iterator.next();
-        assert Titleitem.isFormField();
-        CSVReader reader = new CSVReader(new InputStreamReader(iterator.next().openStream()));
-        String[] nextLine;
-        try {
-            nextLine = reader.readNext();
-            String language1 = nextLine[0];
-            String language2 = nextLine[1];
-            Deck deck = new Deck(getDeckName(Titleitem), language1, language2);
-            while ((nextLine = reader.readNext()) != null) {
-                Flashcard flashcard = new Flashcard(nextLine[0], nextLine[1]);
-                deck.cards.add(flashcard);
-            }
-            return deck;
-        } catch (NullPointerException e) {
-            return null;
-        }
     }
 }
