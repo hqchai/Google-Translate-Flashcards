@@ -52,7 +52,9 @@
     }
 
     .carousel .item {
-      height: 500px;
+        line-height: 300px;
+       overflow: hidden;
+       min-height: 300px;
     }
     .carousel img {
       position: absolute;
