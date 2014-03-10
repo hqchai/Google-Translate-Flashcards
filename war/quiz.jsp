@@ -114,8 +114,8 @@ body {
 			
 			          <div class="flip">
                     <div class="card">
-                        <div class="face front">Front</div>
-                        <div class="face back">Back</div>
+                        <div class="face front"><c:out value="${flashcard.phrase1}"/></div>
+                        <div class="face back"><c:out value="${flashcard.phrase2}"/></div>
                     </div>
                 </div>
                   
