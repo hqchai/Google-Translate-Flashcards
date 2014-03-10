@@ -1,7 +1,5 @@
 package flashcards;
 
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,7 +15,7 @@ public class Deck {
     public String userId;
     @Index
     public String name;
-    public List<Flashcard> cards = new LinkedList<Flashcard>();
+    private List<Flashcard> cards = new LinkedList<Flashcard>();
     public String language1;
     public String language2;
     private Flashcard currentCard;
@@ -96,5 +94,35 @@ public class Deck {
         currentCard = cards.get(index);
         index++;
         return currentCard;
+    }
+
+    /**
+     * 
+     * @param flashcard
+     * @return true if card added
+     *          false if card was already in deck
+     */
+    public boolean addFlashcard(Flashcard flashcard) {
+        for(Flashcard flashcardInList : cards) {
+            if (flashcardInList.equals(flashcard)) {
+                return false;
+            }
+        }
+        cards.add(flashcard);
+        return true;
+    }
+    
+    public Flashcard getFlashcard(String phrase1, String phrase2) {
+        Flashcard flashcard = new Flashcard(phrase1, phrase2);
+        for(Flashcard flashcardInList : cards) {
+            if(flashcardInList.equals(flashcard)) {
+                return flashcardInList;
+            }
+        }
+        return null;
+    }
+
+    public List<Flashcard> getCardList() {
+        return cards;
     }
 }

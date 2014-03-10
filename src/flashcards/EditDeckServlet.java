@@ -24,7 +24,7 @@ public class EditDeckServlet extends HttpServlet {
                 response.getWriter().print("Error getting the deck named <em>" + deckName + "</em>. Press the back button in your browser and try a new name.");
                 return;
             }
-            request.setAttribute("flashcardList", deck.cards);
+            request.setAttribute("flashcardList", deck.getCardList());
             request.setAttribute("deckName", deckName);
             request.setAttribute("language1", deck.language1);
             request.setAttribute("language2", deck.language2);

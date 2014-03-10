@@ -26,17 +26,7 @@ public class EditCardServlet extends HttpServlet {
                 response.getWriter().print("Error getting the deck named <em>" + deckName + "</em>. Press the back button in your browser and try a new name.");
                 return;
             }
-
-            Flashcard flashcard = null;
-            for (Flashcard f : deck.cards) {
-                
-                if (f.getPhrase1().equals(oldPhrase1) && f.getPhrase2().equals(oldPhrase2)) {
-                    
-                    flashcard = f;
-                    break;
-                }
-            }
-            
+            Flashcard flashcard = deck.getFlashcard(oldPhrase1, oldPhrase2);
             if (flashcard == null) {
                 
                 response.getWriter().print("Error getting the flashcard with phrase 1  <em>" + oldPhrase1 + "</em>. Press the back button in your browser and try again.");

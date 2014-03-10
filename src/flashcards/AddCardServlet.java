@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
-import java.util.List;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -44,13 +43,13 @@ public class AddCardServlet extends HttpServlet {
                 response.sendError(500);
                 return;
             }
-            List<Flashcard> flashcardList = deck.cards;
+            
 //            if (isWrongLanguagePair(flashcard, deck)) {
 //                
 //                response.getWriter().print("The detected languages for phrase 1 and phrase 2 don't match the language pair for this deck! Press the back button in your broswer and try again.");
 //                return;
 //            }
-            flashcardList.add(flashcard);
+            deck.addFlashcard(flashcard);
             googleDatastoreFacade.updateDeck(deck);
             response.sendRedirect("/editDeck?deckName=" + URLEncoder.encode(deckName, "UTF-8"));
         } catch (AuthorizationException e) {
