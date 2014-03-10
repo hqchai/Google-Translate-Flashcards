@@ -182,7 +182,7 @@
 
 			  <%
 			  	String phrase1 = (String) pageContext.getAttribute("p1");
-			  	String safePhrase1 = StringEscapeUtils.escapeHtml4((phrase1.replaceAll(" ", "-")).replaceAll("'", "-")); 
+			  	String safePhrase1 = phrase1.replaceAll("[^a-zA-Z0-9]","-");
 			  %>
 	          
 	          <tr>  
