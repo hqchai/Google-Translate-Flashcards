@@ -148,7 +148,7 @@
 								  <br>
 								  <p>Phrase 2: </p>
 								  <INPUT TYPE="text" NAME="phrase2">
-								  <p>Or translate with Google Translate</p>
+								  <button type="submit" value="submit" class="btn btn-primary">Or translate with Google Translate</button>
 								  <br>
 								  <input type="hidden" name="deckName" value="<%= deckName %>">
 								  <input type="hidden" name="language1" value="<c:out value="${language1}"/>">
