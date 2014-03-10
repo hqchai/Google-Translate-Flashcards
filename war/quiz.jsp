@@ -6,6 +6,7 @@
 <%@ page import="com.google.appengine.api.users.UserService" %>
 <%@ page import="com.google.appengine.api.users.UserServiceFactory" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html lang="en">
   <head>
@@ -74,13 +75,6 @@ body {
 }
 </style>
   </head>
-
-  <%
-    UserService userService = UserServiceFactory.getUserService();
-    User user = userService.getCurrentUser();
-    String deckName = URLDecoder.decode( (String) request.getParameter("deckName"), "UTF-8");
-  %>
-  
   <body>
 
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -102,7 +96,7 @@ body {
           </ul>
 		  
 		    <ul class="nav navbar-nav navbar-right">
-          	  <li><a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">Sign Out</a></li>
+          	  <li><a href="<c:out value="${logoutURL}"/>">Sign Out</a></li>
             </ul>
         </div><!--/.nav-collapse -->
       </div>

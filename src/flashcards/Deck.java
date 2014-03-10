@@ -1,8 +1,8 @@
 package flashcards;
 
 import java.util.Iterator;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.LinkedList;
+import java.util.List;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
@@ -13,7 +13,7 @@ public class Deck {
     @Id Long id;
     @Index public String userId;
     @Index public String name;
-	public SortedSet<Flashcard> cards = new TreeSet<Flashcard>();
+	public List<Flashcard> cards = new LinkedList<Flashcard>();
 	public String language1;
 	public String language2;
     public Flashcard currentCard;

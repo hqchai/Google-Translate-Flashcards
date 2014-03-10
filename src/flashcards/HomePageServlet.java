@@ -35,4 +35,9 @@ public class HomePageServlet extends HttpServlet {
         UserService userService = UserServiceFactory.getUserService();
         response.sendRedirect(userService.createLoginURL("/home"));
     }
+    
+    public static String createLogoutURL() {
+        UserService userService = UserServiceFactory.getUserService();
+        return userService.createLogoutURL("/login");
+    }
 }

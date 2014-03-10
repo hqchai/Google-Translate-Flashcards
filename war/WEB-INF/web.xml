@@ -51,6 +51,10 @@
         <servlet-name>RenameDeck</servlet-name>
         <servlet-class>flashcards.RenameDeckServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Quiz</servlet-name>
+        <servlet-class>flashcards.QuizServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Csv</servlet-name>
 	    <url-pattern>/csv</url-pattern>
@@ -90,6 +94,10 @@
     <servlet-mapping>
         <servlet-name>RenameDeck</servlet-name>
         <url-pattern>/renameDeck</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Quiz</servlet-name>
+        <url-pattern>/quiz</url-pattern>
     </servlet-mapping>
    <welcome-file-list>
         <welcome-file>login</welcome-file>

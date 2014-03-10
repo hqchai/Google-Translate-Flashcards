@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
-import java.util.SortedSet;
+import java.util.List;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -44,7 +44,7 @@ public class AddCardServlet extends HttpServlet {
                 response.sendError(500);
                 return;
             }
-            SortedSet<Flashcard> flashcardList = deck.cards;
+            List<Flashcard> flashcardList = deck.cards;
             // TODO: Uncomment this once billing is set up for app
             /*if (isWrongLanguagePair(flashcard, deck)) {
                 
@@ -61,6 +61,7 @@ public class AddCardServlet extends HttpServlet {
     
     
     
+    @SuppressWarnings("unused")
     private boolean isWrongLanguagePair(Flashcard flashcard, Deck deck) {
         
         String cardLanguage1 = detectLanguage(flashcard.getPhrase1());        

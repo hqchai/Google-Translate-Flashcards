@@ -2,6 +2,7 @@ package flashcards;
 
 import java.io.IOException;
 import java.net.URLDecoder;
+import java.util.Collections;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,6 +24,11 @@ public class QuizServlet extends HttpServlet {
         try {
             GoogleDatastoreFacade facade = new GoogleDatastoreFacade();
             String deckName = URLDecoder.decode( (String) request.getParameter("deckName"), "UTF-8");
+            Deck deck = facade.getDeck(deckName);
+            request.setAttribute("flashcard", Collections.max(deck.cards, new ScoreComparator()));
+            request.setAttribute("deckName", deckName);
+            request.setAttribute("logoutURL", HomePageServlet.createLogoutURL());
+            request.getRequestDispatcher("/quiz.jsp").forward(request, response);
         } catch (AuthorizationException e) {
             HomePageServlet.redirectToLogin(response);
         }        
@@ -32,8 +38,8 @@ public class QuizServlet extends HttpServlet {
      * Receives information about the card just displayed. Also returns next card
      * Called by Quiz.jsp
      */
-    @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        
-    }
+//    @Override
+//    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+//        
+//    }
 }
