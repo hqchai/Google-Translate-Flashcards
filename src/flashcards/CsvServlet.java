@@ -30,9 +30,11 @@ public class CsvServlet extends HttpServlet {
             response.setContentType("text/html");
             ServletFileUpload upload = new ServletFileUpload();
             FileItemIterator iterator = upload.getItemIterator(request);
-            FileItemStream titleitem = iterator.next();
-            String deckName = getDeckName(titleitem);
-            addToDeck(deckName, iterator.next());
+            String deckName = getContent(iterator.next());
+            String language1 = getContent(iterator.next());
+            String language2 = getContent(iterator.next());
+            
+            addToDeck(deckName, language1, language2, iterator.next());
             response.sendRedirect("/editDeck?deckName=" + URLEncoder.encode(deckName, "UTF-8"));
         } catch (FileUploadException e) {
             throw new ServletException(e);
@@ -41,20 +43,22 @@ public class CsvServlet extends HttpServlet {
         }
     }
 
-    private void addToDeck(String deckName, FileItemStream cardStream) throws IOException, FileUploadException,
+    private void addToDeck(String deckName, String language1, String language2, FileItemStream cardStream) throws IOException, FileUploadException,
             AuthorizationException {
         GoogleDatastoreFacade facade = new GoogleDatastoreFacade();
         Deck deck = facade.getDeck(deckName);
         CSVReader reader = new CSVReader(new InputStreamReader(cardStream.openStream()));
         String[] nextLine;
         while ((nextLine = reader.readNext()) != null) {
-            Flashcard flashcard = new Flashcard(nextLine[0], nextLine[1]);
-            deck.cards.add(flashcard);
+            if(nextLine[0].equals(language1) && nextLine[1].equals(language2)) {
+                Flashcard flashcard = new Flashcard(nextLine[2], nextLine[3]);
+                deck.cards.add(flashcard);
+            }
         }
         facade.updateDeck(deck);
     }
 
-    private String getDeckName(FileItemStream titleItem) throws IOException {
+    private String getContent(FileItemStream titleItem) throws IOException {
         InputStream inputStream = titleItem.openStream();
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         return reader.readLine();
