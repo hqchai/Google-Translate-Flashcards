@@ -2,6 +2,7 @@ package flashcards;
 
 import java.io.IOException;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,6 +24,10 @@ public class QuizServlet extends HttpServlet {
             GoogleDatastoreFacade facade = new GoogleDatastoreFacade();
             String deckName = URLDecoder.decode((String) request.getParameter("deckName"), "UTF-8");
             Deck deck = facade.getDeck(deckName);
+            Flashcard flashcard = deck.getNextCard();
+            if(flashcard == null) {
+                response.sendRedirect("/editDeck?deckName=" + URLEncoder.encode(deckName, "UTF-8"));
+            }
             request.setAttribute("flashcard", deck.getNextCard());
             request.setAttribute("deckName", deckName);
             request.setAttribute("logoutURL", HomePageServlet.createLogoutURL());
