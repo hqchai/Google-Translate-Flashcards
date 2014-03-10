@@ -47,7 +47,7 @@ public class CsvServlet extends HttpServlet {
             AuthorizationException {
         GoogleDatastoreFacade facade = new GoogleDatastoreFacade();
         Deck deck = facade.getDeck(deckName);
-        CSVReader reader = new CSVReader(new InputStreamReader(cardStream.openStream()));
+        CSVReader reader = new CSVReader(new InputStreamReader(cardStream.openStream(), "UTF-8"));
         String[] nextLine;
         while ((nextLine = reader.readNext()) != null) {
             if(nextLine[0].equals(language1) && nextLine[1].equals(language2)) {
