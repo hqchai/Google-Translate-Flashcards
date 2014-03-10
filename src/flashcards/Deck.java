@@ -1,5 +1,6 @@
 package flashcards;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -16,7 +17,8 @@ public class Deck {
 	public List<Flashcard> cards = new LinkedList<Flashcard>();
 	public String language1;
 	public String language2;
-    public Flashcard currentCard;
+    private Flashcard currentCard;
+    private int index = 0;
 
     // no-arg constructor required for objectify
     @SuppressWarnings("unused")
@@ -55,7 +57,7 @@ public class Deck {
         }
     }
 
-    public void updateCurrentCard(int score, Boolean correctness) {     //Call this function after you use the card
+    public void updateCurrentCard(Boolean correctness) {     //Call this function after you use the card
        // Update the time rating.  If the rating is 0, bump all other cards ratings by 100 
        currentCard.updateTimeRating();
        if (currentCard.timeRatingIs0()) {
@@ -65,9 +67,7 @@ public class Deck {
        }
 
        //Update correctness rating and user rating
-       currentCard.updateUserRating(score);
        currentCard.updateCorrectnessRating(correctness);
-       
        currentCard.updateTotalScore();
     }
 
@@ -81,5 +81,15 @@ public class Deck {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public Flashcard getNextCard() {
+        //        currentCard = Collections.max(cards, new ScoreComparator());
+        if(index == cards.size()) {
+            index = 0;
+        }
+        currentCard = cards.get(index);
+        index++;
+        return currentCard;
     }
 }

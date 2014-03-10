@@ -134,14 +134,20 @@ body {
         </div>
   </div>
 
-	  <h2 style="text-align:right; padding-right: 130px">Rate card difficulty </h2>
+	  <h2 style="text-align:right; padding-right: 130px">Did you get this card right?</h2>
 
 	  <div class="row-fluid">
-		<div style = "float:right">
-			<form name="User Feedback" action="ProcessCardServlet" method="post">
-				<input class="btn btn-lg btn-primary" type="submit" name="cardRating" value="I got it! (Easy)">
-				<input class="btn btn-lg btn-primary" type="submit" name="cardRating" value="Took a little time (Medium)">
-				<input class="btn btn-lg btn-primary" type="submit" name="cardRating" value="That was tricky (Difficult)">
+		<div>
+			<form name="correct" action="/quiz" method="post">
+                                <input type="hidden" name="correct" value="true">
+				<input type="hidden" name="deckName" value="<c:out value="${deckName}"/>">
+				<input class="btn btn-lg btn-primary" type="submit" name="cardRating" value="Yes">
+
+			</form>
+                        <form name="incorrect" action="/quiz" method="post">
+				<input type="hidden" name="correct" value="false">
+				<input type="hidden" name="deckName" value="<c:out value="${deckName}"/>">
+				<input class="btn btn-lg btn-primary" type="submit" name="cardRating" value="No">
 			</form>
 		</div>
 	</div>     
