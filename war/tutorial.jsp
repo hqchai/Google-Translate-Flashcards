@@ -90,7 +90,7 @@
           <!--<h2 id="add">Add Cards to a Deck</h2>
             <p>See "Edit a Deck" </p>-->
           <h2 id="edit">Edit a Deck</h2>
-            <p>From <a href="/home">your homepage</a>, click the <a href="deck.html?name=Food">Edit</a> deck option. From there, you may edit the contents of a flashcard, add/remove flashcards, rename your deck, or quiz yourself (in case you didn't mean to click edit).</p>
+            <p>From <a href="/home">your homepage</a>, click the "Edit" deck option. From there, you may edit the contents of a flashcard, add/remove flashcards, rename your deck, or quiz yourself (in case you didn't mean to click edit).</p>
           <h2 id="delete">Delete a Deck</h2>
             <p>From <a href="/home">your homepage</a>, click on the "Delete" button below the deck you want to delete. You will then be prompted to confirm that you want to delete this deck. You may select "Confirm" to delete the deck, or click "Cancel" if you do not want to delete the deck.</p>
           <h2 id="quiz">Quiz Yourself</h2>
