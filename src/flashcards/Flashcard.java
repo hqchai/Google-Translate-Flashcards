@@ -23,6 +23,7 @@ public class Flashcard {
     private int correctnessRating; // Higher score means more times correct
     private int userRating; // 1 = easy 3 = hard
     private int timeRating; // A high time rating means you haven't seen it in a while
+    private boolean correctLastTime; 
 
     // no-arg constructor required for objectify
     @SuppressWarnings("unused")
@@ -40,6 +41,8 @@ public class Flashcard {
         timeRating = 100; //See setTimeRating for more info on time rating
         //Calculate the total score
         updateTotalScore();
+        
+        correctLastTime = false;
     }
 
     public String toString() {
@@ -69,6 +72,16 @@ public class Flashcard {
     public void setPhrase2(String s) {
 
         phrase2 = s;
+    }
+    
+    public boolean getCorrectLastTime() {
+        
+        return correctLastTime;
+    }
+    
+    public void setCorrectLastTime(boolean m) {
+        
+        correctLastTime = m;
     }
 
     public boolean timeRatingIs0() {

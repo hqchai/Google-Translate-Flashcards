@@ -63,6 +63,7 @@
 	
       <div class="container">
 	   <% List<String> deckNameList = (List<String>) request.getAttribute("deckNameList");
+	   	  List<String> progressAmountList = (List<String>) request.getAttribute("progessAmountList");
 		 int deckSize = deckNameList.size();
 		 for (int i =0; i <= deckSize; i++) {
 			if (i % 4 == 0) { %>
@@ -240,7 +241,8 @@
 			<% }
 			else {
 			
-			String deckName = deckNameList.get(i); 
+			String deckName = deckNameList.get(i);
+			String progressAmount = progressAmountList.get(i); // String of an integer from 0-100 for progress bar
       
       // Short deck name is the name displayed on each deck's picture.
       String shortDeckName = deckName;

@@ -24,6 +24,7 @@ public class HomePageServlet extends HttpServlet {
         try {
             GoogleDatastoreFacade datastore = new GoogleDatastoreFacade();
             request.setAttribute("deckNameList", datastore.getDeckNameList());
+            request.setAttribute("progessAmountList", datastore.getProgressAmountList());
             request.getRequestDispatcher("/home.jsp").forward(request, response);
         } catch (AuthorizationException e) {
             redirectToLogin(response);

@@ -32,6 +32,18 @@ public class GoogleDatastoreFacade {
         
         return deckNameList;
     }
+    
+    public List<String> getProgressAmountList() throws AuthorizationException {
+        
+        List<Deck> decks = ofy().load().type(Deck.class).filter("userId", userId).list();
+        List<String> progressAmountList = new ArrayList<String>();
+        for (Deck d : decks) {
+            
+            progressAmountList.add(Integer.toString(d.getProgressAmount()));
+        }
+        
+        return progressAmountList;
+    }
 
     public Deck getDeck(String deckName) {
         
