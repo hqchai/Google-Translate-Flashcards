@@ -174,7 +174,10 @@
 					
 					<form action="/csv" method="Post" enctype="multipart/form-data">
 						<div class="modal-body">
-							<input type="hidden" name="deckName" value="<%= deckName %>">
+							<input type="hidden" name="deckName" value="<c:out value="${deckName}"/>">
+                                                        <input type="hidden" name="language1" value="<c:out value="${language1}"/>">
+							<input type="hidden" name="language2" value="<c:out value="${language2}"/>">
+
 							<p>Upload CSV </p>
 							<input type="file" name="deck">
 							<br>
