@@ -50,6 +50,7 @@ public class QuizServlet extends HttpServlet {
             GoogleDatastoreFacade facade = new GoogleDatastoreFacade();
             Deck deck = facade.getDeck(deckName);
             deck.updateCurrentCard(correctString.equals("true"));
+            deck.updateProgressAmount();
             request.setAttribute("flashcard", deck.getNextCard());
             request.setAttribute("deckName", deckName);
             request.setAttribute("logoutURL", HomePageServlet.createLogoutURL());

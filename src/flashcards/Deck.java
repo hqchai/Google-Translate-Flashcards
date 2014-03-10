@@ -20,6 +20,7 @@ public class Deck {
     public String language2;
     private Flashcard currentCard;
     private int index = 0;
+    private int progressAmount; // int from 0-100 specifying percentage of cards the user got correct the last time they viewed each card
 
     // no-arg constructor required for objectify
     @SuppressWarnings("unused")
@@ -32,6 +33,7 @@ public class Deck {
         name = n;
         language1 = lang1;
         language2 = lang2;
+        progressAmount = 0;
     }
 
     public String toString() {
@@ -69,6 +71,7 @@ public class Deck {
         //Update correctness rating and user rating
         currentCard.updateCorrectnessRating(correctness);
         currentCard.updateTotalScore();
+        currentCard.setCorrectLastTime(correctness);
     }
 
     public boolean isDuplicateDeckName() {
@@ -124,5 +127,29 @@ public class Deck {
 
     public List<Flashcard> getCardList() {
         return cards;
+    }
+    
+    public int getProgressAmount() {
+        
+        return progressAmount;
+    }
+
+    public void updateProgressAmount() {
+        
+        int numCorrect = 0;
+        int numCards = 0;
+        for (Flashcard f : cards) {
+        
+            numCards++;
+            if (f.getCorrectLastTime()) {
+                
+                numCorrect++;
+            }
+        }
+        
+        if (numCards != 0) {
+            
+            progressAmount = (int) ((((double) numCorrect) / ((double) numCards)) * 100);
+        }
     }
 }
