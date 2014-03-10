@@ -34,8 +34,8 @@ body {
 }
 .flip {
     -webkit-perspective: 800;
-    width: 400px;
-    height: 200px;
+    width: 450px;
+    height: 225px;
     position: relative;
     margin: 50px auto;
 }
@@ -110,7 +110,7 @@ body {
        <!-- <img src="./images/background.gif/1200x480"> -->
           <div class="container">
            <!-- <div class="carousel-caption">-->
-			
+			       
 			
 			          <div class="flip">
                     <div class="card">
