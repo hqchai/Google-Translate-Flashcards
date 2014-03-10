@@ -72,10 +72,11 @@
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
             <li align="center"><h4><strong>Deck: </strong><em><%= deckName %></em></h4></li>
-	    <li><a href="#add" data-toggle="modal">Add Card</a></li>
+	    	<li><a href="#add" data-toggle="modal">Add Card</a></li>
             <li><a href="#delete" data-toggle="modal">Delete Deck</a></li>		
             <li><a href="/quiz?deckName=<%= encodedDeckName %>">Quiz</a></li>
-			<li><a href="#rename" data-toggle="modal">Rename</a></li>							
+			<li><a href="#rename" data-toggle="modal">Rename</a></li>
+			<li><a href="#upload-csv" data-toggle="modal">Upload CSV</a></li>							
           </ul>
         </div>	
 		
@@ -157,6 +158,31 @@
 						<div class="modal-footer">
 						  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 						  <button type="submit" value="submit" class="btn btn-primary">Save Changes</button>
+						</div>
+					</form>
+				  </div>
+				</div>
+			  </div>
+
+			  <div class="modal fade" id="upload-csv" tabindex="-1" role="dialog" aria-labelledby="upload-csv-label" aria-hidden="true">
+				<div class="modal-dialog">
+				  <div class="modal-content">
+					<div class="modal-header">
+					  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					  <h4 class="modal-title" id="upload-csv-label">Upload CSV</h4>
+					</div>
+					
+					
+					<form action="/csv" method="Post" enctype="multipart/form-data">
+						<div class="modal-body">
+							<input type="hidden" name="deckName" value="<%= deckName %>">
+							<p>Upload CSV </p>
+							<input type="file" name="deck">
+							<br>
+						</div>
+						<div class="modal-footer">
+						  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+						  <button type="submit" value="submit" class="btn btn-primary">Import Cards</button>
 						</div>
 					</form>
 				  </div>

@@ -226,9 +226,6 @@
 							</select>
 
 							<br><br>
-
-							<p>Optional: Upload CSV</p>
-							<p align="center"><input type="file" accept=".csv" name="deckCSV"/></p>
 							
 					</div>
 
@@ -236,22 +233,6 @@
 							<button type="submit" value="submit" class="btn btn-primary">Add Deck</button>
 							</form>
 					</div>
-						  
-							
-					
-                              <!--  <form action="/csv" method="post" enctype="multipart/form-data">
-							  <p>New deck name: </p>
-							  <input type="text" name="deckname"/>
-						          <p>Upload CSV </p>
-							  <input type="file" name="deck"/> 
-							  <br>
-							  <button type="button" class="btn btn-primary">Fetch from Phrasebook</button> -->
-					<!--</div>-->
-						<!--<div class="modal-footer">
-						  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-						  <button type="submit" value="submit" class="btn btn-primary">Save Changes</button>
-						</div> -->
-					</form>
 				  </div>
 				</div>
 			  </div>
