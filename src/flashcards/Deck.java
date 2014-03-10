@@ -1,5 +1,6 @@
 package flashcards;
 
+import java.util.Iterator;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -38,12 +39,19 @@ public class Deck {
         return "Deck Name: " + name + "\n" + cardsStr;
     }
     
-    public void deleteCard(String p1) {
-        for (Flashcard f : cards) {
-            if (f.getPhrase1().equals(p1)) {
-                cards.remove(f);
-            	return;
-	    }
+    public void deleteCard(String p1) {       
+//        for (Flashcard f : cards) {
+//            if (f.getPhrase1().equals(p1)) {
+//                cards.remove(f);
+//            	return;
+//	        }
+//        }
+        Iterator<Flashcard> iter = cards.iterator();
+        while (iter.hasNext()) {
+            if (iter.next().getPhrase1().equals(p1)) {
+                iter.remove();
+                return;
+            }
         }
     }
 
@@ -59,7 +67,8 @@ public class Deck {
        //Update correctness rating and user rating
        currentCard.updateUserRating(score);
        currentCard.updateCorrectnessRating(correctness);
-
+       
+       currentCard.updateTotalScore();
     }
 
     public boolean isDuplicateDeckName() {
