@@ -107,7 +107,7 @@ body {
 	<div id="myCarousel" class="carousel slide">
       <div class="carousel-inner">
         <div class="item active">
-          <!--<img src="./images/ucla_logo.gif/1200x480" alt="">-->
+       <!-- <img src="./images/background.gif/1200x480"> -->
           <div class="container">
            <!-- <div class="carousel-caption">-->
 			
@@ -136,21 +136,25 @@ body {
 
 	  <h2 style="text-align:right; padding-right: 130px">Did you get this card right?</h2>
 
-	  <div class="row-fluid">
-		<div>
-			<form name="correct" action="/quiz" method="post">
-                                <input type="hidden" name="correct" value="true">
-				<input type="hidden" name="deckName" value="<c:out value="${deckName}"/>">
-				<input class="btn btn-lg btn-primary" type="submit" name="cardRating" value="Yes">
+<div class="row-fluid">
+    <span style="float:right; padding-right: 130px">
+    			<form name="correct" action="/quiz" method="post">
+                    <input type="hidden" name="correct" value="true">
+    				<input type="hidden" name="deckName" value="<c:out value="${deckName}"/>">
+    				<input class="btn btn-lg btn-primary" type="submit" name="cardRating" value="Yes">
 
-			</form>
-                        <form name="incorrect" action="/quiz" method="post">
-				<input type="hidden" name="correct" value="false">
-				<input type="hidden" name="deckName" value="<c:out value="${deckName}"/>">
-				<input class="btn btn-lg btn-primary" type="submit" name="cardRating" value="No">
-			</form>
-		</div>
-	</div>     
+    			</form>
+            </span>
+    <span style="float:right; padding-right: 40px">
+
+            
+                <form name="incorrect" action="/quiz" method="post">
+    				<input type="hidden" name="correct" value="false">
+    				<input type="hidden" name="deckName" value="<c:out value="${deckName}"/>">
+    				<input class="btn btn-lg btn-primary" type="submit" name="cardRating" value="No">
+    			</form>
+	</span>
+</div>     
 
 
 	 <!-- <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a> -->	  
