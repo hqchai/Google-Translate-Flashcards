@@ -221,6 +221,7 @@
 	             	<form action="/deleteCard" method="Post">
 	             		<input type="hidden" name="deckName" value="<%= deckName %>">
 	             		<input type="hidden" name="phrase1" value="<c:out value="${flashcard.phrase1}"/>">
+	             		<input type="hidden" name="phrase2" value="<c:out value="${flashcard.phrase2}"/>">
 	             		<button type="submit" value="submit" class="btn btn-danger">Delete</button>
 	             	</form>
 	            </td> 
@@ -249,7 +250,7 @@
 								  <br><br>
 								  <input type="hidden" name="deckName" value="<%= deckName %>">
 								  <input type="hidden" name="oldPhrase1" value="<c:out value="${flashcard.phrase1}"/>">
-
+								  <input type="hidden" name="oldPhrase2" value="<c:out value="${flashcard.phrase2}"/>">
 						</div>
 						<div class="modal-footer">
 						  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>

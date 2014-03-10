@@ -46,17 +46,14 @@ public class Deck {
         return "Deck Name: " + name + "\n" + cardsStr;
     }
 
-    public void deleteCard(String p1) {
-        //        for (Flashcard f : cards) {
-        //            if (f.getPhrase1().equals(p1)) {
-        //                cards.remove(f);
-        //            	return;
-        //	        }
-        //        }
-        Iterator<Flashcard> iter = cards.iterator();
-        while (iter.hasNext()) {
-            if (iter.next().getPhrase1().equals(p1)) {
-                iter.remove();
+    public void deleteCard(String p1, String p2) {
+       
+        for (int i=0; i < cards.size(); i++) {
+            
+            Flashcard flashcard = cards.get(i);
+            if (flashcard.getPhrase1().equals(p1) && flashcard.getPhrase2().equals(p2)) {
+                
+                cards.remove(i);
                 return;
             }
         }

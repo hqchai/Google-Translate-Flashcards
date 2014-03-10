@@ -17,10 +17,11 @@ public class DeleteCardServlet extends HttpServlet {
         try {
             String deckName = (String) request.getParameter("deckName");
             String phrase1 = (String) request.getParameter("phrase1");
+            String phrase2 = (String) request.getParameter("phrase2");
             GoogleDatastoreFacade datastore = new GoogleDatastoreFacade();
             Deck deck = datastore.getDeck(deckName);
             if (deck != null) {
-                deck.deleteCard(phrase1);
+                deck.deleteCard(phrase1, phrase2);
                 datastore.updateDeck(deck);
             }
             response.sendRedirect("/editDeck?deckName=" + URLEncoder.encode(deckName, "UTF-8"));

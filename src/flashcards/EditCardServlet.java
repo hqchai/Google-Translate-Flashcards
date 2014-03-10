@@ -17,6 +17,7 @@ public class EditCardServlet extends HttpServlet {
         try {
             String deckName = (String) request.getParameter("deckName");
             String oldPhrase1 = (String) request.getParameter("oldPhrase1");
+            String oldPhrase2 = (String) request.getParameter("oldPhrase2");
             GoogleDatastoreFacade datastore = new GoogleDatastoreFacade();
             Deck deck = datastore.getDeck(deckName);
             
@@ -27,11 +28,12 @@ public class EditCardServlet extends HttpServlet {
             }
 
             Flashcard flashcard = null;
-            for (Flashcard f: deck.cards) {
+            for (Flashcard f : deck.cards) {
                 
-                if (f.getPhrase1().equals(oldPhrase1)) {
+                if (f.getPhrase1().equals(oldPhrase1) && f.getPhrase2().equals(oldPhrase2)) {
                     
                     flashcard = f;
+                    break;
                 }
             }
             
