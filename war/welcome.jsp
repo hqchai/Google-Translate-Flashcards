@@ -12,7 +12,7 @@
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <link href="css/cover.css" rel="stylesheet">
+    <link href="css/cover2.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Hammersmith+One' rel='stylesheet' type='text/css'>
     <link rel="icon" type="image/jpg" href="images/icon.jpg">
   </head>
