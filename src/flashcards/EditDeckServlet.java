@@ -24,6 +24,8 @@ public class EditDeckServlet extends HttpServlet {
                 response.getWriter().print("Error getting the deck named <em>" + deckName + "</em>. Press the back button in your browser and try a new name.");
                 return;
             }
+            deck.updateProgressAmount(); // not redundant, checks for changes in percent progress
+            facade.updateDeck(deck);
             request.setAttribute("flashcardList", deck.getCardList());
             request.setAttribute("deckName", deckName);
             request.setAttribute("language1", deck.language1);
