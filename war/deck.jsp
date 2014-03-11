@@ -76,13 +76,7 @@
             <li><a href="#delete" data-toggle="modal">Delete Deck</a></li>		
             <li><a href="/quiz?deckName=<%= encodedDeckName %>">Quiz</a></li>
 			<li><a href="#rename" data-toggle="modal">Rename</a></li>
-			<li><a href="#upload-csv" data-toggle="modal">Upload CSV</a></li><br>
-			<li>
-				<div class="progress progress-striped active">
-  					<div class="progress-bar" role="progressbar" aria-valuenow="50%" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
-  					</div>
-				</div>
-			</li>						
+			<li><a href="#upload-csv" data-toggle="modal">Upload CSV</a></li><br>					
           </ul>
         </div>	
 		
@@ -202,6 +196,10 @@
 		<table class="table table-striped table-hover table-condensed">
 			<div>
   				<h1 align="center"><%= deckName %></h1>
+			</div>
+			<div align="center" class="progress progress-striped active">
+  					<div class="progress-bar" role="progressbar" aria-valuenow="<%= progressAmount %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= progressAmount %>%">
+  					<em>Level of Mastery: <%= progressAmount %>%</em></div>
 			</div>
 	        <thead>  
 	          <tr>  
