@@ -28,11 +28,11 @@ public class QuizServlet extends HttpServlet {
             if(flashcard == null) {
                 response.sendRedirect("/editDeck?deckName=" + URLEncoder.encode(deckName, "UTF-8"));
             }
-            request.setAttribute("flashcard", deck.getNextCard());
+            facade.updateDeck(deck);
+            request.setAttribute("flashcard", flashcard);
             request.setAttribute("deckName", deckName);
             request.setAttribute("logoutURL", HomePageServlet.createLogoutURL());
             request.getRequestDispatcher("/quiz.jsp").forward(request, response);
-            facade.updateDeck(deck);
         } catch (AuthorizationException e) {
             HomePageServlet.redirectToLogin(response);
         }
@@ -51,11 +51,12 @@ public class QuizServlet extends HttpServlet {
             Deck deck = facade.getDeck(deckName);
             deck.updateCurrentCard(correctString.equals("true"));
             deck.updateProgressAmount();
+            facade.updateDeck(deck);
             request.setAttribute("flashcard", deck.getNextCard());
             request.setAttribute("deckName", deckName);
             request.setAttribute("logoutURL", HomePageServlet.createLogoutURL());
+            facade.updateDeck(deck); // not a typo, need to update deck once after updating current card and then again after getting next card
             request.getRequestDispatcher("/quiz.jsp").forward(request, response);
-            facade.updateDeck(deck);
         } catch (AuthorizationException e) {
             HomePageServlet.redirectToLogin(response);
         }

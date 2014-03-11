@@ -254,7 +254,7 @@
 			String safeDeckName = deckName.replaceAll("[^a-zA-Z0-9]","-");
 			String encodedDeckName = URLEncoder.encode(deckName, "UTF-8"); %>
 
-			 <div class="col-md-3"><a href="quiz?deckName=<%=encodedDeckName%>"><div class="row deck"><div style="word-wrap: break-word"><%= shortDeckName %></div></div></a><div class="row deck-buttons"><button type="button" class="btn btn-primary" onclick="window.location.href='/editDeck?deckName=<%=encodedDeckName%>'">Edit</button>&nbsp; &nbsp;<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-<%=safeDeckName%>">Delete</button></div></div>
+			 <div class="col-md-3"><a href="/quiz?deckName=<%=encodedDeckName%>"><div class="row deck"><div style="word-wrap: break-word"><%= shortDeckName %></div></div></a><div class="row deck-buttons"><button type="button" class="btn btn-primary" onclick="window.location.href='/editDeck?deckName=<%=encodedDeckName%>'">Edit</button>&nbsp; &nbsp;<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-<%=safeDeckName%>">Delete</button></div></div>
 
 			 <div class="modal fade" id="delete-<%=safeDeckName%>" tabindex="-1" role="dialog" aria-labelledby="delete-<%=safeDeckName%>-label" aria-hidden="true">
 				<div class="modal-dialog">

@@ -68,7 +68,6 @@ public class Deck {
             }
         }
 
-        //Update correctness rating and user rating
         currentCard.updateCorrectnessRating(correctness);
         currentCard.updateTotalScore();
         currentCard.setCorrectLastTime(correctness);
