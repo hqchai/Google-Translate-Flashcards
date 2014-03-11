@@ -35,7 +35,6 @@ public class CsvServlet extends HttpServlet {
             String language2 = getContent(iterator.next());
             
             addToDeck(deckName, language1, language2, iterator.next());
-            deck.updateProgressAmount();
             response.sendRedirect("/editDeck?deckName=" + URLEncoder.encode(deckName, "UTF-8"));
         } catch (FileUploadException e) {
             throw new ServletException(e);
@@ -56,6 +55,7 @@ public class CsvServlet extends HttpServlet {
                 deck.addFlashcard(flashcard);
             }
         }
+        deck.updateProgressAmount();
         facade.updateDeck(deck);
         reader.close();
     }
