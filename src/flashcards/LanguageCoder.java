@@ -1,17 +1,16 @@
 package flashcards;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.google.api.translate.Language;
-import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
+import com.google.common.collect.ImmutableBiMap;
 
 public final class LanguageCoder {
-    private Map<String, Language> languageToCode;
+    private BiMap<String, Language> languageToCode;
     private static LanguageCoder instance = null;
 
     private LanguageCoder() {
-        Map<String, Language> map = new HashMap<String, Language>();
+        BiMap<String, Language> map = HashBiMap.create(64);
         map.put("Afrikaans", Language.AFRIKAANS);
         map.put("Albanian", Language.ALBANIAN);
         map.put("Arabic", Language.ARABIC);
@@ -74,17 +73,25 @@ public final class LanguageCoder {
         map.put("Vietnamese", Language.VIETNAMESE);
         map.put("Welsh", Language.WELSH);
         map.put("Yiddish", Language.YIDDISH);
-          languageToCode = ImmutableMap.copyOf(map);
+        languageToCode = ImmutableBiMap.copyOf(map);
     }
     
     public static LanguageCoder getInstance() {
+        
         if (instance == null) {
             instance = new LanguageCoder();
         }
+        
         return instance;
     }
     
     public Language getCode(String Language) {
+        
         return languageToCode.get(Language);
+    }
+    
+    public String getLanguage(Language Code) {
+        
+        return languageToCode.inverse().get(Code);
     }
 }

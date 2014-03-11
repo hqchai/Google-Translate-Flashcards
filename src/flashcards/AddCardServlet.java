@@ -7,9 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
 import com.google.api.GoogleAPI;
 import com.google.api.GoogleAPIException;
+import com.google.api.detect.*;
 import com.google.api.translate.Language;
 import com.google.api.translate.Translate;
 
@@ -44,11 +44,11 @@ public class AddCardServlet extends HttpServlet {
                 return;
             }
             
-//            if (isWrongLanguagePair(flashcard, deck)) {
-//                
-//                response.getWriter().print("The detected languages for phrase 1 and phrase 2 don't match the language pair for this deck! Press the back button in your broswer and try again.");
-//                return;
-//            }
+            if (isWrongLanguagePair(flashcard, deck)) {
+                
+                response.getWriter().print("The detected languages for phrase 1 and phrase 2 don't match the language pair for this deck! Press the back button in your broswer and try again.");
+                return;
+            }
             deck.addFlashcard(flashcard);
             deck.updateProgressAmount();
             googleDatastoreFacade.updateDeck(deck);
@@ -58,13 +58,16 @@ public class AddCardServlet extends HttpServlet {
         }
     }
     
-//    @SuppressWarnings("unused")
-//    private boolean isWrongLanguagePair(Flashcard flashcard, Deck deck) {
-//        
-//          String cardLanguage1 = detectLanguage(flashcard.getPhrase1());        
-//          String cardLanguage2 = detectLanguage(flashcard.getPhrase2());
-//        return ((!cardLanguage1.equalsIgnoreCase(deck.language1)) || (!cardLanguage2.equalsIgnoreCase(deck.language2)));
-//    }
+    private boolean isWrongLanguagePair(Flashcard flashcard, Deck deck) {
+        
+          String cardLanguage1 = detectLanguage(flashcard.getPhrase1());        
+          String cardLanguage2 = detectLanguage(flashcard.getPhrase2());
+          if (cardLanguage1 == null || cardLanguage2 == null) {
+              
+              return false;
+          }
+          return ((!cardLanguage1.equalsIgnoreCase(deck.language1)) || (!cardLanguage2.equalsIgnoreCase(deck.language2)));
+    }
 
     public String translate(String sourceText, String sourceLanguage, String targetLanguage) {
         
@@ -89,61 +92,19 @@ public class AddCardServlet extends HttpServlet {
         } 
     }
     
-//    private String detectLanguage(String phrase) {
-//
-//        CloseableHttpClient client = HttpClients.createDefault();
-//        try {
-//            URI uri = new URIBuilder()
-//                    .setScheme("https")
-//                    .setHost("www.googleapis.com")
-//                    .setPath("/language/translate/v2")
-//                    .setParameter("key", apiKey)
-//                    .setParameter("q", phrase)
-//                    .build();
-//            HttpGet httpGet = new HttpGet(uri);
-//            CloseableHttpResponse response = client.execute(httpGet);
-//            try {
-//                HttpEntity entity = response.getEntity();
-//                String googlejsonResponse = EntityUtils.toString(entity);
-//                String detectedLanguageCode = jsonToDetectedLanguage(googlejsonResponse);
-//                
-//                LanguageCoder languageCoder = LanguageCoder.getInstance();
-//                return languageCoder.getLanguage(detectedLanguageCode);
-//            } finally {
-//                response.close();
-//            }
-//        } catch (URISyntaxException | IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
-    
-    public String jsonToDetectedLanguage(String json) {
-        Gson gson = new Gson();
-        GoogleLanguageDetectionResponse response = gson.fromJson(json, GoogleLanguageDetectionResponse.class);
-        return response.data.detections[0].detectedLanguage;
+    private String detectLanguage(String phrase) {
+
+        GoogleAPI.setHttpReferrer("http://www.uclatranslateflashcards.appspot.com/");
+        GoogleAPI.setKey(apiKey);
+        
+        try {
+            
+            LanguageCoder languageCoder = LanguageCoder.getInstance();
+            Language detectedLanguage = Detect.execute(phrase).getLanguage();
+            return languageCoder.getLanguage(detectedLanguage);        
+        } catch (Exception e) {
+
+            return null;
+        }
     }
-}
-
-class GoogleTranslateResponse {
-    public Data data;
-}
-
-class Data {
-    public Translation[] translations;
-}
-
-class Translation {
-    public String translatedText;
-}
-
-class GoogleLanguageDetectionResponse {
-    public DetectionData data;
-}
-
-class DetectionData {
-    public Detection[] detections;
-}
-
-class Detection {
-    public String detectedLanguage;
 }
