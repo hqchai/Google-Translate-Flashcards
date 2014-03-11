@@ -18,8 +18,7 @@ public class Deck {
     private List<Flashcard> cards = new LinkedList<Flashcard>();
     public String language1;
     public String language2;
-    private Flashcard currentCard;
-    private int index = 0;
+    private int currCardIndex; // identifies the current card
     private int progressAmount; // int from 0-100 specifying percentage of cards the user got correct the last time they viewed each card
 
     // no-arg constructor required for objectify
@@ -33,6 +32,7 @@ public class Deck {
         name = n;
         language1 = lang1;
         language2 = lang2;
+        currCardIndex = -1; // getNextCard() increments index before accessing the card; want first card to be cards[0]
         progressAmount = 0;
     }
 
@@ -61,16 +61,17 @@ public class Deck {
 
     public void updateCurrentCard(Boolean correctness) { //Call this function after you use the card
         // Update the time rating.  If the rating is 0, bump all other cards ratings by 100 
-        currentCard.updateTimeRating();
-        if (currentCard.timeRatingIs0()) {
+        cards.get(currCardIndex).updateTimeRating();
+        
+        if (cards.get(currCardIndex).timeRatingIs0()) {
             for (Flashcard card : cards) {
                 card.add100ToTimeRating();
             }
         }
 
-        currentCard.updateCorrectnessRating(correctness);
-        currentCard.updateTotalScore();
-        currentCard.setCorrectLastTime(correctness);
+        cards.get(currCardIndex).updateCorrectnessRating(correctness);
+        cards.get(currCardIndex).updateTotalScore();
+        cards.get(currCardIndex).setCorrectLastTime(correctness);
     }
 
     public boolean isDuplicateDeckName() {
@@ -90,12 +91,11 @@ public class Deck {
         if (cards.isEmpty()) {
             return null;
         }
-        if (index == cards.size()) {
-            index = 0;
+        currCardIndex++;
+        if (currCardIndex == cards.size()) {
+            currCardIndex = 0;
         }
-        currentCard = cards.get(index);
-        index++;
-        return currentCard;
+        return cards.get(currCardIndex);
     }
 
     /**
