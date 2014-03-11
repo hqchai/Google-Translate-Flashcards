@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.net.URLDecoder" %>
+<%@ page import="java.net.URLEncoder" %>
 <%@ page import="flashcards.Flashcard" %>
 <%@ page import="com.google.appengine.api.users.User" %>
 <%@ page import="com.google.appengine.api.users.UserService" %>
@@ -137,6 +138,11 @@ body {
 	  <h2 style="text-align:right; padding-right: 130px">Did you get this card right?</h2>
 
 <div class="row-fluid">
+    <span style="float:left; padding-left: 130px">
+      <% String deckName = (String) request.getAttribute("deckName");
+         String encodedDeckName = URLEncoder.encode(deckName, "UTF-8"); %>
+      <a href="/editDeck?deckName=<%=encodedDeckName%>"><button type="button" class="btn btn-success">Back to <%=deckName%></button></a>
+    </span>
     <span style="float:right; padding-right: 130px">
     			<form name="correct" action="/quiz" method="post">
                     <input type="hidden" name="correct" value="true">
