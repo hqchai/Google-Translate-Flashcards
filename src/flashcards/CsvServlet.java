@@ -56,6 +56,7 @@ public class CsvServlet extends HttpServlet {
             }
         }
         facade.updateDeck(deck);
+        reader.close();
     }
 
     private String getContent(FileItemStream titleItem) throws IOException {

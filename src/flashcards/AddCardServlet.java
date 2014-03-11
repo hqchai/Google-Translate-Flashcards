@@ -1,23 +1,17 @@
 package flashcards;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
-
 import com.google.gson.Gson;
+import com.google.api.GoogleAPI;
+import com.google.api.GoogleAPIException;
+import com.google.api.translate.Language;
+import com.google.api.translate.Translate;
 
 public class AddCardServlet extends HttpServlet {
     /**
@@ -31,10 +25,16 @@ public class AddCardServlet extends HttpServlet {
             String deckName = request.getParameter("deckName");
             String phrase1 = request.getParameter("phrase1");
             String phrase2 = request.getParameter("phrase2");
-            String sourceLanguage = request.getParameter("sourceLanguage");
-            String targetLanguage = request.getParameter("targetLanguage");
+            String sourceLanguage = request.getParameter("language1");
+            String targetLanguage = request.getParameter("language2");
             if(phrase2 == null || phrase2 == "") {
                 phrase2 = translate(phrase1, sourceLanguage, targetLanguage);
+                
+                if (phrase2 == null) {
+                    
+                    response.getWriter().print("Error connecting to Google Translate services! Press the back button in your browser and try again.");
+                    return;
+                }
             }
             Flashcard flashcard = new Flashcard(phrase1, phrase2);
             GoogleDatastoreFacade googleDatastoreFacade = new GoogleDatastoreFacade();
@@ -57,79 +57,64 @@ public class AddCardServlet extends HttpServlet {
         }
     }
     
-    
-    
-    @SuppressWarnings("unused")
-    private boolean isWrongLanguagePair(Flashcard flashcard, Deck deck) {
-        
-        String cardLanguage1 = detectLanguage(flashcard.getPhrase1());        
-        String cardLanguage2 = detectLanguage(flashcard.getPhrase2());
-        return ((!cardLanguage1.equalsIgnoreCase(deck.language1)) || (!cardLanguage2.equalsIgnoreCase(deck.language2)));
-    }
+//    @SuppressWarnings("unused")
+//    private boolean isWrongLanguagePair(Flashcard flashcard, Deck deck) {
+//        
+//          String cardLanguage1 = detectLanguage(flashcard.getPhrase1());        
+//          String cardLanguage2 = detectLanguage(flashcard.getPhrase2());
+//        return ((!cardLanguage1.equalsIgnoreCase(deck.language1)) || (!cardLanguage2.equalsIgnoreCase(deck.language2)));
+//    }
 
     public String translate(String sourceText, String sourceLanguage, String targetLanguage) {
+        
         LanguageCoder languageCoder = LanguageCoder.getInstance();
-        String sourceLanguageCode = languageCoder.getCode(sourceLanguage);
-        String targetLanguageCode = languageCoder.getCode(targetLanguage);
-
-        CloseableHttpClient client = HttpClients.createDefault();
-        try {
-            URI uri = new URIBuilder()
-                    .setScheme("https")
-                    .setHost("www.googleapis.com")
-                    .setPath("/language/translate/v2")
-                    .setParameter("key", apiKey)
-                    .setParameter("source", sourceLanguageCode)
-                    .setParameter("target", targetLanguageCode)
-                    .setParameter("q", sourceText)
-                    .build();
-            HttpGet httpGet = new HttpGet(uri);
-            CloseableHttpResponse response = client.execute(httpGet);
-            try {
-                HttpEntity entity = response.getEntity();
-                String googlejsonResponse = EntityUtils.toString(entity);
-                return jsonToTranslatedWord(googlejsonResponse);
-            } finally {
-                response.close();
-            }
-        } catch (URISyntaxException | IOException e) {
-            throw new RuntimeException(e);
+        Language l_sourceLanguage = languageCoder.getCode(sourceLanguage);
+        Language l_targetLanguage = languageCoder.getCode(targetLanguage);
+        
+        if (l_sourceLanguage == null || l_targetLanguage == null) {
+            
+            return null;
         }
+        
+        GoogleAPI.setHttpReferrer("http://www.uclatranslateflashcards.appspot.com/");
+        GoogleAPI.setKey(apiKey);
+        
+        try {
+            
+            return Translate.DEFAULT.execute(sourceText, l_sourceLanguage, l_targetLanguage);
+        } catch (GoogleAPIException e) {
+            
+            return null;
+        } 
     }
     
-    public String jsonToTranslatedWord(String json) {
-        Gson gson = new Gson();
-        GoogleTranslateResponse response = gson.fromJson(json, GoogleTranslateResponse.class);
-        return response.data.translations[0].translatedText;
-    }
-
-    private String detectLanguage(String phrase) {
-
-        CloseableHttpClient client = HttpClients.createDefault();
-        try {
-            URI uri = new URIBuilder()
-                    .setScheme("https")
-                    .setHost("www.googleapis.com")
-                    .setPath("/language/translate/v2")
-                    .setParameter("key", apiKey)
-                    .setParameter("q", phrase)
-                    .build();
-            HttpGet httpGet = new HttpGet(uri);
-            CloseableHttpResponse response = client.execute(httpGet);
-            try {
-                HttpEntity entity = response.getEntity();
-                String googlejsonResponse = EntityUtils.toString(entity);
-                String detectedLanguageCode = jsonToDetectedLanguage(googlejsonResponse);
-                
-                LanguageCoder languageCoder = LanguageCoder.getInstance();
-                return languageCoder.getLanguage(detectedLanguageCode);
-            } finally {
-                response.close();
-            }
-        } catch (URISyntaxException | IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+//    private String detectLanguage(String phrase) {
+//
+//        CloseableHttpClient client = HttpClients.createDefault();
+//        try {
+//            URI uri = new URIBuilder()
+//                    .setScheme("https")
+//                    .setHost("www.googleapis.com")
+//                    .setPath("/language/translate/v2")
+//                    .setParameter("key", apiKey)
+//                    .setParameter("q", phrase)
+//                    .build();
+//            HttpGet httpGet = new HttpGet(uri);
+//            CloseableHttpResponse response = client.execute(httpGet);
+//            try {
+//                HttpEntity entity = response.getEntity();
+//                String googlejsonResponse = EntityUtils.toString(entity);
+//                String detectedLanguageCode = jsonToDetectedLanguage(googlejsonResponse);
+//                
+//                LanguageCoder languageCoder = LanguageCoder.getInstance();
+//                return languageCoder.getLanguage(detectedLanguageCode);
+//            } finally {
+//                response.close();
+//            }
+//        } catch (URISyntaxException | IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
     
     public String jsonToDetectedLanguage(String json) {
         Gson gson = new Gson();

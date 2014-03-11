@@ -115,7 +115,6 @@
 								<option value="German">German</option>
 								<option value="Greek">Greek</option>
 								<option value="Gujarati">Gujarati</option>
-								<option value="Haitian Creole">Haitian Creole</option>
 								<option value="Hebrew">Hebrew</option>
 								<option value="Hindi">Hindi</option>
 								<option value="Hungarian">Hungarian</option>
@@ -126,7 +125,6 @@
 								<option value="Japanese">Japanese</option>
 								<option value="Kannada">Kannada</option>
 								<option value="Korean">Korean</option>
-								<option value="Latin">Latin</option>
 								<option value="Latvian">Latvian</option>
 								<option value="Lithuanian">Lithuanian</option>
 								<option value="Macedonian">Macedonian</option>
@@ -185,7 +183,6 @@
 								<option value="German">German</option>
 								<option value="Greek">Greek</option>
 								<option value="Gujarati">Gujarati</option>
-								<option value="Haitian Creole">Haitian Creole</option>
 								<option value="Hebrew">Hebrew</option>
 								<option value="Hindi">Hindi</option>
 								<option value="Hungarian">Hungarian</option>
@@ -196,7 +193,6 @@
 								<option value="Japanese">Japanese</option>
 								<option value="Kannada">Kannada</option>
 								<option value="Korean">Korean</option>
-								<option value="Latin">Latin</option>
 								<option value="Latvian">Latvian</option>
 								<option value="Lithuanian">Lithuanian</option>
 								<option value="Macedonian">Macedonian</option>
