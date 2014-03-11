@@ -52,7 +52,10 @@ public class CsvServlet extends HttpServlet {
         while ((nextLine = reader.readNext()) != null) {
             if(nextLine[0].equals(language1) && nextLine[1].equals(language2)) {
                 Flashcard flashcard = new Flashcard(nextLine[2], nextLine[3]);
-                deck.addFlashcard(flashcard);
+                if (!AddCardServlet.isWrongLanguagePair(flashcard, deck)) {
+                
+                    deck.addFlashcard(flashcard);
+                }
             }
         }
         deck.updateProgressAmount();

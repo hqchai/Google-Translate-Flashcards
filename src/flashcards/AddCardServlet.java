@@ -58,7 +58,7 @@ public class AddCardServlet extends HttpServlet {
         }
     }
     
-    private boolean isWrongLanguagePair(Flashcard flashcard, Deck deck) {
+    public static boolean isWrongLanguagePair(Flashcard flashcard, Deck deck) {
         
           String cardLanguage1 = detectLanguage(flashcard.getPhrase1());        
           String cardLanguage2 = detectLanguage(flashcard.getPhrase2());
@@ -69,7 +69,7 @@ public class AddCardServlet extends HttpServlet {
           return ((!cardLanguage1.equalsIgnoreCase(deck.language1)) || (!cardLanguage2.equalsIgnoreCase(deck.language2)));
     }
 
-    public String translate(String sourceText, String sourceLanguage, String targetLanguage) {
+    public static String translate(String sourceText, String sourceLanguage, String targetLanguage) {
         
         LanguageCoder languageCoder = LanguageCoder.getInstance();
         Language l_sourceLanguage = languageCoder.getCode(sourceLanguage);
@@ -92,7 +92,7 @@ public class AddCardServlet extends HttpServlet {
         } 
     }
     
-    private String detectLanguage(String phrase) {
+    private static String detectLanguage(String phrase) {
 
         GoogleAPI.setHttpReferrer("http://www.uclatranslateflashcards.appspot.com/");
         GoogleAPI.setKey(apiKey);
