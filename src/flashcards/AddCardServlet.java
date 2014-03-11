@@ -50,6 +50,7 @@ public class AddCardServlet extends HttpServlet {
 //                return;
 //            }
             deck.addFlashcard(flashcard);
+            deck.updateProgressAmount();
             googleDatastoreFacade.updateDeck(deck);
             response.sendRedirect("/editDeck?deckName=" + URLEncoder.encode(deckName, "UTF-8"));
         } catch (AuthorizationException e) {

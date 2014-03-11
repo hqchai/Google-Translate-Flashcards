@@ -35,7 +35,9 @@ public class EditCardServlet extends HttpServlet {
             
             flashcard.setPhrase1((String) request.getParameter("phrase1"));
             flashcard.setPhrase2((String) request.getParameter("phrase2"));
-            flashcard.updateUserRating(Integer.parseInt((String) request.getParameter("userRating"))); 
+            flashcard.updateUserRating(Integer.parseInt((String) request.getParameter("userRating")));
+            flashcard.updateCorrectnessRating(false);
+            deck.updateProgressAmount();
             datastore.updateDeck(deck);
             response.sendRedirect("/editDeck?deckName=" + URLEncoder.encode(deckName, "UTF-8"));
         } catch (AuthorizationException e) {
