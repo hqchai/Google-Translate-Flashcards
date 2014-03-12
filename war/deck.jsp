@@ -238,7 +238,7 @@
 	          <tr>  
 	            <td>${flashcard.phrase1}</td>  
 	            <td>${flashcard.phrase2}</td>
-	            <td>userRatingString</td>
+	            <td><%= userRatingString %></td>
 	            <td>
 	           		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit-<%=safePhrase1%>">Edit</button>
 	            </td> 
