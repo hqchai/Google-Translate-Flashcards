@@ -94,12 +94,14 @@ public class Deck {
                 highestFlashcard = i;
             }
         }
-
+        
         if(highestFlashcard == currCardIndex) {
             currCardIndex++;
             if(currCardIndex == cards.size()) {
                 currCardIndex = 0;
             }
+        } else {
+            currCardIndex = highestFlashcard;
         }
 
         return cards.get(currCardIndex);
