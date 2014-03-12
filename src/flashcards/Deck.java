@@ -87,16 +87,8 @@ public class Deck {
 
     public Flashcard getNextCard() {
         //        currentCard = Collections.max(cards, new ScoreComparator());
-        /*
-        if (cards.isEmpty()) {
+        if (cards.isEmpty()) 
             return null;
-        }
-        currCardIndex++;
-        if (currCardIndex == cards.size()) {
-            currCardIndex = 0;
-        }
-        return cards.get(currCardIndex);
-        */
         // Get the highest rated card
         
         int highestRatedIndex = 0;
