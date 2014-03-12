@@ -18,8 +18,8 @@ public class Deck {
     private List<Flashcard> cards = new LinkedList<Flashcard>();
     public String language1;
     public String language2;
-    private int currCardIndex; // identifies the current card
-    private int progressAmount; // int from 0-100 specifying percentage of cards the user got correct the last time they viewed each card
+    private int currCardIndex = 0; // identifies the current card
+    private int progressAmount = 0; // int from 0-100 specifying percentage of cards the user got correct the last time they viewed each card
 
     // no-arg constructor required for objectify
     @SuppressWarnings("unused")
@@ -32,8 +32,6 @@ public class Deck {
         name = n;
         language1 = lang1;
         language2 = lang2;
-        currCardIndex = -1; // getNextCard() increments index before accessing the card; want first card to be cards[0]
-        progressAmount = 0;
     }
 
     public String toString() {
@@ -91,25 +89,17 @@ public class Deck {
         }
 
         int highestFlashcard = 0;
-        int secondhighest = 0;
         for (int i = 0; i < cards.size(); i++) {
             if (cards.get(i).getTotalScore() > cards.get(highestFlashcard).getTotalScore()) {
                 highestFlashcard = i;
             }
         }
-        for (int i = 0; i < cards.size(); i++) {
-            if (i == highestFlashcard) {
-                continue;
+
+        if(highestFlashcard == currCardIndex) {
+            currCardIndex++;
+            if(currCardIndex == cards.size()) {
+                currCardIndex = 0;
             }
-            if (cards.get(i).getTotalScore() > cards.get(secondhighest).getTotalScore()) {
-                secondhighest = i;
-            }
-        }
-        if(currCardIndex == highestFlashcard) {
-            currCardIndex = secondhighest;
-        }
-        else {
-            currCardIndex = highestFlashcard;
         }
 
         return cards.get(currCardIndex);
