@@ -216,16 +216,29 @@
 			
 		<c:forEach var="flashcard" items="${flashcardList}">
 			<c:set var="p1" value="${flashcard.phrase1}" />
+			<c:set var="userRating" value="${flashcard.userRating}" />
 
 			  <%
 			  	String phrase1 = (String) pageContext.getAttribute("p1");
 			  	String safePhrase1 = phrase1.replaceAll("[^a-zA-Z0-9]","-");
+			  	String userRatingNum = (String) pageContext.getAttribute("userRating");
+			  	String userRatingString = "Medium";
+			  	switch (userRatingNum) {
+			  		case "1": 	userRatingString = "Easy";
+			  					break;
+			  		case "2":	userRatingString = "Medium";
+			  					break;
+			  		case "3":	userRatingString = "Difficult";
+			  					break;
+			  		default:	userRatingString = "Medium";
+			  					break;
+			  	}
 			  %>
 	          
 	          <tr>  
 	            <td>${flashcard.phrase1}</td>  
 	            <td>${flashcard.phrase2}</td>
-	            <td>${flashcard.userRating}</td>
+	            <td><%= userRatingString %></td>
 	            <td>
 	           		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit-<%=safePhrase1%>">Edit</button>
 	            </td> 
