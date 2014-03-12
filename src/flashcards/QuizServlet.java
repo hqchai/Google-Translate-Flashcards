@@ -59,7 +59,6 @@ public class QuizServlet extends HttpServlet {
             request.setAttribute("flashcard", flashcard);
             request.setAttribute("deckName", deckName);
             request.setAttribute("logoutURL", HomePageServlet.createLogoutURL());
-            facade.updateDeck(deck); // not a typo, need to update deck once after updating current card and then again after getting next card
             request.getRequestDispatcher("/quiz.jsp").forward(request, response);
         } catch (AuthorizationException e) {
             HomePageServlet.redirectToLogin(response);
