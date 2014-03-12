@@ -67,12 +67,13 @@
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
             <li><a href="#">Getting Started</a></li>
-            <li><a href="#signup">Sign Up</a></li>
-            <li><a href="#login">Login</a></li>
+            <li><a href="#signup"> - Sign Up</a></li>
+            <li><a href="#login"> - Login</a></li>
             <li><a href="#create">Create a Deck</a></li>
+            <li><a href="#upload"> - Upload Cards</a></li>
             <!--<li><a href="#add">Add Cards to a Deck</a></li> -->
-            <li><a href="#edit">Edit a Deck</a></li>
-            <li><a href="#delete">Delete a Deck</a></li>
+            <li><a href="#edit"> - Edit a Deck</a></li>
+            <li><a href="#delete"> - Delete a Deck</a></li>
             <li><a href="#quiz">Quiz Yourself</a></li>
 			<li><a href="#signout">Sign Out</a></li>
           </ul>
@@ -80,18 +81,22 @@
     
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1>Getting Started</h1>
-          <h2 id="signup">Sign Up</h2>
+          <h3 id="signup">Sign Up</h2>
             <p>If you already have a Google account, this part is easy! UCLA Translate Flashcards uses your Google account and data from Google Translate to personalize your learning experience. Go ahead and sign in using your existing Google account information.</p>
             <p>If you do not have a Google account, <a href="https://accounts.google.com/SignUp">sign up for one now!</a> It's fast, free, easy, and will allow you to get started with UCLA Translate Flashcards instantly.</p>
-          <h2 id="login">Login</h2>
+          <h3 id="login">Login</h2>
             <p>Follow <a href="/home">this link</a> to enter your Google account information and to begin your UCLA Translate Flashcards experience. If you have already logged in with your Google account, this will automatically redirect you to your dashboard.</p>
           <h2 id="create">Create a Deck</h2>
             <p>From <a href="/home">your homepage</a>, click the "add a deck" icon in the lower-right corner of the screen. This will prompt you to fill out information regarding the deck you wish to create, including the deck name, language pair, and the source of the flashcard content.</p>
+          <h3 id="upload">Upload Cards from Google Phrasebook</h3>
+            <p>From <a href="translate.google.com">Google Translate</a>, select <em>Show Phrasebook</em>, and then <em>Export to Google Sheets</em>, both located in the top-right corner of your browser. When prompted by the following page, click <em>Yes, import the data.</em> A Google spreadsheet should appear with the words translated in your Phrasebook.</p>
+            <p>Click <em>File > Download as > Comma-separated values (.csv, current sheet)</em>. Once downloaded, use the <em>Upload CSV</em> feature found from a deck's page, or when creating a new deck.</p>
+            <p>The <em>Upload CSV</em> feature automatically checks the file to upload only those flashcards which contain phrases from the proper pair of languages used in the deck. In addition, cards which are duplicates of already-existing cards in the deck are not re-added.</p>
           <!--<h2 id="add">Add Cards to a Deck</h2>
             <p>See "Edit a Deck" </p>-->
-          <h2 id="edit">Edit a Deck</h2>
+          <h3 id="edit">Edit a Deck</h2>
             <p>From <a href="/home">your homepage</a>, click the "Edit" deck option. From there, you may edit the contents of a flashcard, add/remove flashcards, rename your deck, or quiz yourself (in case you didn't mean to click edit).</p>
-          <h2 id="delete">Delete a Deck</h2>
+          <h3 id="delete">Delete a Deck</h2>
             <p>From <a href="/home">your homepage</a>, click on the "Delete" button below the deck you want to delete. You will then be prompted to confirm that you want to delete this deck. You may select "Confirm" to delete the deck, or click "Cancel" if you do not want to delete the deck.</p>
           <h2 id="quiz">Quiz Yourself</h2>
             <p>The best part! From <a href="/home">your homepage</a>, click on the image of the deck you would like to be quizzed on. To flip a flashcard over, simply click anywhere on the flashcard. To advance to the next card, hover your mouse over the right arrow.</p>
