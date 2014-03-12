@@ -98,6 +98,7 @@ public class Deck {
         return cards.get(currCardIndex);
         */
         // Get the highest rated card
+        
         int highestRatedIndex = 0;
         for (int i = 0; i < cards.size(); i++) {
             if (cards.get(i).getTotalScore() >= cards.get(highestRatedIndex).getTotalScore()) {
