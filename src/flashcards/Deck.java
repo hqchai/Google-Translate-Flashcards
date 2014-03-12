@@ -86,21 +86,33 @@ public class Deck {
     }
 
     public Flashcard getNextCard() {
-        //        currentCard = Collections.max(cards, new ScoreComparator());
-        if (cards.isEmpty()) 
+        if (cards.isEmpty()) {
             return null;
-        // Get the highest rated card
-        
-        int highestRatedIndex = 0;
+        }
+
+        int highestFlashcard = 0;
+        int secondhighest = 0;
         for (int i = 0; i < cards.size(); i++) {
-            if (cards.get(i).getTotalScore() >= cards.get(highestRatedIndex).getTotalScore()) {
-                if (i != currCardIndex)
-                    highestRatedIndex = i;
+            if (cards.get(i).getTotalScore() > cards.get(highestFlashcard).getTotalScore()) {
+                highestFlashcard = i;
             }
         }
-        currCardIndex = highestRatedIndex;
-        return cards.get(currCardIndex);
+        for (int i = 0; i < cards.size(); i++) {
+            if (i == highestFlashcard) {
+                continue;
+            }
+            if (cards.get(i).getTotalScore() > cards.get(secondhighest).getTotalScore()) {
+                secondhighest = i;
+            }
+        }
+        if(currCardIndex == highestFlashcard) {
+            currCardIndex = secondhighest;
+        }
+        else {
+            currCardIndex = highestFlashcard;
+        }
 
+        return cards.get(currCardIndex);
     }
 
     /**
