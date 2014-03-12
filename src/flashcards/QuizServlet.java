@@ -51,8 +51,12 @@ public class QuizServlet extends HttpServlet {
             Deck deck = facade.getDeck(deckName);
             deck.updateCurrentCard(correctString.equals("true"));
             deck.updateProgressAmount();
+            Flashcard flashcard = deck.getNextCard();
+            if(flashcard == null) {
+                response.sendRedirect("/editDeck?deckName=" + URLEncoder.encode(deckName, "UTF-8"));
+            }
             facade.updateDeck(deck);
-            request.setAttribute("flashcard", deck.getNextCard());
+            request.setAttribute("flashcard", flashcard);
             request.setAttribute("deckName", deckName);
             request.setAttribute("logoutURL", HomePageServlet.createLogoutURL());
             facade.updateDeck(deck); // not a typo, need to update deck once after updating current card and then again after getting next card

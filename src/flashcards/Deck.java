@@ -88,20 +88,20 @@ public class Deck {
             return null;
         }
 
-        int highestFlashcard = 0;
+        int highestFlashcardIndex = 0;
         for (int i = 0; i < cards.size(); i++) {
-            if (cards.get(i).getTotalScore() > cards.get(highestFlashcard).getTotalScore()) {
-                highestFlashcard = i;
+            if (cards.get(i).getTotalScore() > cards.get(highestFlashcardIndex).getTotalScore()) {
+                highestFlashcardIndex = i;
             }
         }
         
-        if(highestFlashcard == currCardIndex) {
+        if(highestFlashcardIndex == currCardIndex) {
             currCardIndex++;
             if(currCardIndex == cards.size()) {
                 currCardIndex = 0;
             }
         } else {
-            currCardIndex = highestFlashcard;
+            currCardIndex = highestFlashcardIndex;
         }
 
         return cards.get(currCardIndex);
