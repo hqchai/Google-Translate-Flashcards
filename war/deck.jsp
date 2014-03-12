@@ -205,6 +205,7 @@
 	          <tr>  
 	            <th><c:out value="${language1}"/></th>  
 	            <th><c:out value="${language2}"/></th>
+	            <th>User Rating</th>
 	            <th></th>
 	            <th></th>  
 	          </tr>  
@@ -224,6 +225,7 @@
 	          <tr>  
 	            <td>${flashcard.phrase1}</td>  
 	            <td>${flashcard.phrase2}</td>
+	            <td>${flashcard.userRating}</td>
 	            <td>
 	           		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit-<%=safePhrase1%>">Edit</button>
 	            </td> 
