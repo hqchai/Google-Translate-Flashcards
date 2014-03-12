@@ -68,7 +68,6 @@ public class Deck {
                 card.add100ToTimeRating();
             }
         }
-
         cards.get(currCardIndex).updateCorrectnessRating(correctness);
         cards.get(currCardIndex).updateTotalScore();
         cards.get(currCardIndex).setCorrectLastTime(correctness);
@@ -88,6 +87,7 @@ public class Deck {
 
     public Flashcard getNextCard() {
         //        currentCard = Collections.max(cards, new ScoreComparator());
+        /*
         if (cards.isEmpty()) {
             return null;
         }
@@ -96,6 +96,18 @@ public class Deck {
             currCardIndex = 0;
         }
         return cards.get(currCardIndex);
+        */
+        // Get the highest rated card
+        int highestRatedIndex = 0;
+        for (int i = 0; i < cards.size(); i++) {
+            if (cards.get(i).getTotalScore() >= cards.get(highestRatedIndex).getTotalScore()) {
+                if (i != currCardIndex)
+                    highestRatedIndex = i;
+            }
+        }
+        currCardIndex = highestRatedIndex;
+        return cards.get(currCardIndex);
+
     }
 
     /**
