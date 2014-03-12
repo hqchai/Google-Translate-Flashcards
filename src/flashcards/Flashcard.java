@@ -102,29 +102,29 @@ public class Flashcard {
             case 1:
                 break;
             case 2:
-                base *= 1.2;
+                base *= 1.3;
                 break;
             case 3:
-                base *= 1.4;
+                base *= 1.6;
                 break;
             default:
                 break;
         }
         switch (correctnessRating) {
-            case 1:
-                base *= 1.1;
-                break;
-            case 2:
-                base *= 1.2;
-                break;
-            case 3:
-                base *= 1.3;
+            case 5:
+                base *= 1.0;
                 break;
             case 4:
                 base *= 1.4;
                 break;
-            case 5:
-                base *= 1.5;
+            case 3:
+                base *= 1.6;
+                break;
+            case 2:
+                base *= 1.8;
+                break;
+            case 1:
+                base *= 2.0;
                 break;
             default:
                 break;
